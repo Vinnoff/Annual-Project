@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthOtherAccount" customModule="MusicFinder" customModuleProvider="target">
+            <connections>
+                <outlet property="label" destination="ava-Fi-cSx" id="9fe-IR-yU5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hu-5R-jeK">
+                    <rect key="frame" x="124" y="318.5" width="127" height="30"/>
+                    <state key="normal" title="Log in with Spotify"/>
+                    <connections>
+                        <action selector="loginSpotifyClicked:" destination="-1" eventType="touchUpInside" id="1GG-UK-zF4"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ava-Fi-cSx">
+                    <rect key="frame" x="166.5" y="277.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92R-hk-cOU">
+                    <rect key="frame" x="162" y="417" width="90" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="disconnect"/>
+                    <connections>
+                        <action selector="disconnectButton:" destination="-1" eventType="touchUpInside" id="qh1-ye-BdU"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3Hu-5R-jeK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Jy8-p3-skJ"/>
+                <constraint firstItem="ava-Fi-cSx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ibD-3m-esk"/>
+                <constraint firstItem="3Hu-5R-jeK" firstAttribute="top" secondItem="ava-Fi-cSx" secondAttribute="bottom" constant="20" id="syY-Mg-Tpa"/>
+                <constraint firstItem="3Hu-5R-jeK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="vvw-Jo-GIJ"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+    </objects>
+</document>
