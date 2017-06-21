@@ -13,13 +13,13 @@ module.exports = (api) => {
 
     router.post('/',
         api.middlewares.bodyParser.json(),
-        api.middlewares.ensureAuthenticated,
+        api.middlewares.ensureAuthentificated,
         api.middlewares.cache.clean("Game"),
         api.actions.game.create);
 
     router.post('/score',
         api.middlewares.bodyParser.json(),
-        api.middlewares.ensureAuthenticated,
+        api.middlewares.ensureAuthentificated,
         api.middlewares.cache.clean("Score"),
         api.actions.score.create);
 

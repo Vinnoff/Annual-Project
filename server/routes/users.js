@@ -6,7 +6,7 @@ module.exports = (api) => {
         api.actions.users.findAll);
 
     router.get('/:id',
-        api.actions.users.findById);
+        api.actions.users.findByUserName);
 
     router.get('/friends',
         api.actions.users.findFriends);
@@ -17,12 +17,12 @@ module.exports = (api) => {
         api.actions.users.create);
 
     router.put('/:id',
-        api.middlewares.ensureAuthenticated,
+        api.middlewares.ensureAuthentificated,
         api.middlewares.bodyParser.json(),
         api.actions.users.update);
 
     router.delete('/:id',
-        api.middlewares.ensureAuthenticated,
+        api.middlewares.ensureAuthentificated,
         api.actions.users.remove);
 
     return router;

@@ -2,7 +2,6 @@ const router = require('express').Router();
 
 module.exports = (api) => {
     router.get('/',
-        api.middlewares.musicalContent.get,
         api.actions.album.findAll);
 
     router.get('/:id',

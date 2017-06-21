@@ -7,7 +7,7 @@ module.exports = (api) => {
         api.actions.auth.login);
 
     router.post('/logout',
-        api.middlewares.ensureAuthenticated,
+        api.middlewares.ensureAuthentificated,
         api.actions.auth.logout);
     console.log("qejbgrejvrbimd")
 
