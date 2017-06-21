@@ -9,7 +9,7 @@ module.exports = (api) => {
         Artist: require('./Artist')(api),
         Content: require('./Content')(api),
         Game: require('./Game')(api),
-        Genre: require('./Genre')(api),
+        Kind: require('./Kind')(api),
         Playlist: require('./Playlist')(api),
         Preferences: require('./Preferences')(api),
         Reward: require('./Reward')(api),

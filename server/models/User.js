@@ -45,8 +45,7 @@ module.exports = (api) => {
             ref: 'Reward'
         }],
         Friends: [{
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+            type: String
         }],
         Playlists: [{
             type: Schema.Types.ObjectId,

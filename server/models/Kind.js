@@ -13,5 +13,5 @@ module.exports = (api) => {
     });
 
     schema.plugin(timestamps);
-    return api.mongoose.model('Genre', schema);
+    return api.mongoose.model('Kind', schema);
 };
