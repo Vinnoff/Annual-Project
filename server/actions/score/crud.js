@@ -1,11 +1,11 @@
 module.exports = (api) => {
     const Score = api.models.Score;
 
-    function create(res, req, next) {
+    function create(req, res, next) {
 
     }
 
-    function update(res, req, next) {
+    function update(req, res, next) {
 
     }
 

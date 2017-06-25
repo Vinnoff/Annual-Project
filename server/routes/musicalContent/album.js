@@ -11,6 +11,7 @@ module.exports = (api) => {
         api.actions.album.findByTitle);
 
     router.post('/',
+        api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.middlewares.musicalContentCreation,
@@ -18,11 +19,13 @@ module.exports = (api) => {
         api.actions.album.create);
 
     router.put('/:id',
+        api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.actions.album.update);
 
     router.delete('/:id',
+        api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.actions.album.remove);
 

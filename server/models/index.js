@@ -12,6 +12,7 @@ module.exports = (api) => {
         Kind: require('./Kind')(api),
         Playlist: require('./Playlist')(api),
         Preferences: require('./Preferences')(api),
+        Rank: require('./Rank')(api),
         Reward: require('./Reward')(api),
         Score: require('./Score')(api),
         Song: require('./Song')(api),

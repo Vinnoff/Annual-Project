@@ -18,6 +18,10 @@ module.exports = (api) => {
             type: String,
             required: true
         },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
         mail: {
             type: String,
             required: true,
@@ -45,7 +49,8 @@ module.exports = (api) => {
             ref: 'Reward'
         }],
         Friends: [{
-            type: String
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }],
         Playlists: [{
             type: Schema.Types.ObjectId,

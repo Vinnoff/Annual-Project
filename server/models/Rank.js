@@ -12,11 +12,7 @@ module.exports = (api) => {
             type: String,
             required: true,
             unique: true
-        },
-        Users: [{
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }]
+        }
     });
 
     schema.plugin(timestamps);

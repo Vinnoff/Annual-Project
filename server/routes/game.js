@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 module.exports = (api) => {
     router.get('/',
+        api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.actions.game.findAll);
 

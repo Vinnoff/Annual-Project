@@ -1,19 +1,19 @@
 module.exports = (api) => {
     const Game = api.models.Game;
 
-    function findAll(res, req, next) {
+    function findAll(req, res, next) {
 
     }
 
-    function findByUser(res, req, next) {
+    function findByUser(req, res, next) {
 
     }
 
-    function findSortedByUser(res, req, next) {
+    function findSortedByUser(req, res, next) {
 
     }
 
-    function create(res, req, next) {
+    function create(req, res, next) {
 
     }
 
