@@ -1,27 +1,27 @@
 module.exports = (api) => {
     const Artist = api.models.Artist;
 
-    function findAll(res, req, next) {
+    function findAll(req, res, next) {
 
     }
 
-    function findOne(res, req, next) {
+    function findOne(req, res, next) {
 
     }
 
-    function findByTitle(res, req, next) {
+    function findByTitle(req, res, next) {
 
     }
 
-    function create(res, req, next) {
+    function create(req, res, next) {
 
     }
 
-    function update(res, req, next) {
+    function update(req, res, next) {
 
     }
 
-    function remove(res, req, next) {
+    function remove(req, res, next) {
 
     }
 

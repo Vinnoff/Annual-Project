@@ -15,7 +15,7 @@ module.exports = (api) => {
             type: Schema.Types.ObjectId,
             ref: 'Song'
         }],
-        creator: {
+        Creator: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
