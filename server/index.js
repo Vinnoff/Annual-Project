@@ -11,7 +11,7 @@ require('./actions')(api);
 console.log('>> Actions initialized');
 require('./routes')(api);
 console.log('>> Routes initialized');
-
-console.log(`Server started and listening on port ${api.settings.port}`)
+let date = new Date()
+console.log("(" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + `) Server started and listening on port ${api.settings.port}`)
 console.log(`Good Job`)
 api.listen(api.settings.port);
