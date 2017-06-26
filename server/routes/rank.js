@@ -4,8 +4,8 @@ module.exports = (api) => {
     router.get('/',
         api.actions.rank.findAll);
 
-    router.get('/:nb',
-        api.actions.rank.findByNb);
+    router.get('/:id',
+        api.actions.rank.findOne);
 
     router.post('/',
         api.middlewares.ensureAuthentificated,
@@ -14,13 +14,13 @@ module.exports = (api) => {
         api.middlewares.cache.clean("Rank"),
         api.actions.rank.create);
 
-    router.put('/:title',
+    router.put('/:id',
         api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.actions.rank.update)
 
-    router.delete('/:title',
+    router.delete('/:id',
         api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.actions.rank.remove)
