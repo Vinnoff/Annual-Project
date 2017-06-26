@@ -3,19 +3,17 @@ module.exports = (api) => {
     const User = api.models.User;
 
     function findAll(req, res, next) {
-        setTimeout(function () {
-            Rank.find((err, data) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                if (!data || data.length == 0) {
-                    return res.status(204).send(data)
-                }
-                return res.send(data);
-            }).sort({
-                nb: 1
-            });
-        }, 2000);
+        Rank.find((err, data) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            if (!data || data.length == 0) {
+                return res.status(204).send(data)
+            }
+            return res.send(data);
+        }).sort({
+            nb: 1
+        });
     }
 
     function findOne(req, res, next) {
