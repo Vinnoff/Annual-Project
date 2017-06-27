@@ -11,12 +11,20 @@ module.exports = (api) => {
             type: Schema.Types.ObjectId,
             ref: 'Score'
         }],
-        dificulty: {
+        Players: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        difficulty: {
             type: Number
         },
         isMultiplayer: {
             type: Boolean,
-            required: true
+            default: false
+        },
+        isPublic: {
+            type: Boolean,
+            default: false
         }
     });
 
