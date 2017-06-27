@@ -21,6 +21,20 @@ module.exports = (api) => {
         }, 2000);
     }
 
+    function findSorted(req, res, next) {
+        User.find((err, data) => {
+            if (err) {
+                return res.status(500).send();
+            }
+            if (!data || data.length == 0) {
+                return res.status(204).send(data)
+            }
+            return res.send(data);
+        }).sort({
+            globalScore: -1
+        }).skip(Number(req.params.start)).limit(Number(req.params.limit));
+    }
+
     function findById(req, res, next) {
         User.findById(req.params.id, (err, data) => {
             if (err) {
@@ -128,6 +142,7 @@ module.exports = (api) => {
 
     return {
         findAll,
+        findSorted,
         findById,
         findByUserName,
         create,

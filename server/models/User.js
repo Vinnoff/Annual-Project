@@ -31,6 +31,10 @@ module.exports = (api) => {
             type: Schema.Types.ObjectId,
             ref: 'Rank'
         },
+        globalScore: {
+            type: Number,
+            default: 0
+        },
         Scores: [{
             type: Schema.Types.ObjectId,
             ref: 'Score'
