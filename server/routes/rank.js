@@ -1,29 +1,29 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
-    router.get('/sorted',
-        api.actions.reward.findSortedByScore);
+    router.get('/',
+        api.actions.rank.findAll);
 
     router.get('/:id',
-        api.actions.reward.findById);
+        api.actions.rank.findOne);
 
     router.post('/',
         api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
-        api.middlewares.cache.clean("Reward"),
-        api.actions.reward.create);
+        api.middlewares.cache.clean("Rank"),
+        api.actions.rank.create);
 
     router.put('/:id',
         api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
-        api.actions.reward.update)
+        api.actions.rank.update)
 
     router.delete('/:id',
         api.middlewares.ensureAuthentificated,
         api.middlewares.ensureAdmin,
-        api.actions.reward.remove)
+        api.actions.rank.remove)
 
     return router;
 }

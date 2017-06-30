@@ -18,6 +18,10 @@ module.exports = (api) => {
             type: String,
             required: true
         },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
         mail: {
             type: String,
             required: true,
@@ -27,9 +31,13 @@ module.exports = (api) => {
             type: Schema.Types.ObjectId,
             ref: 'Rank'
         },
-        Scores: [{
+        globalScore: {
+            type: Number,
+            default: 0
+        },
+        Games: [{
             type: Schema.Types.ObjectId,
-            ref: 'Score'
+            ref: 'Game'
         }],
         avatar: {
             type: String
@@ -45,7 +53,8 @@ module.exports = (api) => {
             ref: 'Reward'
         }],
         Friends: [{
-            type: String
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }],
         Playlists: [{
             type: Schema.Types.ObjectId,

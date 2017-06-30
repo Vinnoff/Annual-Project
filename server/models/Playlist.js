@@ -3,6 +3,14 @@ const timestamps = require('mongoose-timestamps');
 
 module.exports = (api) => {
     const schema = new Schema({
+        title: {
+            type: String,
+            required: true
+        },
+        Statistics: {
+            type: Schema.Types.ObjectId,
+            ref: 'Statistics'
+        },
         isPublic: {
             type: Boolean,
             /*par defaut:false,*/
@@ -15,7 +23,7 @@ module.exports = (api) => {
             type: Schema.Types.ObjectId,
             ref: 'Song'
         }],
-        creator: {
+        Creator: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         }

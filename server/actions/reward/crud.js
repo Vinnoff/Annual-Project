@@ -1,23 +1,23 @@
 module.exports = (api) => {
     const Reward = api.models.Reward;
 
-    function findSortedByScore(res, req, next) {
+    function findSortedByScore(req, res, next) {
 
     }
 
-    function findById(res, req, next) {
+    function findById(req, res, next) {
 
     }
 
-    function create(res, req, next) {
+    function create(req, res, next) {
 
     }
 
-    function update(res, req, next) {
+    function update(req, res, next) {
 
     }
 
-    function remove(res, req, next) {
+    function remove(req, res, next) {
 
     }
 

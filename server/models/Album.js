@@ -4,6 +4,14 @@ const fs = require('fs');
 
 module.exports = (api) => {
     const schema = new Schema({
+        title: {
+            type: String,
+            required: true
+        },
+        Statistics: {
+            type: Schema.Types.ObjectId,
+            ref: 'Statistics'
+        },
         Artists: [{
             type: Schema.Types.ObjectId,
             ref: 'Artist'

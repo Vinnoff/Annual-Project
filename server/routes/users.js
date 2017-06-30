@@ -1,29 +1,38 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
-    router.get('/',
-        api.middlewares.cache.get,
-        api.actions.users.findAll);
+	router.get('/',
+		api.middlewares.cache.get,
+		api.actions.users.findAll);
 
-    router.get('/:id',
-        api.actions.users.findByUserName);
+	router.get('/:start/:limit',
+		api.middlewares.cache.get,
+		api.actions.users.findSorted);
 
-    router.get('/friends',
-        api.actions.users.findFriends);
+	router.get('/:id',
+		api.actions.users.findById);
 
-    router.post('/',
-        api.middlewares.bodyParser.json(),
-        api.middlewares.cache.clean('User'),
-        api.actions.users.create);
+	router.get('/userName/:userName',
+		api.actions.users.findByUserName);
 
-    router.put('/:id',
-        api.middlewares.ensureAuthentificated,
-        api.middlewares.bodyParser.json(),
-        api.actions.users.update);
+	router.post('/',
+		api.middlewares.bodyParser.json(),
+		api.middlewares.cache.clean('User'),
+		api.actions.users.create);
 
-    router.delete('/:id',
-        api.middlewares.ensureAuthentificated,
-        api.actions.users.remove);
+	router.put('/:id',
+		api.middlewares.bodyParser.json(),
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.update);
 
-    return router;
+	router.put('/:id/globalScore',
+		api.middlewares.bodyParser.json(),
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.updateGlobalScore);
+
+	router.delete('/:id',
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.remove);
+
+	return router;
 }
