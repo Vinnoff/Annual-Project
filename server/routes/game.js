@@ -17,6 +17,10 @@ module.exports = (api) => {
         api.middlewares.cache.clean("Game"),
         api.actions.game.create);
 
+    router.get('/score/:id',
+        api.middlewares.bodyParser.json(),
+        api.actions.score.findById);
+
     router.put('/score/:id',
         api.middlewares.bodyParser.json(),
         api.actions.score.update);
