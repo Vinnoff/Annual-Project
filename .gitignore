@@ -222,3 +222,6 @@ $RECYCLE.BIN/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+
+### Cache ###
+cache/
