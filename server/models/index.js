@@ -7,7 +7,6 @@ module.exports = (api) => {
     api.models = {
         Album: require('./Album')(api),
         Artist: require('./Artist')(api),
-        Content: require('./Content')(api),
         Game: require('./Game')(api),
         Kind: require('./Kind')(api),
         Playlist: require('./Playlist')(api),
