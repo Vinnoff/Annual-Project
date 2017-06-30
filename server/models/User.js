@@ -35,9 +35,9 @@ module.exports = (api) => {
             type: Number,
             default: 0
         },
-        Scores: [{
+        Games: [{
             type: Schema.Types.ObjectId,
-            ref: 'Score'
+            ref: 'Game'
         }],
         avatar: {
             type: String
