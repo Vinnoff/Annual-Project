@@ -30,6 +30,11 @@ module.exports = (api) => {
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.updateGlobalScore);
 
+	router.put('/friend/:id',
+		api.middlewares.bodyParser.json(),
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.updateFriends)
+
 	router.delete('/:id',
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.remove);
