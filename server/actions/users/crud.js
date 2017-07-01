@@ -138,6 +138,41 @@ module.exports = (api) => {
 		});
 	}
 
+	function updateFriends(req, res, next) {
+		User.findByIdAndUpdate(req.params.id, {
+			$push: {
+				Friends: req.body.friend
+			}
+		}, {
+			new: true
+		}, (err, data) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
+
+			if (!data) {
+				return res.status(204).send();
+			}
+			User.findByIdAndUpdate(req.body.friend, {
+				$push: {
+					Friends: req.params.id
+				}
+			}, {
+				new: true
+			}, (err, data) => {
+				if (err) {
+					return res.status(500).send(err);
+				}
+
+				if (!data) {
+					return res.status(204).send();
+				}
+
+				return res.send("OK");
+			})
+		});
+	}
+
 	function remove(req, res, next) {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.delete.another.user.account');
@@ -172,6 +207,7 @@ module.exports = (api) => {
 		create,
 		update,
 		updateGlobalScore,
+		updateFriends,
 		remove
 	};
 }
