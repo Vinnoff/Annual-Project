@@ -35,36 +35,40 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func requestTrackArtist(url: String) {
         let token: String?
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
-            Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-            (response: DataResponse<TopTrack>) in
-                if let topTracks = response.result.value {
-                    for track in topTracks.tracks! {
-                        self.tracks.append(track)
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                token = session.accessToken
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                    (response: DataResponse<TopTrack>) in
+                    if let topTracks = response.result.value {
+                        for track in topTracks.tracks! {
+                            self.tracks.append(track)
+                        }
                     }
-                }
-                self.tableView.reloadData()
-            })
+                    self.tableView.reloadData()
+                })
+            }
         }
     }
     
     func requestAlbumArtist(url: String) {
         let token: String?
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
-            Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-                (response: DataResponse<ItemType>) in
-                if let itemType = response.result.value {
-                    self.itemTypeAlbum = itemType
-                    for album in itemType.items! {
-                        self.albums.append(album)
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                token = session.accessToken
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                    (response: DataResponse<ItemType>) in
+                    if let itemType = response.result.value {
+                        self.itemTypeAlbum = itemType
+                        for album in itemType.items! {
+                            self.albums.append(album)
+                        }
                     }
-                }
-                self.tableView.reloadData()
-            })
+                    self.tableView.reloadData()
+                })
+            }
         }
     }
 

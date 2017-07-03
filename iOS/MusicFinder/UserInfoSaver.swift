@@ -17,7 +17,7 @@ class UserInfoSaver {
         userDefaults = UserDefaults.standard
     }
     
-    func isAuthenticatedSpotify() -> SPTSession? {
+    func getSessionSpotify() -> SPTSession? {
         if let sessionObj:AnyObject = userDefaults?.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
@@ -27,7 +27,7 @@ class UserInfoSaver {
     }
     
     func isAuth() -> Bool? {
-        if let session = isAuthenticatedSpotify(){
+        if let session = getSessionSpotify(){
              return session.isValid()
         }
         return false

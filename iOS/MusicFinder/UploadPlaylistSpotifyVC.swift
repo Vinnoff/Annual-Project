@@ -17,7 +17,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
     @IBOutlet weak var textfield: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setNavigationBarItem()
         // https://api.spotify.com/v1/users/alkrox/playlists
         //Authorization: Bearer
         
@@ -26,20 +26,22 @@ class UploadPlaylistSpotifyVC: UIViewController {
 
     
     @IBAction func buttonClicked(_ sender: Any) {
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            if textfield.text != nil{
-                let headers: HTTPHeaders = [
-                    "Authorization": "Bearer " + session.accessToken,
-                    "Accept": "application/json"
-                ]
-                let parameters = [
-                    "description": "test",
-                    "public" : "true",
-                    "name" : textfield.text
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                if textfield.text != nil{
+                    let headers: HTTPHeaders = [
+                        "Authorization": "Bearer " + session.accessToken,
+                        "Accept": "application/json"
+                    ]
+                    let parameters = [
+                        "description": "test",
+                        "public" : "true",
+                        "name" : textfield.text
+                        
+                        ] as [String : Any]
                     
-                    ] as [String : Any]
-                
-                Alamofire.request("https://api.spotify.com/v1/users/alkrox/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                    Alamofire.request("https://api.spotify.com/v1/users/alkrox/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                }
             }
         }
     }
@@ -48,19 +50,19 @@ class UploadPlaylistSpotifyVC: UIViewController {
         //1sOYqfD1K4HYOWzi7l7iIW
         //spotify:album:6XMTRp9sURjgP9g23ppEri
         
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            let uris = "spotify:track:4IIUaKqGMElZ3rGtuvYlNc"
-            let playlistId = "1sOYqfD1K4HYOWzi7l7iIW"
-            let urisUpdated = uris.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil)
-            let url = "https://api.spotify.com/v1/users/alkrox/playlists/" + playlistId + "/tracks?uris=" + urisUpdated
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer " + session.accessToken,
-                "Accept": "application/json"
-            ]
-            
-            Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                let uris = "spotify:track:4IIUaKqGMElZ3rGtuvYlNc"
+                let playlistId = "1sOYqfD1K4HYOWzi7l7iIW"
+                let urisUpdated = uris.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil)
+                let url = "https://api.spotify.com/v1/users/alkrox/playlists/" + playlistId + "/tracks?uris=" + urisUpdated
+                let headers: HTTPHeaders = [
+                    "Authorization": "Bearer " + session.accessToken,
+                    "Accept": "application/json"
+                ]
+                Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
+            }
         }
-        
     }
     
     

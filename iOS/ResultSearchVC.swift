@@ -41,72 +41,73 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func requestResult(url: String, type: String?) {
         let token: String?
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
-            print(headers)
-            
-            if type == "track" {
-                //Track
-                Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-                    (response: DataResponse<ItemTypeTrack>) in
-                    
-                    let itemType = response.result.value
-                    self.tracks = itemType?.tracks
-                    if let items = self.tracks?.items {
-                        for item in (self.tracks?.items)! {
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                token = session.accessToken
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                print(headers)
+                
+                if type == "track" {
+                    //Track
+                    Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                        (response: DataResponse<ItemTypeTrack>) in
+                        
+                        let itemType = response.result.value
+                        self.tracks = itemType?.tracks
+                        if let items = self.tracks?.items {
+                            for item in items {
+                                self.names.append(item.name!)
+                                self.imagesTest.append((item.album?.images?[2].url)!)
+                            }
+                        }
+                        
+                        if self.names.count == 0 {
+                            self.noResultView.isHidden = false
+                        }else {
+                            self.noResultView.isHidden = true
+                        }
+                        self.tableView.reloadData()
+                    })
+                }
+                else if type == "album" {
+                    Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                        (response: DataResponse<ItemTypeAlbum>) in
+                        
+                        let itemType = response.result.value
+                        self.albums = itemType?.albums
+                        for item in (self.albums?.items)! {
                             self.names.append(item.name!)
-                            self.imagesTest.append((item.album?.images?[2].url)!)
+                            if item.images?[2].url != nil {
+                                self.imagesTest.append((item.images?[2].url)!)
+                            }
                         }
-                    }
-                    
-                    if self.names.count == 0 {
-                        self.noResultView.isHidden = false
-                    }else {
-                        self.noResultView.isHidden = true
-                    }
-                    self.tableView.reloadData()
-                })
-            }
-            else if type == "album" {
-                Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-                    (response: DataResponse<ItemTypeAlbum>) in
-                    
-                    let itemType = response.result.value
-                    self.albums = itemType?.albums
-                    for item in (self.albums?.items)! {
-                        self.names.append(item.name!)
-                        if item.images?[2].url != nil {
-                            self.imagesTest.append((item.images?[2].url)!)
+                        if self.names.count == 0 {
+                            self.noResultView.isHidden = false
+                        }else {
+                            self.noResultView.isHidden = true
                         }
-                    }
-                    if self.names.count == 0 {
-                        self.noResultView.isHidden = false
-                    }else {
-                        self.noResultView.isHidden = true
-                    }
-                    self.tableView.reloadData()
-                })
-            }
-            
-            else if type == "artist"{
-                Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-                    (response: DataResponse<ItemTypeArtist>) in
+                        self.tableView.reloadData()
+                    })
+                }
                     
-                    let itemType = response.result.value
-                    self.artists = itemType?.artists
-                    for item in (self.artists?.items)! {
-                        self.names.append(item.name!)
-                    }
-                    if self.names.count == 0 {
-                        self.noResultView.isHidden = false
-                    }else {
-                        self.noResultView.isHidden = true
-                    }
-                    self.tableView.reloadData()
-                })
+                else if type == "artist"{
+                    Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                        (response: DataResponse<ItemTypeArtist>) in
+                        
+                        let itemType = response.result.value
+                        self.artists = itemType?.artists
+                        for item in (self.artists?.items)! {
+                            self.names.append(item.name!)
+                        }
+                        if self.names.count == 0 {
+                            self.noResultView.isHidden = false
+                        }else {
+                            self.noResultView.isHidden = true
+                        }
+                        self.tableView.reloadData()
+                    })
+                }
             }
-            
         }
     }
     

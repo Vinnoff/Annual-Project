@@ -74,7 +74,7 @@ class HomeVC: UIViewController, iCarouselDelegate, iCarouselDataSource {
     }
 
     
-    func requestPlaylist(url: String) {
+    /*func requestPlaylist(url: String) {
         if let session = UserInfoSaver().isAuthenticatedSpotify() {
             //token = session.accessToken
             let headers: HTTPHeaders = ["Authorization": "Bearer " + session.accessToken!]
@@ -89,7 +89,7 @@ class HomeVC: UIViewController, iCarouselDelegate, iCarouselDataSource {
     override func viewWillAppear(_ animated: Bool) {
         var urlPlaylist = "https://api.spotify.com/v1/users/alkrox/playlists"
         //requestPlaylist(url: urlPlaylist)
-    }
+    }*/
     
     
 }

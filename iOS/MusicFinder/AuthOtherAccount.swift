@@ -64,7 +64,7 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     func callAlamofire(url: String) {
         let token: String?
         
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
+        if let session = UserInfoSaver().getSessionSpotify() {
             token = session.accessToken
             let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
             print(headers)

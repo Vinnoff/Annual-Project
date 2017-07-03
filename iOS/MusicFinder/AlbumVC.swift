@@ -22,21 +22,24 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        if let session = UserInfoSaver().isAuthenticatedSpotify() {
-            let token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
-            
-            Alamofire.request(url!, headers: headers).responseObject(completionHandler: {
-                (response: DataResponse<Album>) in
-                if let album = response.result.value {
-                    self.album = album
-                    self.tracks = (album.tracks?.items!)!
-                    /*if !(album.images?.isEmpty)! {
-                        self.imageUrlToSend = album.images?[0].url
-                    }*/
-                }
-                self.tableView.reloadData()
-            })
+        if UserInfoSaver().isAuth()! {
+            if let session = UserInfoSaver().getSessionSpotify() {
+                let token = session.accessToken
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                
+                Alamofire.request(url!, headers: headers).responseObject(completionHandler: {
+                    (response: DataResponse<Album>) in
+                    if let album = response.result.value {
+                        self.album = album
+                        self.tracks = (album.tracks?.items!)!
+                        /*if !(album.images?.isEmpty)! {
+                         self.imageUrlToSend = album.images?[0].url
+                         }*/
+                    }
+                    self.tableView.reloadData()
+                })
+            }
+
         }
     }
 
