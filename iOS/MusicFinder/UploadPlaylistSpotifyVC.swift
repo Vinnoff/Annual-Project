@@ -34,7 +34,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
                 ]
                 let parameters = [
                     "description": "test",
-                    "public" : "false",
+                    "public" : "true",
                     "name" : textfield.text
                     
                     ] as [String : Any]
@@ -45,6 +45,21 @@ class UploadPlaylistSpotifyVC: UIViewController {
     }
     
     @IBAction func addClicked(_ sender: Any) {
+        //1sOYqfD1K4HYOWzi7l7iIW
+        //spotify:album:6XMTRp9sURjgP9g23ppEri
+        
+        if let session = UserInfoSaver().isAuthenticatedSpotify() {
+            let uris = "spotify:track:4IIUaKqGMElZ3rGtuvYlNc"
+            let playlistId = "1sOYqfD1K4HYOWzi7l7iIW"
+            let urisUpdated = uris.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil)
+            let url = "https://api.spotify.com/v1/users/alkrox/playlists/" + playlistId + "/tracks?uris=" + urisUpdated
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + session.accessToken,
+                "Accept": "application/json"
+            ]
+            
+            Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
+        }
         
     }
     
