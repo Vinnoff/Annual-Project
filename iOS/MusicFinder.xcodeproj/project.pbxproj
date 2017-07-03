@@ -13,6 +13,8 @@
 		0F201CDB1E86E02A00F0B631 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F201CD91E86E02A00F0B631 /* HomeVC.swift */; };
 		0F201CDC1E86E02A00F0B631 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CDA1E86E02A00F0B631 /* HomeVC.xib */; };
 		0F220B8B1E87D938000589EC /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F220B8A1E87D938000589EC /* NSObject.swift */; };
+		0F2E8E8B1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */; };
+		0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */; };
 		0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */; };
 		0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */; };
 		0F76423C1E87D3C400560D76 /* ListGenreQuizzVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */; };
@@ -70,6 +72,8 @@
 		0F201CD91E86E02A00F0B631 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		0F201CDA1E86E02A00F0B631 /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		0F220B8A1E87D938000589EC /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPlaylistSpotifyVC.swift; sourceTree = "<group>"; };
+		0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadPlaylistSpotifyVC.xib; sourceTree = "<group>"; };
 		0F3C26ADCA39C443CD516399 /* Pods-MusicFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFinder/Pods-MusicFinder.release.xcconfig"; sourceTree = "<group>"; };
 		0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
 		0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGenreQuizzVC.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				0FD52B4F1EF32F5C0039543E /* Track */,
 				0FD52B541EF335790039543E /* Album */,
 				0FF59FE41EF4236F00F853DB /* Artist */,
+				0F2E8E8D1F0A86F600F6FB6B /* UploadPlaylistSpotify */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
@@ -214,6 +219,15 @@
 				0F9C319D1E87CAB300A84F2C /* Playlist */,
 			);
 			name = Quizz;
+			sourceTree = "<group>";
+		};
+		0F2E8E8D1F0A86F600F6FB6B /* UploadPlaylistSpotify */ = {
+			isa = PBXGroup;
+			children = (
+				0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */,
+				0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */,
+			);
+			name = UploadPlaylistSpotify;
 			sourceTree = "<group>";
 		};
 		0F7642411E87D47E00560D76 /* ListGenreCell */ = {
@@ -448,6 +462,7 @@
 				0FD52B2D1EF2899F0039543E /* ResultSearchVC.xib in Resources */,
 				0FD52B531EF335750039543E /* AlbumVC.xib in Resources */,
 				0F9C319C1E87CAAE00A84F2C /* PlaylistVC.xib in Resources */,
+				0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */,
 				0F201CCF1E86DFC400F0B631 /* Assets.xcassets in Resources */,
 				0F9C31A11E87CCC600A84F2C /* ListGenreReusableView.xib in Resources */,
 				0F76423C1E87D3C400560D76 /* ListGenreQuizzVC.xib in Resources */,
@@ -535,6 +550,7 @@
 				0FD52B361EF2ACFF0039543E /* Track.swift in Sources */,
 				0F201CC81E86DFC400F0B631 /* AppDelegate.swift in Sources */,
 				0F7642451E87D8AE00560D76 /* UITableView.swift in Sources */,
+				0F2E8E8B1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift in Sources */,
 				0FD52B441EF2B3080039543E /* ItemTypeAlbum.swift in Sources */,
 				0F9C31961E87CA2100A84F2C /* DetailMusicVC.swift in Sources */,
 				0FD52B421EF2B2FF0039543E /* ItemTypeArtist.swift in Sources */,

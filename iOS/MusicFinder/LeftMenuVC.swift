@@ -13,7 +13,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
     var listGenreQuizz: ListGenreQuizzVC!
-    var items: [String] = ["Home","Auth Spotify", "Quizz", "Search"]
+    var items: [String] = ["Home","Auth Spotify", "Quizz", "Search", "upload playlist"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -67,6 +67,11 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 3:
             let searchVC = SearchVC(nibName: SearchVC.className(), bundle: nil)
             let newRootVC = UINavigationController(rootViewController: searchVC)
+            revealVC.pushFrontViewController(newRootVC, animated: true)
+            
+        case 4:
+            let uploadPlaylistVC = UploadPlaylistSpotifyVC(nibName: UploadPlaylistSpotifyVC.className(), bundle: nil)
+            let newRootVC = UINavigationController(rootViewController: uploadPlaylistVC)
             revealVC.pushFrontViewController(newRootVC, animated: true)
             
         default:
