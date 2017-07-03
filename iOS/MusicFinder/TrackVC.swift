@@ -60,10 +60,15 @@ class TrackVC: UIViewController {
             }
             
             //Player
-            playerUrl = NSURL(string: (item?.preview_url)!)
-            playerItem = AVPlayerItem(url: playerUrl! as URL)
-            player = AVPlayer(playerItem: playerItem)
-            player = AVPlayer(url: playerUrl! as URL)
+            if let preview = item?.preview_url {
+                playerUrl = NSURL(string: (preview))
+                playerItem = AVPlayerItem(url: playerUrl! as URL)
+                player = AVPlayer(playerItem: playerItem)
+                player = AVPlayer(url: playerUrl! as URL)
+            } else {
+                playButton.isEnabled = false
+                playButton.setTitle("Pas de preview", for: .disabled)
+            }
         }
         
         else if track != nil {

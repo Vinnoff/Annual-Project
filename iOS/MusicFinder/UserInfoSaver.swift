@@ -25,5 +25,12 @@ class UserInfoSaver {
         }
         return nil
     }
+    
+    func isAuth() -> Bool? {
+        if let session = isAuthenticatedSpotify(){
+             return session.isValid()
+        }
+        return false
+    }
 
 }

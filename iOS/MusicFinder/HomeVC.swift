@@ -56,11 +56,10 @@ class HomeVC: UIViewController, iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
-        
-        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-             tempView.backgroundColor = UIColor.red
-        }
-        else {
+
+        if UserInfoSaver().isAuth()! {
+            tempView.backgroundColor = UIColor.red
+        } else {
             tempView.backgroundColor = UIColor.blue
         }
         

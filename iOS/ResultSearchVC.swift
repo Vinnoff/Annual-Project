@@ -53,10 +53,13 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     let itemType = response.result.value
                     self.tracks = itemType?.tracks
-                    for item in (self.tracks?.items)! {
-                        self.names.append(item.name!)
-                        self.imagesTest.append((item.album?.images?[2].url)!)
+                    if let items = self.tracks?.items {
+                        for item in (self.tracks?.items)! {
+                            self.names.append(item.name!)
+                            self.imagesTest.append((item.album?.images?[2].url)!)
+                        }
                     }
+                    
                     if self.names.count == 0 {
                         self.noResultView.isHidden = false
                     }else {
