@@ -117,6 +117,7 @@ module.exports = (api) => {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.modify.another.user.account');
 		}
+
 		User.findById(req.params.id, (err, user) => {
 			if (err) {
 				return res.status(500).send(err);
@@ -128,64 +129,79 @@ module.exports = (api) => {
 			Score.find({
 				User: req.params.id
 			}, (err, scores) => {
+				console.log("rftyv" + scores[1].scoreInGame)
 				user.globalScore = 0
 				scores.forEach(function (score) {
-					user.globalScore += score
+					console.log(user.globalScore)
+					user.globalScore += score.scoreInGame
 				})
-				return res.send(JSON.stringify(user.globalScore));
-
+				user.save((err, data) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					return res.send(JSON.stringify(user.globalScore));
+				})
 			})
 		});
 	}
 
 	function updateFriends(req, res, next) {
-		User.findByIdAndUpdate(req.params.id, {
-			$push: {
-				Friends: req.body.friend
-			}
-		}, {
-			new: true
-		}, (err, data) => {
+		User.findById(req.params.id, (err, data) => {
 			if (err) {
-				return res.status(500).send(err);
+				return res.status(500).send(err)
 			}
-
 			if (!data) {
 				return res.status(204).send();
 			}
-			User.findByIdAndUpdate(req.body.friend, {
-				$push: {
-					Friends: req.params.id
-				}
-			}, {
-				new: true
-			}, (err, data) => {
-				if (err) {
-					return res.status(500).send(err);
+			let alreadyFriends = false
+			data.Friends.some(function (friend) {
+				if (JSON.stringify(req.body.friend) === JSON.stringify(friend)) {
+					alreadyFriends = true
+					return true
 				}
 
-				if (!data) {
-					return res.status(204).send();
-				}
-
-				return res.send("OK");
 			})
-		});
+			if (alreadyFriends) {
+				return res.status(401).send('users.already.friends')
+
+			} else {
+				User.findByIdAndUpdate(req.params.id, {
+					$push: {
+						Friends: req.body.friend
+					}
+				}, {
+					new: true
+				}, (err, data) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					if (!data) {
+						return res.status(204).send();
+					}
+					User.findByIdAndUpdate(req.body.friend, {
+						$push: {
+							Friends: req.params.id
+						}
+					}, {
+						new: true
+					}, (err, data) => {
+						if (err) {
+							return res.status(500).send(err);
+						}
+						if (!data) {
+							return res.status(204).send();
+						}
+						return res.send("OK");
+					})
+				});
+			}
+		})
 	}
 
 	function remove(req, res, next) {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.delete.another.user.account');
 		}
-
-		User.findById(req.params.id, (err, data) => {
-			if (err) {
-				return res.status(500).send(err);
-			}
-			if (!data) {
-				return res.status(204).send(data);
-			}
-		})
 
 		User.findByIdAndRemove(req.params.id, (err, data) => {
 			if (err) {

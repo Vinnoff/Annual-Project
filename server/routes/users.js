@@ -25,7 +25,7 @@ module.exports = (api) => {
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.update);
 
-	router.put('/:id/globalScore',
+	router.put('/globalScore/:id',
 		api.middlewares.bodyParser.json(),
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.updateGlobalScore);
