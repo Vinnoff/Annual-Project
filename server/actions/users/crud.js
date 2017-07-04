@@ -7,18 +7,16 @@ module.exports = (api) => {
 	const Playlist = api.models.Playlist;
 
 	function findAll(req, res, next) {
-		setTimeout(function () {
-			User.find((err, data) => {
-				if (err) {
-					return res.status(500).send(err);
-				}
-				if (!data || data.length == 0) {
-					return res.status(204).send(data)
-				}
-				api.middlewares.cache.set('User', data, req.url);
-				return res.send(data);
-			});
-		}, 2000);
+		User.find((err, data) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
+			if (!data || data.length == 0) {
+				return res.status(204).send(data)
+			}
+			api.middlewares.cache.set('User', data, req.originalUrl);
+			return res.send(data);
+		});
 	}
 
 	function findSorted(req, res, next) {
@@ -117,7 +115,6 @@ module.exports = (api) => {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.modify.another.user.account');
 		}
-
 		User.findById(req.params.id, (err, user) => {
 			if (err) {
 				return res.status(500).send(err);
@@ -129,10 +126,8 @@ module.exports = (api) => {
 			Score.find({
 				User: req.params.id
 			}, (err, scores) => {
-				console.log("rftyv" + scores[1].scoreInGame)
 				user.globalScore = 0
 				scores.forEach(function (score) {
-					console.log(user.globalScore)
 					user.globalScore += score.scoreInGame
 				})
 				user.save((err, data) => {
