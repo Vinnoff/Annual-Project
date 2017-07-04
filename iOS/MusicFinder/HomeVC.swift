@@ -16,7 +16,6 @@ class HomeVC: UIViewController, iCarouselDelegate, iCarouselDataSource {
     @IBOutlet weak var carouselView: iCarousel!
     var numbers = [1,2,3]
     
-    
     typealias JSONStandard = [String: AnyObject]
     let userDefaults = UserDefaults()
     

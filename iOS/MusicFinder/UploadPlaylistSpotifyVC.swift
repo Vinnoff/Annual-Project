@@ -40,7 +40,20 @@ class UploadPlaylistSpotifyVC: UIViewController {
                         
                         ] as [String : Any]
                     
-                    Alamofire.request("https://api.spotify.com/v1/users/alkrox/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+                    Alamofire.request("https://api.spotify.com/v1/users/alkrox/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            print("SUCCESS")
+                            let alert = UIAlertController(title: "Alert", message: "Ajouté avec succes", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        case .failure:
+                            print("ERROR")
+                            let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    })
                 }
             }
         }
