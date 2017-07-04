@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import SWRevealViewController
 
 class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -39,7 +40,12 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.tableView.reloadData()
                 })
             }
-
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Pas connecté à Spotify", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Se connecter", style: UIAlertActionStyle.default, handler: { action in
+                self.showAuthSpotify()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -60,6 +66,14 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         trackVC.item = tracks[indexPath.row]
         trackVC.album = album
         navigationController?.pushViewController(trackVC, animated: true)
+    }
+    
+    func showAuthSpotify() {
+        var revealVC: SWRevealViewController
+        revealVC = self.revealViewController()
+        let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+        let newRootVC = UINavigationController(rootViewController: authVC)
+        revealVC.pushFrontViewController(newRootVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

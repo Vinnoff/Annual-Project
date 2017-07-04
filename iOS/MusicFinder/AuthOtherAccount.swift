@@ -11,6 +11,7 @@ import UIKit
 
 class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
+    @IBOutlet weak var disconnect: UIButton!
     @IBOutlet weak var label: UILabel!
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
@@ -25,7 +26,6 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
         self.setNavigationBarItem()
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(AuthOtherAccount.updateAfterFirstLogin), name: nil, object: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,5 +77,10 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     }
     override func viewWillAppear(_ animated: Bool) {
         callAlamofire(url: urlInfoAccount)
+        if UserInfoSaver().isAuth()! {
+            disconnect.isHidden = false
+        } else {
+            disconnect.isHidden = true
+        }
     }
 }

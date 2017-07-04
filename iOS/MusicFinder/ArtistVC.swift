@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import SWRevealViewController
 
 class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -49,6 +50,12 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.tableView.reloadData()
                 })
             }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Pas connecté à Spotify", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Se connecter", style: UIAlertActionStyle.default, handler: { action in
+                self.showAuthSpotify()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -69,6 +76,12 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.tableView.reloadData()
                 })
             }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Pas connecté à Spotify", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Se connecter", style: UIAlertActionStyle.default, handler: { action in
+                self.showAuthSpotify()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -149,6 +162,14 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 requestAlbumArtist(url: searchUrlNext!)
             }
         }
+    }
+    
+    func showAuthSpotify() {
+        var revealVC: SWRevealViewController
+        revealVC = self.revealViewController()
+        let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+        let newRootVC = UINavigationController(rootViewController: authVC)
+        revealVC.pushFrontViewController(newRootVC, animated: true)
     }
     
     

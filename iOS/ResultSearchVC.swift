@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import SWRevealViewController
 
 class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -108,7 +109,21 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     })
                 }
             }
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Pas connecté à Spotify", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Se connecter", style: UIAlertActionStyle.default, handler: { action in
+            self.showAuthSpotify()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func showAuthSpotify() {
+        var revealVC: SWRevealViewController
+        revealVC = self.revealViewController()
+        let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+        let newRootVC = UINavigationController(rootViewController: authVC)
+        revealVC.pushFrontViewController(newRootVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
