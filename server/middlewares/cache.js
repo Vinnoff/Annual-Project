@@ -1,74 +1,75 @@
 module.exports = (api) => {
-    const cache = [{
-        model: String,
-        storage: {}
+	const cache = [{
+		model: String,
+		storage: {}
     }];
 
-    function getDataFromKey(key) {
-        for (let item of cache) {
-            const data = item.storage[key]
-            if (data)
-                return data
-        }
+	function getDataFromKey(key) {
+		for (let item of cache) {
+			const data = item.storage[key]
+			if (data)
+				return data
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    function getItemFromModel(model) {
-        for (let item of cache) {
-            if (item.model == model) {
-                return item
-            }
-        }
+	function getItemFromModel(model) {
+		for (let item of cache) {
+			if (item.model == model) {
+				return item
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    function get(req, res, next) {
-        const data = getDataFromKey(req.originalUrl)
+	function get(req, res, next) {
+		const data = getDataFromKey(req.originalUrl)
 
-        if (data)
-            return res.send(data)
+		if (data)
+			return res.send(data)
 
-        next()
-    }
+		next()
+	}
 
-    function set(model, data, key) {
-        let item = getItemFromModel(model);
-        if (item) {
-            return item.storage[key] = data;
-        }
+	function set(model, data, key) {
+		let item = getItemFromModel(model);
+		if (item) {
+			return item.storage[key] = data;
+		}
 
-        item = {
-            model: model,
-            storage: {}
-        }
+		item = {
+			model: model,
+			storage: {}
+		}
 
-        item.storage[key] = data;
+		item.storage[key] = data;
+		console.log("cache : %s\n", JSON.stringify(cache))
+		console.log("item : %s\n", JSON.stringify(item))
+		cache.push(item);
+	}
 
-        cache.push(item);
-    }
+	function clean(model) {
+		return (req, res, next) => {
+			let index = -1;
+			for (let item of cache) {
+				if (item.model == model) {
+					index = cache.indexOf(item);
+				}
+			}
 
-    function clean(model) {
-        return (req, res, next) => {
-            let index = -1;
-            for (let item of cache) {
-                if (item.model == model) {
-                    index = cache.indexOf(item);
-                }
-            }
+			if (index != -1) {
+				cache.splice(index, 1);
+			}
 
-            if (index != -1) {
-                cache.splice(index, 1);
-            }
+			next();
+		}
+	}
 
-            next();
-        }
-    }
-
-    return {
-        get,
-        set,
-        clean
-    }
+	return {
+		get,
+		set,
+		clean
+	}
 }
