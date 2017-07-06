@@ -28,7 +28,9 @@ class TrackVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        playButton.layer.cornerRadius = 5.0
+        
         if item != nil {
             titleLabel.text = item?.name
             

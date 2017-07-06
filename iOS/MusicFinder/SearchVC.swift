@@ -18,6 +18,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        self.addGestureMenu()
         submitButton.layer.cornerRadius = 5.0
         containerView.layer.cornerRadius = 5.0
     }

@@ -18,6 +18,7 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        self.addGestureMenu()
         
         let headers: HTTPHeaders = [
             //"Authorization": "Bearer " + session.accessToken,

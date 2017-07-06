@@ -23,6 +23,7 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor.darkGray
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 let token = session.accessToken
@@ -57,6 +58,8 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         if let name = tracks[indexPath.row].name {
             cell.textLabel?.text = name
+            cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor(red: 255, green: 229, blue: 53)
         }
         return cell
     }

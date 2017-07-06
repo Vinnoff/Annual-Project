@@ -22,26 +22,28 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4ZW-Rp-3CF">
-                    <rect key="frame" x="0.0" y="38" width="375" height="629"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4ZW-Rp-3CF">
+                    <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2wv-LB-jDr">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <segments>
                         <segment title="Musique"/>
                         <segment title="Album"/>
                         <segment title="Artiste"/>
                     </segments>
+                    <color key="tintColor" red="1" green="0.89803921568627454" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="segmentedBarClicked:" destination="-1" eventType="valueChanged" id="t1e-Kd-kQF"/>
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdm-w8-mtC">
-                    <rect key="frame" x="0.0" y="38" width="375" height="629"/>
+                    <rect key="frame" x="0.0" y="28" width="375" height="639"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aucun résultat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcM-aM-AFv">
-                            <rect key="frame" x="132.5" y="304" width="110.5" height="21"/>
+                            <rect key="frame" x="132.5" y="309" width="110.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -62,10 +64,10 @@
                 <constraint firstAttribute="trailing" secondItem="bdm-w8-mtC" secondAttribute="trailing" id="I1F-3u-Zq7"/>
                 <constraint firstAttribute="bottom" secondItem="4ZW-Rp-3CF" secondAttribute="bottom" id="IVT-Ma-xxy"/>
                 <constraint firstItem="2wv-LB-jDr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KEz-4J-z7D"/>
-                <constraint firstItem="bdm-w8-mtC" firstAttribute="top" secondItem="2wv-LB-jDr" secondAttribute="bottom" constant="10" id="NNO-qM-Ckg"/>
+                <constraint firstItem="bdm-w8-mtC" firstAttribute="top" secondItem="2wv-LB-jDr" secondAttribute="bottom" id="NNO-qM-Ckg"/>
                 <constraint firstAttribute="trailing" secondItem="2wv-LB-jDr" secondAttribute="trailing" id="Qgx-jm-Nft"/>
                 <constraint firstItem="4ZW-Rp-3CF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="chS-ya-kBO"/>
-                <constraint firstItem="4ZW-Rp-3CF" firstAttribute="top" secondItem="2wv-LB-jDr" secondAttribute="bottom" constant="10" id="g2w-5u-mLr"/>
+                <constraint firstItem="4ZW-Rp-3CF" firstAttribute="top" secondItem="2wv-LB-jDr" secondAttribute="bottom" id="g2w-5u-mLr"/>
                 <constraint firstItem="2wv-LB-jDr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jTo-nM-XgZ"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="88.5"/>

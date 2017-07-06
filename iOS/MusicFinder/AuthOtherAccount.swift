@@ -25,6 +25,7 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        self.addGestureMenu()
         loginButton.layer.cornerRadius = 5.0
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(AuthOtherAccount.updateAfterFirstLogin), name: nil, object: nil)

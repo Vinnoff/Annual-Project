@@ -19,6 +19,7 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var searchUrl: String?
     var names = [String]()
     var imagesTest = [String]()
+    var allItems = [Item]()
     var albums: ItemType?
     var artists: ItemType?
     var tracks: ItemType?
@@ -29,6 +30,7 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Rechercher"
         tableView.delegate = self
         tableView.dataSource = self
         self.edgesForExtendedLayout = []
@@ -55,10 +57,17 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         let itemType = response.result.value
                         self.tracks = itemType?.tracks
+                        
                         if let items = self.tracks?.items {
                             for item in items {
+                                self.allItems.append(item)
                                 self.names.append(item.name!)
-                                self.imagesTest.append((item.album?.images?[2].url)!)
+                                if let images = item.album?.images {
+                                    if images.indices.contains(2) {
+                                        self.imagesTest.append(images[2].url!)
+                                    }
+                                }
+                                
                             }
                         }
                         
@@ -77,9 +86,12 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let itemType = response.result.value
                         self.albums = itemType?.albums
                         for item in (self.albums?.items)! {
+                            self.allItems.append(item)
                             self.names.append(item.name!)
-                            if item.images?[2].url != nil {
-                                self.imagesTest.append((item.images?[2].url)!)
+                            if (item.images?.indices.contains(2))! {
+                                if item.images?[2].url != nil {
+                                    self.imagesTest.append((item.images?[2].url)!)
+                                }
                             }
                         }
                         if self.names.count == 0 {
@@ -98,6 +110,7 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let itemType = response.result.value
                         self.artists = itemType?.artists
                         for item in (self.artists?.items)! {
+                            self.allItems.append(item)
                             self.names.append(item.name!)
                         }
                         if self.names.count == 0 {
@@ -132,10 +145,19 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultcell", for: indexPath) as! ResultSearchCell
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.gray
+        } else {
+            cell.backgroundColor = UIColor.darkGray
+        }
         if searchType == "artist" {
             cell.bindData(title: names[indexPath.row])
         } else {
-            cell.bindData(title: names[indexPath.row], imageURL: imagesTest[indexPath.row])
+            if imagesTest.indices.contains(indexPath.row) {
+                cell.bindData(title: names[indexPath.row], imageURL: imagesTest[indexPath.row])
+            } else {
+                cell.bindData(title: names[indexPath.row])
+            }
         }
         
         return cell
@@ -144,7 +166,7 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = names.count - 1
         if indexPath.row == lastElement {
@@ -173,25 +195,29 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if searchType == "track" {
             let trackVC = TrackVC(nibName: TrackVC.className(), bundle: nil)
-            trackVC.item = tracks?.items?[indexPath.row]
+            //trackVC.item = tracks?.items?[indexPath.row]
+            trackVC.item = allItems[indexPath.row]
             navigationController?.pushViewController(trackVC, animated: true)
         }
         
         else if searchType == "album" {
             let albumVC = AlbumVC(nibName: AlbumVC.className(), bundle: nil)
-            albumVC.url = albums?.items?[indexPath.row].href
+            //albumVC.url = albums?.items?[indexPath.row].href
+            albumVC.url =  allItems[indexPath.row].href
             navigationController?.pushViewController(albumVC, animated: true)
         }
         
         else if searchType == "artist" {
             let artistVC = ArtistVC(nibName: ArtistVC.className(), bundle: nil)
-            artistVC.artist = artists?.items?[indexPath.row]
+            //artistVC.artist = artists?.items?[indexPath.row]
+            artistVC.artist =  allItems[indexPath.row]
             navigationController?.pushViewController(artistVC, animated: true)
         }
     }
     
     @IBAction func segmentedBarClicked(_ sender: Any) {
         names = []
+        allItems = []
         imagesTest = []
         switch segmentedBar.selectedSegmentIndex {
             case 0:

@@ -19,6 +19,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        self.addGestureMenu()
         // https://api.spotify.com/v1/users/alkrox/playlists
         //Authorization: Bearer
         

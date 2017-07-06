@@ -13,16 +13,19 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
     var listGenreQuizz: ListGenreQuizzVC!
-    var items: [String] = ["Home","Auth Spotify", "Quizz", "Search", "upload playlist"]
+    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload"]
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = UIColor.darkGray
+        tableView.register(UINib(nibName: LeftMenuCell.className(), bundle: nil), forCellReuseIdentifier: "leftmenucell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,14 +46,26 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Auth Spotify" {
+        /*let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Se connecter" {
             cell.textLabel?.text = "Profil"
         } else {
             cell.textLabel?.text = self.items[indexPath.row]
+        }*/
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "leftmenucell", for: indexPath) as! LeftMenuCell
+        if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Se connecter" {
+            cell.bindData(title: "Profil", imageName: self.ico[indexPath.row])
+        } else {
+            cell.bindData(title: self.items[indexPath.row], imageName: self.ico[indexPath.row])
         }
+        cell.backgroundColor = UIColor.darkGray
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -59,7 +74,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         switch (indexPath.row) {
         case 0:
-            let homeVC = HomeVC(nibName: HomeVC.className(), bundle: nil)
+            let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
             let newRootVC = UINavigationController(rootViewController: homeVC)
             revealVC.pushFrontViewController(newRootVC, animated: true)
             

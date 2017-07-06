@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
         auth.redirectURL = URL(string: "musicfinder-auth://callback")
         auth.sessionUserDefaultsKey = "current session"
         
-        let homeVC = HomeVC(nibName: "HomeVC", bundle: nil)
+        let homeVC = Home2VC(nibName: "Home2VC", bundle: nil)
         let leftMenuVC = LeftMenuVC(nibName: "LeftMenuVC", bundle: nil)
         self.window = UIWindow(frame: UIScreen.main.bounds)
         

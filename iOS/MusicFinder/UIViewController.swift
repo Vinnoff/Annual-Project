@@ -16,6 +16,14 @@ extension UIViewController {
         let menuIcon = UIImage(named: "ic_menu")
         let leftItem = UIBarButtonItem(image: menuIcon, style: .plain, target: revealController, action: #selector(revealController.revealToggle(_:)))
         self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.leftBarButtonItem?.tintColor =  UIColor(red: 255, green: 200, blue: 40)
+    }
+    
+    func addGestureMenu() {
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        }
     }
     
    
