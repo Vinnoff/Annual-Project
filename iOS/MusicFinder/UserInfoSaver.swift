@@ -33,4 +33,7 @@ class UserInfoSaver {
         return false
     }
 
+    func disconnectAccount() {
+        userDefaults?.removeObject(forKey: "SpotifySession")
+    }
 }

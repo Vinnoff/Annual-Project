@@ -17,6 +17,7 @@ class ItemType : Mappable{
     var offset: Int?
     var previous: String?
     var total: Int?
+    var uri: String?
     
     required init?(map: Map){
     }
@@ -29,5 +30,6 @@ class ItemType : Mappable{
         offset <- map["offset"]
         previous <- map["previous"]
         total <- map["total"]
+        uri <- map["uri"]
     }
 }

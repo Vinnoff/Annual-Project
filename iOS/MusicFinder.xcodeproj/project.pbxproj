@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F1A5ECC1F0D386100473697 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1A5ECA1F0D386100473697 /* ProfileVC.swift */; };
+		0F1A5ECD1F0D386100473697 /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F1A5ECB1F0D386100473697 /* ProfileVC.xib */; };
 		0F201CC81E86DFC400F0B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F201CC71E86DFC400F0B631 /* AppDelegate.swift */; };
 		0F201CCF1E86DFC400F0B631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CCE1E86DFC400F0B631 /* Assets.xcassets */; };
 		0F201CD21E86DFC400F0B631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */; };
@@ -64,6 +66,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F1A5ECA1F0D386100473697 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		0F1A5ECB1F0D386100473697 /* ProfileVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
 		0F201CC41E86DFC400F0B631 /* MusicFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F201CC71E86DFC400F0B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F201CCE1E86DFC400F0B631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,6 +153,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		0F1A5ECE1F0D386500473697 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				0F1A5ECA1F0D386100473697 /* ProfileVC.swift */,
+				0F1A5ECB1F0D386100473697 /* ProfileVC.xib */,
+			);
+			name = ProfileVC;
+			sourceTree = "<group>";
+		};
 		0F201CBB1E86DFC400F0B631 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +196,7 @@
 				0FD52B541EF335790039543E /* Album */,
 				0FF59FE41EF4236F00F853DB /* Artist */,
 				0F2E8E8D1F0A86F600F6FB6B /* UploadPlaylistSpotify */,
+				0F1A5ECE1F0D386500473697 /* ProfileVC */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
@@ -462,6 +476,7 @@
 				0FD52B2D1EF2899F0039543E /* ResultSearchVC.xib in Resources */,
 				0FD52B531EF335750039543E /* AlbumVC.xib in Resources */,
 				0F9C319C1E87CAAE00A84F2C /* PlaylistVC.xib in Resources */,
+				0F1A5ECD1F0D386100473697 /* ProfileVC.xib in Resources */,
 				0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */,
 				0F201CCF1E86DFC400F0B631 /* Assets.xcassets in Resources */,
 				0F9C31A11E87CCC600A84F2C /* ListGenreReusableView.xib in Resources */,
@@ -557,6 +572,7 @@
 				0FD52B301EF29B980039543E /* ItemType.swift in Sources */,
 				0F220B8B1E87D938000589EC /* NSObject.swift in Sources */,
 				0F201CDB1E86E02A00F0B631 /* HomeVC.swift in Sources */,
+				0F1A5ECC1F0D386100473697 /* ProfileVC.swift in Sources */,
 				0FD52B271EF2882B0039543E /* SearchVC.swift in Sources */,
 				0F9C31931E87C8D100A84F2C /* UIViewController.swift in Sources */,
 				0FD52B401EF2B2F30039543E /* ItemTypeTrack.swift in Sources */,

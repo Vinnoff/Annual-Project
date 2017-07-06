@@ -23,7 +23,10 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +44,12 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.items[indexPath.row]
+        if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Auth Spotify" {
+            cell.textLabel?.text = "Profil"
+        } else {
+            cell.textLabel?.text = self.items[indexPath.row]
+        }
+        
         return cell
     }
     
@@ -56,9 +64,16 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             revealVC.pushFrontViewController(newRootVC, animated: true)
             
         case 1:
-            let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: authVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
+            if UserInfoSaver().isAuth()! {
+                let profileVC = ProfileVC(nibName: ProfileVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: profileVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
+            
         case 2:
             let listGenreVC = ListGenreQuizzVC(nibName: ListGenreQuizzVC.className(), bundle: nil)
             let newRootVC = UINavigationController(rootViewController: listGenreVC)
@@ -73,6 +88,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let uploadPlaylistVC = UploadPlaylistSpotifyVC(nibName: UploadPlaylistSpotifyVC.className(), bundle: nil)
             let newRootVC = UINavigationController(rootViewController: uploadPlaylistVC)
             revealVC.pushFrontViewController(newRootVC, animated: true)
+            
             
         default:
             break

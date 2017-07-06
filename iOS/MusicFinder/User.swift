@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class User {
+class User : Mappable{
     var username: String?
-    var token: String?
+ 
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        username <- map["username"]
+    }
+    
 }

@@ -11,12 +11,15 @@ import Alamofire
 
 class SearchVC: UIViewController {
 
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        submitButton.layer.cornerRadius = 5.0
+        containerView.layer.cornerRadius = 5.0
     }
 
     override func didReceiveMemoryWarning() {

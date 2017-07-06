@@ -11,6 +11,7 @@ import UIKit
 
 class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var disconnect: UIButton!
     @IBOutlet weak var label: UILabel!
     var auth = SPTAuth.defaultInstance()!
@@ -24,6 +25,7 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
+        loginButton.layer.cornerRadius = 5.0
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(AuthOtherAccount.updateAfterFirstLogin), name: nil, object: nil)
     }

@@ -18,6 +18,7 @@ class Track : Mappable{
     var name: String?
     var preview_url: String?
     var type: String?
+    var uri: String?
 
     
     required init?(map: Map){
@@ -32,6 +33,6 @@ class Track : Mappable{
         name <- map["name"]
         preview_url <- map["preview_url"]
         type <- map["type"]
-        
+        uri <- map["uri"]
     }
 }

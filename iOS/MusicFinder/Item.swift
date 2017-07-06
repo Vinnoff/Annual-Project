@@ -19,6 +19,7 @@ class Item : Mappable{
     var name: String?
     var preview_url: String?
     var type: String?
+    var uri: String?
     
     //Album
     var album_type: String?
@@ -39,6 +40,7 @@ class Item : Mappable{
         name <- map["name"]
         preview_url <- map["preview_url"]
         type <- map["type"]
+        uri <- map["uri"]
         
         //Album
         album_type <- map["album_type"]
