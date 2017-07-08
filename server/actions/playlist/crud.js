@@ -91,6 +91,10 @@ module.exports = (api) => {
         });
     }
 
+    function addSong(req, res, next) {
+      Playlist.findById()
+    }
+
     return {
         findAll,
         findOne,

@@ -98,6 +98,10 @@ module.exports = (api) => {
         });
     }
 
+    function addSong(req, res, next) {
+      Album.findById()
+    }
+
     return {
         findAll,
         findOne,
