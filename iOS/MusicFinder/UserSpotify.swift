@@ -12,6 +12,8 @@ import ObjectMapper
 class UserSpotify : Mappable{
     
     var id : String?
+    var uri: String?
+    var images: ImageProfile?
     
     required init?(map: Map) {
         
@@ -19,10 +21,8 @@ class UserSpotify : Mappable{
      
      func mapping(map: Map) {
         self.id <- map["id"]
+        self.uri <- map["uri"]
+        self.images <- map["images"]
      }
-    
-    func bind(id: String?) {
-        self.id = id
-    }
 }
 

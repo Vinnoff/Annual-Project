@@ -75,8 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
                 let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
                 print(headers)
                 Alamofire.request(urlInfoAccount, headers: headers).responseJSON(completionHandler: { (response) in
-                    if let JSON = response.result.value {
-                        print(JSON)
+                    if  response.result.value != nil{
                         self.initController()
                     }
                 })

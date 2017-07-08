@@ -44,6 +44,12 @@
 		0FC1F8CE1F0E7C0C00C34908 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC1F8CD1F0E7C0C00C34908 /* UIColor.swift */; };
 		0FC1F8D01F0E8F4800C34908 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC1F8CF1F0E8F4800C34908 /* LeftMenuCell.swift */; };
 		0FC1F8D21F0E8F5700C34908 /* LeftMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC1F8D11F0E8F5700C34908 /* LeftMenuCell.xib */; };
+		0FC3C9391F11348B00D386ED /* CreatePlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3C9371F11348B00D386ED /* CreatePlaylistVC.swift */; };
+		0FC3C93A1F11348B00D386ED /* CreatePlaylistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC3C9381F11348B00D386ED /* CreatePlaylistVC.xib */; };
+		0FC3C93D1F11368600D386ED /* ImageProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3C93C1F11368600D386ED /* ImageProfile.swift */; };
+		0FC3C9411F113D8E00D386ED /* ListPlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3C93F1F113D8E00D386ED /* ListPlaylistVC.swift */; };
+		0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC3C9401F113D8E00D386ED /* ListPlaylistVC.xib */; };
+		0FC3C9441F113E4300D386ED /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3C9431F113E4300D386ED /* Playlist.swift */; };
 		0FD52B271EF2882B0039543E /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52B251EF2882B0039543E /* SearchVC.swift */; };
 		0FD52B281EF2882B0039543E /* SearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD52B261EF2882B0039543E /* SearchVC.xib */; };
 		0FD52B2C1EF2899F0039543E /* ResultSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD52B2A1EF2899F0039543E /* ResultSearchVC.swift */; };
@@ -112,6 +118,12 @@
 		0FC1F8CD1F0E7C0C00C34908 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0FC1F8CF1F0E8F4800C34908 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		0FC1F8D11F0E8F5700C34908 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuCell.xib; sourceTree = "<group>"; };
+		0FC3C9371F11348B00D386ED /* CreatePlaylistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaylistVC.swift; sourceTree = "<group>"; };
+		0FC3C9381F11348B00D386ED /* CreatePlaylistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreatePlaylistVC.xib; sourceTree = "<group>"; };
+		0FC3C93C1F11368600D386ED /* ImageProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProfile.swift; sourceTree = "<group>"; };
+		0FC3C93F1F113D8E00D386ED /* ListPlaylistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPlaylistVC.swift; sourceTree = "<group>"; };
+		0FC3C9401F113D8E00D386ED /* ListPlaylistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListPlaylistVC.xib; sourceTree = "<group>"; };
+		0FC3C9431F113E4300D386ED /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		0FD52B251EF2882B0039543E /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		0FD52B261EF2882B0039543E /* SearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchVC.xib; sourceTree = "<group>"; };
 		0FD52B2A1EF2899F0039543E /* ResultSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultSearchVC.swift; path = ../ResultSearchVC.swift; sourceTree = "<group>"; };
@@ -209,6 +221,7 @@
 				0F1A5ECE1F0D386500473697 /* ProfileVC */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
+				0FC3C93B1F11348F00D386ED /* Playlist */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
 				0F8DDFE31ED06DF200289AE8 /* MusicFinder-Bridging-Header.h */,
 			);
@@ -272,7 +285,7 @@
 				0F8DDFE81ED06E9600289AE8 /* AuthOtherAccount.xib */,
 				0F8DDFEE1ED0998200289AE8 /* UserInfo */,
 				0F8DDFEF1ED09ADE00289AE8 /* User.swift */,
-				0F8DDFF11ED0A5D000289AE8 /* UserSpotify.swift */,
+				0FC3C93E1F1136D500D386ED /* ModelUserSpotify */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -335,6 +348,26 @@
 			name = ListGenreReusableView;
 			sourceTree = "<group>";
 		};
+		0FC3C93B1F11348F00D386ED /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				0FC3C9371F11348B00D386ED /* CreatePlaylistVC.swift */,
+				0FC3C9381F11348B00D386ED /* CreatePlaylistVC.xib */,
+				0FC3C93F1F113D8E00D386ED /* ListPlaylistVC.swift */,
+				0FC3C9401F113D8E00D386ED /* ListPlaylistVC.xib */,
+			);
+			name = Playlist;
+			sourceTree = "<group>";
+		};
+		0FC3C93E1F1136D500D386ED /* ModelUserSpotify */ = {
+			isa = PBXGroup;
+			children = (
+				0F8DDFF11ED0A5D000289AE8 /* UserSpotify.swift */,
+				0FC3C93C1F11368600D386ED /* ImageProfile.swift */,
+			);
+			name = ModelUserSpotify;
+			sourceTree = "<group>";
+		};
 		0FD52B291EF2882F0039543E /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +400,7 @@
 				0FD52B3B1EF2AF970039543E /* Artist.swift */,
 				0FD52B391EF2AF370039543E /* Image.swift */,
 				0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */,
+				0FC3C9431F113E4300D386ED /* Playlist.swift */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -483,6 +517,7 @@
 			files = (
 				0F201CD21E86DFC400F0B631 /* LaunchScreen.storyboard in Resources */,
 				0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */,
+				0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */,
 				0F8DDFEA1ED06E9600289AE8 /* AuthOtherAccount.xib in Resources */,
 				0F7642401E87D47A00560D76 /* ListGenreCell.xib in Resources */,
 				0F201CDC1E86E02A00F0B631 /* HomeVC.xib in Resources */,
@@ -490,6 +525,7 @@
 				0FD52B4E1EF32F580039543E /* TrackVC.xib in Resources */,
 				0FD52B2D1EF2899F0039543E /* ResultSearchVC.xib in Resources */,
 				0FD52B531EF335750039543E /* AlbumVC.xib in Resources */,
+				0FC3C93A1F11348B00D386ED /* CreatePlaylistVC.xib in Resources */,
 				0FC1F8D21F0E8F5700C34908 /* LeftMenuCell.xib in Resources */,
 				0F9C319C1E87CAAE00A84F2C /* PlaylistVC.xib in Resources */,
 				0F1A5ECD1F0D386100473697 /* ProfileVC.xib in Resources */,
@@ -569,6 +605,7 @@
 				0F8DDFF21ED0A5D000289AE8 /* UserSpotify.swift in Sources */,
 				0FD52B521EF335750039543E /* AlbumVC.swift in Sources */,
 				0FD52B381EF2AE9C0039543E /* Album.swift in Sources */,
+				0FC3C9391F11348B00D386ED /* CreatePlaylistVC.swift in Sources */,
 				0F8DDFF01ED09ADE00289AE8 /* User.swift in Sources */,
 				0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */,
 				0F8FFFD11E86E65F005FFDC3 /* LeftMenuVC.swift in Sources */,
@@ -576,6 +613,7 @@
 				0F8DDFED1ED0997B00289AE8 /* UserInfoSaver.swift in Sources */,
 				0FD52B4D1EF32F580039543E /* TrackVC.swift in Sources */,
 				0F8DDFE91ED06E9600289AE8 /* AuthOtherAccount.swift in Sources */,
+				0FC3C9441F113E4300D386ED /* Playlist.swift in Sources */,
 				0F76423F1E87D47A00560D76 /* ListGenreCell.swift in Sources */,
 				0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */,
 				0FD52B481EF2B7A60039543E /* ResultSearchCell.swift in Sources */,
@@ -588,6 +626,7 @@
 				0F9C31961E87CA2100A84F2C /* DetailMusicVC.swift in Sources */,
 				0FD52B421EF2B2FF0039543E /* ItemTypeArtist.swift in Sources */,
 				0FD52B301EF29B980039543E /* ItemType.swift in Sources */,
+				0FC3C9411F113D8E00D386ED /* ListPlaylistVC.swift in Sources */,
 				0F220B8B1E87D938000589EC /* NSObject.swift in Sources */,
 				0FC1F8D01F0E8F4800C34908 /* LeftMenuCell.swift in Sources */,
 				0FC1F8CE1F0E7C0C00C34908 /* UIColor.swift in Sources */,
@@ -595,6 +634,7 @@
 				0F1A5ECC1F0D386100473697 /* ProfileVC.swift in Sources */,
 				0FD52B271EF2882B0039543E /* SearchVC.swift in Sources */,
 				0F9C31931E87C8D100A84F2C /* UIViewController.swift in Sources */,
+				0FC3C93D1F11368600D386ED /* ImageProfile.swift in Sources */,
 				0FD52B401EF2B2F30039543E /* ItemTypeTrack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
