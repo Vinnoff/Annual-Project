@@ -8,6 +8,7 @@
 
 import UIKit
 import SWRevealViewController
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDelegate {
@@ -23,18 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
         auth.redirectURL = URL(string: "musicfinder-auth://callback")
         auth.sessionUserDefaultsKey = "current session"
         
-        let homeVC = Home2VC(nibName: "Home2VC", bundle: nil)
-        let leftMenuVC = LeftMenuVC(nibName: "LeftMenuVC", bundle: nil)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        initController()
         
-        let homeNavigationController = UINavigationController(rootViewController: homeVC)
-        let leftMenuNavigationController = UINavigationController(rootViewController: leftMenuVC)
-        let revealVC = SWRevealViewController(rearViewController: leftMenuNavigationController, frontViewController: homeNavigationController)
-       
-        revealVC?.delegate = self;
-        self.viewController = revealVC;
-        self.window!.rootViewController = self.viewController
-        self.window!.makeKeyAndVisible()
         return true
     }
 
@@ -51,10 +42,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
                 userDefault.set(sessionData, forKey: "SpotifySession")
                 userDefault.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
+                self.requestDetailUserSpotify()
+                
+                
             })
             return true
         }
         return false
+    }
+    
+    func initController() {
+        let homeVC = Home2VC(nibName: "Home2VC", bundle: nil)
+        let leftMenuVC = LeftMenuVC(nibName: "LeftMenuVC", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let homeNavigationController = UINavigationController(rootViewController: homeVC)
+        let leftMenuNavigationController = UINavigationController(rootViewController: leftMenuVC)
+        let revealVC = SWRevealViewController(rearViewController: leftMenuNavigationController, frontViewController: homeNavigationController)
+        
+        revealVC?.delegate = self;
+        self.viewController = revealVC;
+        self.window!.rootViewController = self.viewController
+        self.window!.makeKeyAndVisible()
+    }
+    
+    func requestDetailUserSpotify() {
+        let token: String?
+        let urlInfoAccount = "https://api.spotify.com/v1/me"
+        if let session = UserInfoSaver().getSessionSpotify() {
+            if UserInfoSaver().isAuth()! {
+                token = session.accessToken
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                print(headers)
+                Alamofire.request(urlInfoAccount, headers: headers).responseJSON(completionHandler: { (response) in
+                    if let JSON = response.result.value {
+                        print(JSON)
+                        self.initController()
+                    }
+                })
+            }
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

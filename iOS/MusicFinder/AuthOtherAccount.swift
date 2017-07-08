@@ -29,11 +29,16 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
         loginButton.layer.cornerRadius = 5.0
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(AuthOtherAccount.updateAfterFirstLogin), name: nil, object: nil)
+        callAlamofire(url: urlInfoAccount)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     func setup() {
@@ -46,11 +51,11 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     @IBAction func loginSpotifyClicked(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
             if auth.canHandle(auth.redirectURL) {
-                var revealVC: SWRevealViewController
+                /*var revealVC: SWRevealViewController
                 revealVC = self.revealViewController()
                 let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
                 let newRootVC = UINavigationController(rootViewController: homeVC)
-                revealVC.pushFrontViewController(newRootVC, animated: true)
+                revealVC.pushFrontViewController(newRootVC, animated: true)*/
             }
         }
     }
@@ -60,11 +65,7 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     }
     
     func updateAfterFirstLogin() {
-        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            /*let sessionDataObj = sessionObj as! Data
-            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            self.session = firstTimeSession
-            //print("MON ACCESS TOKEN \n n" + session.accessToken)*/
+        if UserInfoSaver().isAuth()! {
             
         }
     }
