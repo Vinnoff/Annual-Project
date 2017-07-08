@@ -1,4 +1,5 @@
 module.exports = (api) => {
+	api.use(api.middlewares.logger);
 	api.use('/auth', require('./auth')(api));
 	api.use('/game', require('./game')(api));
 	api.use('/album', require('./musicalContent/album')(api));
