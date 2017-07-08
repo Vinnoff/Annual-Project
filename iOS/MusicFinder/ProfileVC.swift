@@ -46,7 +46,7 @@ class ProfileVC: UIViewController {
         
         var revealVC: SWRevealViewController
         revealVC = self.revealViewController()
-        let homeVC = HomeVC(nibName: HomeVC.className(), bundle: nil)
+        let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
         let newRootVC = UINavigationController(rootViewController: homeVC)
         revealVC.pushFrontViewController(newRootVC, animated: true)
     }

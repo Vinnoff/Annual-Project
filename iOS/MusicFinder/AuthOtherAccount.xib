@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthOtherAccount" customModule="MusicFinder" customModuleProvider="target">
             <connections>
-                <outlet property="disconnect" destination="92R-hk-cOU" id="Qt4-fh-9Bd"/>
                 <outlet property="loginButton" destination="3Hu-5R-jeK" id="yVL-na-KbF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,20 +30,12 @@
                         <constraint firstAttribute="width" constant="200" id="Zjb-Jo-OGI"/>
                         <constraint firstAttribute="height" constant="60" id="sUo-2K-W9G"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="15"/>
                     <state key="normal" title="Log in with Spotify">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="loginSpotifyClicked:" destination="-1" eventType="touchUpInside" id="1GG-UK-zF4"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92R-hk-cOU">
-                    <rect key="frame" x="162" y="417" width="90" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="disconnect"/>
-                    <connections>
-                        <action selector="disconnectButton:" destination="-1" eventType="touchUpInside" id="qh1-ye-BdU"/>
                     </connections>
                 </button>
             </subviews>

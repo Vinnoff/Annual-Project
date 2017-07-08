@@ -8,11 +8,11 @@
 
 import Alamofire
 import UIKit
+import SWRevealViewController
 
 class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var disconnect: UIButton!
     @IBOutlet weak var label: UILabel!
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
@@ -46,7 +46,11 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     @IBAction func loginSpotifyClicked(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
             if auth.canHandle(auth.redirectURL) {
-                
+                var revealVC: SWRevealViewController
+                revealVC = self.revealViewController()
+                let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: homeVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
             }
         }
     }
@@ -57,10 +61,11 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     
     func updateAfterFirstLogin() {
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            let sessionDataObj = sessionObj as! Data
+            /*let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             self.session = firstTimeSession
-            //print("MON ACCESS TOKEN \n n" + session.accessToken)
+            //print("MON ACCESS TOKEN \n n" + session.accessToken)*/
+            
         }
     }
 
@@ -76,14 +81,6 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
                     print(JSON)
                 }
             })
-        }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        callAlamofire(url: urlInfoAccount)
-        if UserInfoSaver().isAuth()! {
-            disconnect.isHidden = false
-        } else {
-            disconnect.isHidden = true
         }
     }
 }
