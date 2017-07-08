@@ -27,7 +27,6 @@ module.exports = (api) => {
 			if (!data || data.length == 0) {
 				return res.status(204).send(data)
 			}
-			return res.send(data);
 		}).sort({
 			globalScore: -1
 		}).skip(Number(req.params.start)).limit(Number(req.params.limit));
@@ -50,10 +49,10 @@ module.exports = (api) => {
 			userName: req.params.userName,
 		}, (err, data) => {
 			if (err) {
-				return res.sendStatus(500).send();
+				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.sendStatus(204).send(data)
+				return res.status(204).send(data)
 			}
 			return res.send(data);
 		});
@@ -61,7 +60,6 @@ module.exports = (api) => {
 
 	function create(req, res, next) {
 		let user = new User(req.body);
-		user.password = sha1(user.password);
 		User.findOne({
 			userName: user.userName
 		}, (err, found) => {
@@ -96,9 +94,7 @@ module.exports = (api) => {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.modify.another.user.account');
 		}
-		if (req.body.password) {
-			req.body.password = sha1(req.body.password);
-		}
+
 		User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
 			if (err) {
 				return res.status(500).send(err);
@@ -197,7 +193,13 @@ module.exports = (api) => {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.delete.another.user.account');
 		}
-
+		User.find({
+			Friends: {
+				$in: req.params.id
+			}
+		}, (err, data) => {
+			console.log(data)
+		})
 		User.findByIdAndRemove(req.params.id, (err, data) => {
 			if (err) {
 				return res.status(500).send();

@@ -5,11 +5,11 @@ module.exports = (api) => {
 		api.middlewares.cache.get,
 		api.actions.users.findAll);
 
-	router.get('/:start/:limit',
+	router.get('/sorted/:start/:limit',
 		api.middlewares.cache.get,
 		api.actions.users.findSorted);
 
-	router.get('/:id',
+	router.get('/id/:id',
 		api.actions.users.findById);
 
 	router.get('/userName/:userName',
