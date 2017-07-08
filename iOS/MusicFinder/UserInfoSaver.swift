@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class UserInfoSaver {
     static let USER_ID_KEY = "user_id"
@@ -27,6 +28,26 @@ class UserInfoSaver {
             return nil
         }
         return nil
+    }
+    
+    func getUser() -> UserSpotify? {
+        let token: String?
+        let urlInfoAccount = "https://api.spotify.com/v1/me"
+        var user: UserSpotify?
+        if let session = self.getSessionSpotify() {
+            token = session.accessToken
+            
+            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+            
+            Alamofire.request(urlInfoAccount, headers: headers).responseObject(completionHandler: {
+                (response: DataResponse<UserSpotify>) in
+                if let userResponse = response.result.value {
+                    user = userResponse
+                }
+                
+            })
+        }
+        return user
     }
     
     func isAuth() -> Bool? {
