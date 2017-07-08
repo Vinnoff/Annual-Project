@@ -7,9 +7,9 @@ module.exports = (api) => {
             type: String,
             required: true
         },
-        Statistics: {
-            type: Schema.Types.ObjectId,
-            ref: 'Statistics'
+        url: {
+            type: String,
+            required: true
         },
         duration: {
             type: Number
