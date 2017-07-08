@@ -38,7 +38,7 @@ class CreatePlaylistVC: UIViewController {
                     let parameters = [
                         "title": textField.text as! String,
                         "isPublic" : "true",
-                        "creator" : user?.id
+                        "Creator" : user?.id
                         
                         ] as [String : Any]
                     

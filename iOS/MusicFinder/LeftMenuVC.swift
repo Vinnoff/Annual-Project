@@ -13,8 +13,8 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
     var listGenreQuizz: ListGenreQuizzVC!
-    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist"]
-    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_home"]
+    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir playlist"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_home", "ico_home"]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -107,6 +107,11 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 5:
             let createPlaylistVC = CreatePlaylistVC(nibName: CreatePlaylistVC.className(), bundle: nil)
             let newRootVC = UINavigationController(rootViewController: createPlaylistVC)
+            revealVC.pushFrontViewController(newRootVC, animated: true)
+            
+        case 6:
+            let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
+            let newRootVC = UINavigationController(rootViewController: listPlaylistVC)
             revealVC.pushFrontViewController(newRootVC, animated: true)
             
             
