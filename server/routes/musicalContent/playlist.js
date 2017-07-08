@@ -12,7 +12,6 @@ module.exports = (api) => {
 
     router.post('/',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.middlewares.musicalContentCreation,
         api.middlewares.cache.clean('Album'),
@@ -20,13 +19,11 @@ module.exports = (api) => {
 
     router.put('/:id',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.actions.playlist.update);
 
     router.delete('/:id',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.actions.playlist.remove);
 
     return router;
