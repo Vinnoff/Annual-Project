@@ -5,11 +5,11 @@ module.exports = (api) => {
 		api.middlewares.cache.get,
 		api.actions.users.findAll);
 
-	router.get('/:start/:limit',
+	router.get('/sorted/:start/:limit',
 		api.middlewares.cache.get,
 		api.actions.users.findSorted);
 
-	router.get('/:id',
+	router.get('/id/:id',
 		api.actions.users.findById);
 
 	router.get('/userName/:userName',
@@ -25,10 +25,15 @@ module.exports = (api) => {
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.update);
 
-	router.put('/:id/globalScore',
+	router.put('/globalScore/:id',
 		api.middlewares.bodyParser.json(),
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.updateGlobalScore);
+
+	router.put('/friend/:id',
+		api.middlewares.bodyParser.json(),
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.updateFriends)
 
 	router.delete('/:id',
 		api.middlewares.ensureAuthentificated,
