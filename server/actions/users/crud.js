@@ -69,24 +69,14 @@ module.exports = (api) => {
 			if (found) {
 				return res.status(401).send('username.already.taken')
 			}
-			User.findOne({
-				mail: user.mail
-			}, (err, found) => {
+			user.Rank = "594fb1c9ab2572510210f8dd"
+			user.birthdate = new Date(user.birthDate);
+			user.save((err, data) => {
 				if (err) {
-					return res.status(500).send(err)
+					return res.status(500).send(err);
 				}
-				if (found) {
-					return res.status(401).send('mail.already.taken')
-				}
-				user.Rank = "594fb1c9ab2572510210f8dd"
-				user.birthdate = new Date(user.birthDate);
-				user.save((err, data) => {
-					if (err) {
-						return res.status(500).send(err);
-					}
-					return res.send(data);
-				})
-			});
+				return res.send(data);
+			})
 		});
 	}
 

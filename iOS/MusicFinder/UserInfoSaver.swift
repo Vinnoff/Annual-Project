@@ -20,8 +20,11 @@ class UserInfoSaver {
     func getSessionSpotify() -> SPTSession? {
         if let sessionObj:AnyObject = userDefaults?.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
-            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            return firstTimeSession
+            
+            if let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as? SPTSession {
+                return firstTimeSession
+            }
+            return nil
         }
         return nil
     }

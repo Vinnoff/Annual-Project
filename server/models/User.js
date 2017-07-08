@@ -20,7 +20,8 @@ module.exports = (api) => {
 		},
 		mail: {
 			type: String,
-			unique: true
+			unique: true,
+			sparse: true
 		},
 		Rank: {
 			type: Schema.Types.ObjectId,

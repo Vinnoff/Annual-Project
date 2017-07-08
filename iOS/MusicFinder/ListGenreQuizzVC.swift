@@ -21,6 +21,7 @@ class ListGenreQuizzVC: UIViewController, UICollectionViewDelegate, UICollection
         collectionView.dataSource = self
         collectionView.registerCellNib(cellClass: ListGenreCell.self)
         self.title = "Quizz Genre"
+        
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())

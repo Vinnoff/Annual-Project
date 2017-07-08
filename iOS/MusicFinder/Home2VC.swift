@@ -18,7 +18,10 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         self.setNavigationBarItem()
         self.addGestureMenu()
         //self.navigationItem.leftBarButtonItem?.tintColor =  UIColor.darkGray
-    
+
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 255, green: 200, blue: 40)]
+        
         self.title = "Music Finder"
         scrollView.frame = view.frame
         
@@ -37,15 +40,15 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-
+        self.navigationController?.view.backgroundColor = UIColor.clear*/
+        
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        var pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         controlePage.currentPage = Int(pageNumber)
         
     }
