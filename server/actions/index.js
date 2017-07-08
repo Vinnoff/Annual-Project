@@ -6,6 +6,7 @@ module.exports = (api) => {
 		game: require('./game/crud')(api),
 		kind: require('./kind/crud')(api),
 		playlist: require('./playlist/crud')(api),
+		preferences: require('./preferences/crud')(api),
 		rank: require('./rank/crud')(api),
 		reward: require('./reward/crud')(api),
 		score: require('./score/crud')(api),
