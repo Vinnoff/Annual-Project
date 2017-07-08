@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (api) => {
-    const Token = api.models.Token;
+	//const Token = api.models.Token;
 
-    return (req, res, next) => {
-        if (!req.headers || !req.headers.authorization) {
+	return (req, res, next) => {
+		/*    if (!req.headers || !req.headers.authorization) {
             return res.status(401).send('authentication.required');
         }
 
@@ -29,6 +29,7 @@ module.exports = (api) => {
                 return next();
             });
         });
-
-    };
+		*/
+		return next();
+	};
 };
