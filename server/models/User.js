@@ -55,7 +55,11 @@ module.exports = (api) => {
 		Playlists: [{
 			type: Schema.Types.ObjectId,
 			ref: 'Playlist'
-        }]
+        }],
+		Preferences: {
+			type: Schema.Types.ObjectId,
+			ref: 'Preferences'
+		}
 	});
 
 	schema.plugin(timestamps);

@@ -5,6 +5,7 @@ module.exports = (api) => {
 	const Rank = api.models.Rank;
 	const Score = api.models.Score;
 	const Playlist = api.models.Playlist;
+	const Preferences = api.models.Preferences;
 
 	function findAll(req, res, next) {
 		User.find((err, data) => {
@@ -69,23 +70,32 @@ module.exports = (api) => {
 			if (found) {
 				return res.status(401).send('username.already.taken')
 			}
-			user.Rank = "594fb1c9ab2572510210f8dd"
-			user.birthdate = new Date(user.birthDate);
-			user.save((err, data) => {
+			new Preferences().save((err, prefData) => {
 				if (err) {
 					return res.status(500).send(err);
 				}
-				return res.send(data);
+				user.Preferences = prefData.id;
+				user.Rank = "594fb1c9ab2572510210f8dd"
+				user.birthdate = new Date(user.birthDate);
+				user.save((err, userData) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					return res.send(userData);
+				})
 			})
+
 		});
 	}
 
 	function update(req, res, next) {
-		if (req.userId != req.params.id) {
-			return res.status(401).send('cant.modify.another.user.account');
-		}
+		//		if (req.userId != req.params.id) {
+		//			return res.status(401).send('cant.modify.another.user.account');
+		//		}
 
-		User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+		User.findByIdAndUpdate(req.params.id, req.body, {
+			new: true
+		}, (err, data) => {
 			if (err) {
 				return res.status(500).send(err);
 			}
@@ -180,9 +190,9 @@ module.exports = (api) => {
 	}
 
 	function remove(req, res, next) {
-		if (req.userId != req.params.id) {
-			return res.status(401).send('cant.delete.another.user.account');
-		}
+//		if (req.userId != req.params.id) {
+	//			return res.status(401).send('cant.delete.another.user.account');
+	//		}
 		User.find({
 			Friends: {
 				$in: req.params.id
@@ -190,6 +200,7 @@ module.exports = (api) => {
 		}, (err, data) => {
 			console.log(data)
 		})
+
 		User.findByIdAndRemove(req.params.id, (err, data) => {
 			if (err) {
 				return res.status(500).send();
@@ -197,7 +208,9 @@ module.exports = (api) => {
 			if (!data) {
 				return res.status(204).send();
 			}
-
+			Preferences.findByIdAndRemove(data.Preferences, (err, prefData) => {
+				console.log(prefData)
+			})
 			return res.send(data);
 		});
 	}

@@ -39,5 +39,13 @@ module.exports = (api) => {
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.remove);
 
+	router.get('/preferences/:id',
+		api.middlewares.bodyParser.json(),
+		api.actions.preferences.findById);
+
+	router.put('/preferences/:id',
+		api.middlewares.bodyParser.json(),
+		api.actions.preferences.update);
+
 	return router;
 }
