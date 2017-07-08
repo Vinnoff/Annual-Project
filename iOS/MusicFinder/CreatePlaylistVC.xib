@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreatePlaylistVC" customModule="MusicFinder" customModuleProvider="target">
+            <connections>
+                <outlet property="submitButton" destination="GBa-b5-9kJ" id="snH-yx-Ltb"/>
+                <outlet property="textField" destination="3n6-nq-3qC" id="r53-dm-5Dg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3n6-nq-3qC">
+                    <rect key="frame" x="62.5" y="313.5" width="250" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="2X5-6F-ElR"/>
+                        <constraint firstAttribute="height" constant="40" id="kni-lf-Nll"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBa-b5-9kJ">
+                    <rect key="frame" x="164.5" y="373.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="submitClicked:" destination="-1" eventType="touchUpInside" id="SvL-4Y-ma1"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="GBa-b5-9kJ" firstAttribute="top" secondItem="3n6-nq-3qC" secondAttribute="bottom" constant="20" id="DZu-Uq-HdX"/>
+                <constraint firstItem="3n6-nq-3qC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bjl-64-kI0"/>
+                <constraint firstItem="3n6-nq-3qC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="n4R-4T-IRF"/>
+                <constraint firstItem="GBa-b5-9kJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yFD-yo-aws"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
