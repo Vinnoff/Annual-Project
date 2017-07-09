@@ -30,7 +30,7 @@ class UserInfoSaver {
         return nil
     }
     
-    func getUser() -> UserSpotify? {
+    func getUserSpotify() -> UserSpotify? {
         let token: String?
         let urlInfoAccount = "https://api.spotify.com/v1/me"
         var user: UserSpotify?
@@ -44,9 +44,23 @@ class UserInfoSaver {
                 if let userResponse = response.result.value {
                     user = userResponse
                 }
-                
             })
         }
+        return user
+    }
+    
+    func getUserMusicFinder(username: String?) -> User? {
+        let urlInfoAccount = "https://api.spotify.com/v1/me"
+        var user: User?
+            
+            let headers: HTTPHeaders = ["Accept": "application/json"]
+            let url = "http://mocnodeserv.hopto.org:3000/users/username/" + username!
+            Alamofire.request(urlInfoAccount, headers: headers).responseObject(completionHandler: {
+                (response: DataResponse<User>) in
+                if let userResponse = response.result.value {
+                    user = userResponse
+                }
+            })
         return user
     }
     

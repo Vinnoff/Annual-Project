@@ -11,12 +11,14 @@ import ObjectMapper
 
 class User : Mappable{
     var username: String?
+    var id: String?
  
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
         username <- map["username"]
+        id <- map["_id"]
     }
     
 }

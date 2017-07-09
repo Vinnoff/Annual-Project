@@ -17,6 +17,9 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBarItem()
+        self.addGestureMenu()
+        
         tableView.delegate = self
         tableView.dataSource = self
         requestPlaylists()
@@ -39,13 +42,14 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             print(response.result.value)
             self.playlists = response.result.value
         })*/
-        
-        Alamofire.request(url).responseArray { (response: DataResponse<[Playlist]>) in
-            
+        let headers: HTTPHeaders = [
+            "Accept": "application/json"
+        ]
+        Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
             if let playlists = response.result.value {
                 self.playlists = playlists
                 self.tableView.reloadData()
-
+                
             }
         }
             

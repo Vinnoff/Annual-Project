@@ -70,6 +70,10 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
         }
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func callAlamofire(url: String) {
         let token: String?
         
