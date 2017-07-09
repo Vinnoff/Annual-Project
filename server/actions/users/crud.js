@@ -205,7 +205,6 @@ module.exports = (api) => {
 			if (err) {
 				return res.status(500).send(err);
 			}
-			console.log("friend : " + JSON.stringify(data))
 			User.findByIdAndRemove(req.params.id, (err, data) => {
 				if (err) {
 					return res.status(500).send(err);
