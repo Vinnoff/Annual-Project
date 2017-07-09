@@ -50,7 +50,8 @@ class ProfileVC: UIViewController {
         
         if let session = UserInfoSaver().getSessionSpotify() {
             token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
+                                        "Accept": "application/json"]
             print(headers)
             Alamofire.request(url, headers: headers).responseJSON(completionHandler: { (response) in
                 if let JSON = response.result.value {

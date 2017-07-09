@@ -17,8 +17,19 @@ class User : Mappable{
     }
     
     func mapping(map: Map) {
-        username <- map["username"]
+        username <- map["userName"]
         id <- map["_id"]
     }
     
+    /*required convenience init(coder aDecoder: NSCoder) {
+        /*let id = aDecoder.decodeObject(forKey: "id") as! String
+        let username = aDecoder.decodeObject(forKey: "username") as! String
+        self.id = id
+        self.username = username
+    }*/
+    
+    func encode(with aCoder: NSCoder) {
+        /*aCoder.encode(id, forKey: "id")
+        aCoder.encode(username, forKey: "username")*/
+    }*/
 }

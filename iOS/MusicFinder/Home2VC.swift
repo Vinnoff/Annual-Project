@@ -80,12 +80,7 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
     }
 
     func saveInfoUser() {
-        let username = UserInfoSaver().getUserSpotify()?.id
-        let idUser = UserInfoSaver().getUserMusicFinder(username: username)
-        let userDefault = UserDefaults.standard
-        userDefault.set(username, forKey: "username")
-        userDefault.set(idUser, forKey: "id_user")
-        userDefault.synchronize()
+        UserInfoSaver().saveInfoUser()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
