@@ -77,7 +77,6 @@ class UserInfoSaver {
         
         if let session = self.getSessionSpotify() {
             token = session.accessToken
-            
             let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
                                         "Accept": "application/json"]
             Alamofire.request(urlInfoAccount, headers: headers).responseObject(completionHandler: {
@@ -92,11 +91,8 @@ class UserInfoSaver {
                     Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                         (response: DataResponse<User>) in
                         if let userResponse = response.result.value {
-                            print(userResponse.id)
-                            
                             self.userDefaults?.set(userResponse.id, forKey: "id_user")
                             self.userDefaults?.synchronize()
-                            self.getUserIdMusicFinder()
                         }
                     })
                 }
