@@ -37,6 +37,7 @@ module.exports = (api) => {
 
 	router.delete('/:id',
 		api.middlewares.ensureAuthentificated,
+		api.middlewares.cache.clean('User'),
 		api.actions.users.remove);
 
 	router.get('/preferences/:id',

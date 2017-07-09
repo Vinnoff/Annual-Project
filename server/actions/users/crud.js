@@ -190,28 +190,36 @@ module.exports = (api) => {
 	}
 
 	function remove(req, res, next) {
-//		if (req.userId != req.params.id) {
-	//			return res.status(401).send('cant.delete.another.user.account');
-	//		}
-		User.find({
+		//		if (req.userId != req.params.id) {
+		//			return res.status(401).send('cant.delete.another.user.account');
+		//		}
+		User.update({
 			Friends: {
-				$in: req.params.id
+				$in: [req.params.id]
+			}
+		}, {
+			$pull: {
+				Friends: req.params.id
 			}
 		}, (err, data) => {
-			console.log(data)
-		})
-
-		User.findByIdAndRemove(req.params.id, (err, data) => {
 			if (err) {
-				return res.status(500).send();
+				return res.status(500).send(err);
 			}
-			if (!data) {
-				return res.status(204).send();
-			}
-			Preferences.findByIdAndRemove(data.Preferences, (err, prefData) => {
-				console.log(prefData)
-			})
-			return res.send(data);
+			console.log("friend : " + JSON.stringify(data))
+			User.findByIdAndRemove(req.params.id, (err, data) => {
+				if (err) {
+					return res.status(500).send(err);
+				}
+				if (!data) {
+					return res.status(404).send('user.not.found');
+				}
+				Preferences.findByIdAndRemove(data.Preferences, (err, prefData) => {
+					if (err) {
+						return res.status(500).send();
+					}
+				})
+				return res.send(data);
+			});
 		});
 	}
 
