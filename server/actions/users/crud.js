@@ -28,6 +28,7 @@ module.exports = (api) => {
 			if (!data || data.length == 0) {
 				return res.status(204).send(data)
 			}
+			return res.send(data)
 		}).sort({
 			globalScore: -1
 		}).skip(Number(req.params.start)).limit(Number(req.params.limit));
