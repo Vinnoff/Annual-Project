@@ -97,12 +97,57 @@ module.exports = (api) => {
         });
     }
 
+    function getAllAlbums(req, res, next) {
+      Kind.findById(req.params.id).populate('Albums').exec((err, data) => {
+          if (err) {
+            return res.status(500).send(err)
+          }
+
+          if (!data) {
+            return res.status(204).send();
+          }
+
+          return res.send(data);
+      })
+    }
+
+    function putAlbum(req, res, next) {
+      Kind.findByIdAndUpdate(req.params.id, {$push : { Artists : req.body.album}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
+    function delAlbum(req, res, next) {
+      Kind.findByIdAndUpdate(req.params.id, {$pull : { Albums : req.body.album}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
     return {
         findAll,
         findOne,
         findByTitle,
         create,
         update,
+        getAllAlbums,
+        putAlbum,
+        delAlbum,
         remove
     };
 }

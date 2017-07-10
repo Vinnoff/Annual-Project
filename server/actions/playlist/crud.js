@@ -11,7 +11,7 @@ module.exports = (api) => {
           return res.status(204).send(data);
         }
 
-        api.middlewares.cache.set('Produit', data, req.originalUrl);
+        api.middlewares.cache.set('Playlist', data, req.originalUrl);
         return res.send(data);
       })
     }
@@ -91,8 +91,46 @@ module.exports = (api) => {
         });
     }
 
-    function addSong(req, res, next) {
-      Playlist.findById()
+    function getAllSongs(req, res, next) {
+      Playlist.findById(req.params.id).populate('Songs').exec((err, data) => {
+          if (err) {
+            return res.status(500).send(err)
+          }
+
+          if (!data) {
+            return res.status(204).send();
+          }
+
+          return res.send(data);
+      })
+    }
+
+    function putSong(req, res, next) {
+      Playlist.findByIdAndUpdate(req.params.id, {$push : { Songs : req.body.song}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
+    function delSong(req, res, next) {
+      Playlist.findByIdAndUpdate(req.params.id, {$pull : { Songs : req.body.song}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
     }
 
     return {
@@ -101,6 +139,9 @@ module.exports = (api) => {
         findByTitle,
         create,
         update,
+        getAllSongs,
+        putSong,
+        delSong,
         remove
     };
 }
