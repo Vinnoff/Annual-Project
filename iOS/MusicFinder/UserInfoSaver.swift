@@ -37,6 +37,29 @@ class UserInfoSaver {
         return nil
     }
     
+    func getUserSpotifyTest() -> UserSpotify?{
+        if let userObj: AnyObject = userDefaults?.object(forKey: "userSpotify") as AnyObject?{
+            let userDataObj = userObj as! Data
+            if let userSpotify = NSKeyedUnarchiver.unarchiveObject(with: userDataObj) as? UserSpotify {
+                return userSpotify
+            }
+            return nil
+        }
+        return nil
+    }
+    
+    func getUserMusicFinderTest() -> User?{
+        if let userObj: AnyObject = userDefaults?.object(forKey: "userMusicFinder") as AnyObject?{
+            let userDataObj = userObj as! Data
+            if let userMusicFinder = NSKeyedUnarchiver.unarchiveObject(with: userDataObj) as? User {
+                return userMusicFinder
+            }
+            return nil
+        }
+        return nil
+    }
+    
+    
     func getUserSpotify() -> UserSpotify? {
         let token: String?
         let urlInfoAccount = "https://api.spotify.com/v1/me"
@@ -51,8 +74,9 @@ class UserInfoSaver {
                     user = userResponse
                 }
             })
+            return nil
         }
-        return user
+        return nil
     }
     
     func getUserMusicFinder(username: String?) -> User? {

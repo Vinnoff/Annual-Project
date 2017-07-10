@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class User : Mappable{
+class User : NSObject, NSCoding, Mappable{
     var username: String?
     var id: String?
  
@@ -21,15 +21,13 @@ class User : Mappable{
         id <- map["_id"]
     }
     
-    /*required convenience init(coder aDecoder: NSCoder) {
-        /*let id = aDecoder.decodeObject(forKey: "id") as! String
-        let username = aDecoder.decodeObject(forKey: "username") as! String
-        self.id = id
-        self.username = username
-    }*/
+    required init?(coder aDecoder: NSCoder) {
+        self.username = aDecoder.decodeObject(forKey: "username") as? String
+        self.id = aDecoder.decodeObject(forKey: "id") as? String
+    }
     
     func encode(with aCoder: NSCoder) {
-        /*aCoder.encode(id, forKey: "id")
-        aCoder.encode(username, forKey: "username")*/
-    }*/
+        aCoder.encode(self.username, forKey: "username");
+        aCoder.encode(self.id, forKey: "id");
+    }
 }

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
     var navigationController: UINavigationController?
     var viewController: SWRevealViewController?
     var auth = SPTAuth()
+    let userDefault = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -46,13 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
                 if error != nil {
                     print("error")
                 }
-                
-                let userDefault = UserDefaults.standard
                 let sessionData = NSKeyedArchiver.archivedData(withRootObject: session)
-                userDefault.set(sessionData, forKey: "SpotifySession")
-                userDefault.synchronize()
+                self.userDefault.set(sessionData, forKey: "SpotifySession")
+                self.userDefault.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
-                self.initControllerAuth()
+                
+                if UserInfoSaver().isAuth()! {
+                    if let userSpotify = UserInfoSaver().getUserSpotify() {
+                        print(userSpotify)
+                    }
+                }
+                
+                
+                //self.initControllerAuth()
             })
             return true
         }
