@@ -14,6 +14,8 @@
                 <outlet property="disconnectButton" destination="vTm-Yk-qwe" id="6di-ZI-84v"/>
                 <outlet property="profilePicture" destination="1XW-Eu-e36" id="1iq-Gs-hzU"/>
                 <outlet property="pseudoLabel" destination="2bB-eQ-gSm" id="Slq-uS-GlO"/>
+                <outlet property="rankLabel" destination="i2M-lx-eNv" id="zdW-Q9-yHA"/>
+                <outlet property="scoreLabel" destination="Ja0-dt-KEQ" id="xVj-AW-NTA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,8 +32,8 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pseudo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-eQ-gSm">
-                    <rect key="frame" x="136" y="215" width="103" height="28"/>
-                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="28"/>
+                    <rect key="frame" x="145" y="215" width="85" height="23"/>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="23"/>
                     <color key="textColor" red="1" green="0.89623751220000003" blue="0.20600573859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -50,14 +52,30 @@
                         <action selector="disconnectedClicked:" destination="-1" eventType="touchUpInside" id="eMX-Sh-bMH"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2M-lx-eNv">
+                    <rect key="frame" x="166" y="258" width="42.5" height="17"/>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja0-dt-KEQ">
+                    <rect key="frame" x="162.5" y="295" width="49.5" height="17"/>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="2bB-eQ-gSm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4Tz-9q-sCm"/>
+                <constraint firstItem="Ja0-dt-KEQ" firstAttribute="top" secondItem="i2M-lx-eNv" secondAttribute="bottom" constant="20" id="FjS-Cu-XKV"/>
+                <constraint firstItem="i2M-lx-eNv" firstAttribute="top" secondItem="2bB-eQ-gSm" secondAttribute="bottom" constant="20" id="Ppp-aX-vfx"/>
                 <constraint firstItem="2bB-eQ-gSm" firstAttribute="top" secondItem="1XW-Eu-e36" secondAttribute="bottom" constant="25" id="Q40-je-wYS"/>
                 <constraint firstItem="1XW-Eu-e36" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TzJ-Fa-sie"/>
+                <constraint firstItem="i2M-lx-eNv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Zak-1W-KSC"/>
                 <constraint firstItem="1XW-Eu-e36" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="aoK-te-spV"/>
                 <constraint firstItem="vTm-Yk-qwe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="i1g-QW-ZKc"/>
+                <constraint firstItem="Ja0-dt-KEQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ikE-Eh-QVN"/>
                 <constraint firstAttribute="bottom" secondItem="vTm-Yk-qwe" secondAttribute="bottom" constant="10" id="o19-o1-qlE"/>
             </constraints>
         </view>
