@@ -65,7 +65,7 @@ class UserInfoSaver {
         let token: String?
         let urlInfoAccount = "https://api.spotify.com/v1/me"
         var userSpotify: UserSpotify?
-        var userMusicFinder: User?
+   
         
         if let session = self.getSessionSpotify() {
             token = session.accessToken

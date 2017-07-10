@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
                 self.userDefault.set(sessionData, forKey: "SpotifySession")
                 self.userDefault.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
-                
+                UserInfoSaver().saveIdSpotify()
                 self.initControllerAuth()
             })
             return true

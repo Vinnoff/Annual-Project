@@ -14,9 +14,7 @@ class ProfileVC: UIViewController {
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var pseudoLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var disconnectButton: UIButton!
-    @IBOutlet weak var scoreLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
@@ -26,9 +24,10 @@ class ProfileVC: UIViewController {
             //"Authorization": "Bearer " + session.accessToken,
             "Accept": "application/json"
         ]
-    
+        
         let parameters = [
             "username": "serey",
+            
             ] as [String : Any]
         
         
