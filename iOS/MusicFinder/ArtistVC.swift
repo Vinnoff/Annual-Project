@@ -39,7 +39,8 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 token = session.accessToken
-                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
+                                            "Accept": "application/json"]
                 Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                     (response: DataResponse<TopTrack>) in
                     if let topTracks = response.result.value {
@@ -64,7 +65,8 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 token = session.accessToken
-                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
+                                            "Accept": "application/json"]
                 Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                     (response: DataResponse<ItemType>) in
                     if let itemType = response.result.value {

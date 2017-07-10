@@ -29,7 +29,7 @@ class CreatePlaylistVC: UIViewController {
     @IBAction func submitClicked(_ sender: Any) {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
-                let user = UserInfoSaver().getUser()
+                let username = UserInfoSaver().getUsername()
                 if textField.text != nil{
                     let headers: HTTPHeaders = [
                         "Authorization": "Bearer " + session.accessToken,
@@ -38,7 +38,7 @@ class CreatePlaylistVC: UIViewController {
                     let parameters = [
                         "title": textField.text as! String,
                         "isPublic" : "true",
-                        "Creator" : user?.id
+                        "Creator" : username
                         
                         ] as [String : Any]
                     

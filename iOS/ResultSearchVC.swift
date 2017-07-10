@@ -47,7 +47,8 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 token = session.accessToken
-                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
+                                            "Accept": "application/json"]
                 print(headers)
                 
                 if type == "track" {

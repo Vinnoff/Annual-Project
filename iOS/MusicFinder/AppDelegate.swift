@@ -16,42 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
     var window: UIWindow?
     var navigationController: UINavigationController?
     var viewController: SWRevealViewController?
-
     var auth = SPTAuth()
+    let userDefault = UserDefaults.standard
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         auth.redirectURL = URL(string: "musicfinder-auth://callback")
         auth.sessionUserDefaultsKey = "current session"
         
-        initController()
-        
-        return true
-    }
-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if auth.canHandle(auth.redirectURL) {
-            auth.handleAuthCallback(withTriggeredAuthURL: url, callback: {
-            (error, session)  in
-                if error != nil {
-                    print("error")
-                }
-                
-                let userDefault = UserDefaults.standard
-                let sessionData = NSKeyedArchiver.archivedData(withRootObject: session)
-                userDefault.set(sessionData, forKey: "SpotifySession")
-                userDefault.synchronize()
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
-                self.requestDetailUserSpotify()
-                
-                
-            })
-            return true
-        }
-        return false
-    }
-    
-    func initController() {
         let homeVC = Home2VC(nibName: "Home2VC", bundle: nil)
         let leftMenuVC = LeftMenuVC(nibName: "LeftMenuVC", bundle: nil)
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -64,23 +36,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
         self.viewController = revealVC;
         self.window!.rootViewController = self.viewController
         self.window!.makeKeyAndVisible()
+        
+        return true
+    }
+
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if auth.canHandle(auth.redirectURL) {
+            auth.handleAuthCallback(withTriggeredAuthURL: url, callback: {
+            (error, session)  in
+                if error != nil {
+                    print("error")
+                }
+                let sessionData = NSKeyedArchiver.archivedData(withRootObject: session)
+                self.userDefault.set(sessionData, forKey: "SpotifySession")
+                self.userDefault.synchronize()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
+                
+                self.initControllerAuth()
+            })
+            return true
+        }
+        return false
     }
     
-    func requestDetailUserSpotify() {
-        let token: String?
-        let urlInfoAccount = "https://api.spotify.com/v1/me"
-        if let session = UserInfoSaver().getSessionSpotify() {
-            if UserInfoSaver().isAuth()! {
-                token = session.accessToken
-                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
-                print(headers)
-                Alamofire.request(urlInfoAccount, headers: headers).responseJSON(completionHandler: { (response) in
-                    if  response.result.value != nil{
-                        self.initController()
-                    }
-                })
-            }
-        }
+    func initControllerAuth() {
+        let connectVC = ConnectionSuccessVC(nibName: "ConnectionSuccessVC", bundle: nil)
+        let leftMenuVC = LeftMenuVC(nibName: "LeftMenuVC", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let homeNavigationController = UINavigationController(rootViewController: connectVC)
+        let leftMenuNavigationController = UINavigationController(rootViewController: leftMenuVC)
+        let revealVC = SWRevealViewController(rearViewController: leftMenuNavigationController, frontViewController: homeNavigationController)
+        
+        revealVC?.delegate = self;
+        self.viewController = revealVC;
+        self.window!.rootViewController = self.viewController
+        self.window!.makeKeyAndVisible()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -99,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
