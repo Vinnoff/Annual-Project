@@ -52,14 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SWRevealViewControllerDel
                 self.userDefault.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
                 
-                if UserInfoSaver().isAuth()! {
-                    if let userSpotify = UserInfoSaver().getUserSpotify() {
-                        print(userSpotify)
-                    }
-                }
-                
-                
-                //self.initControllerAuth()
+                self.initControllerAuth()
             })
             return true
         }

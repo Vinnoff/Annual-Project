@@ -37,33 +37,16 @@ class UserInfoSaver {
         return nil
     }
     
-    func getUserSpotifyTest() -> UserSpotify?{
-        if let userObj: AnyObject = userDefaults?.object(forKey: "userSpotify") as AnyObject?{
-            let userDataObj = userObj as! Data
-            if let userSpotify = NSKeyedUnarchiver.unarchiveObject(with: userDataObj) as? UserSpotify {
-                return userSpotify
-            }
-            return nil
+    func getUsername() -> String? {
+        if let username = userDefaults?.string(forKey: "username") {
+            return username
         }
         return nil
     }
     
-    func getUserMusicFinderTest() -> User?{
-        if let userObj: AnyObject = userDefaults?.object(forKey: "userMusicFinder") as AnyObject?{
-            let userDataObj = userObj as! Data
-            if let userMusicFinder = NSKeyedUnarchiver.unarchiveObject(with: userDataObj) as? User {
-                return userMusicFinder
-            }
-            return nil
-        }
-        return nil
-    }
-    
-    
-    func getUserSpotify() -> UserSpotify? {
+    func saveIdSpotify() {
         let token: String?
         let urlInfoAccount = "https://api.spotify.com/v1/me"
-        var user: UserSpotify?
         if let session = self.getSessionSpotify() {
             token = session.accessToken
             let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
@@ -71,26 +54,11 @@ class UserInfoSaver {
             Alamofire.request(urlInfoAccount, headers: headers).responseObject(completionHandler: {
                 (response: DataResponse<UserSpotify>) in
                 if let userResponse = response.result.value {
-                    user = userResponse
+                    self.userDefaults?.set(userResponse.id, forKey: "username")
+                    self.userDefaults?.synchronize()
                 }
             })
-            return nil
         }
-        return nil
-    }
-    
-    func getUserMusicFinder(username: String?) -> User? {
-        var user: User?
-            
-        let headers: HTTPHeaders = ["Accept": "application/json"]
-        let url = "http://mocnodeserv.hopto.org:3000/users/username/" + username!
-        Alamofire.request(url, headers: headers).responseObject(completionHandler: {
-            (response: DataResponse<User>) in
-            if let userResponse = response.result.value {
-                user = userResponse
-            }
-        })
-        return user
     }
     
     func saveInfoUser() {
@@ -133,5 +101,7 @@ class UserInfoSaver {
 
     func disconnectAccount() {
         userDefaults?.removeObject(forKey: "SpotifySession")
+        userDefaults?.removeObject(forKey: "id_user")
+        userDefaults?.removeObject(forKey: "username")
     }
 }

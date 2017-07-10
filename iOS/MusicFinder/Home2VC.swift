@@ -48,32 +48,38 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         if UserInfoSaver().isAuth()! {
             self.saveInfoUser()
         }
+        
+        print(UserInfoSaver().getUsername())
+        print(UserInfoSaver().getUserIdMusicFinder())
     }
     
     func requestUserMusicFinder() {
         if UserInfoSaver().isAuth()!{
-                //Your UI update cpde
-            let headers: HTTPHeaders = [
-                "Accept": "application/json"
-            ]
-            let url = "http://mocnodeserv.hopto.org:3000/users/username/alkrox"
-            Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
-                if response.response?.statusCode == 204 {
-                    let url = "http://mocnodeserv.hopto.org:3000/users/"
-                    let parameters = [
-                        "userName" : "alkrox"
-                        
-                        ] as [String : Any]
-                    Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default,headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
-                        if response.response?.statusCode == 200 {
-                            print("SUCCESS PICH")
-                            self.saveInfoUser()
-                        }
-                    })
-                } else if response.response?.statusCode == 200 {
-                    self.saveInfoUser()
-                }
-            })
+            
+            if let username = UserInfoSaver().getUsername() {
+                let headers: HTTPHeaders = [
+                    "Accept": "application/json"
+                ]
+                let url = "http://mocnodeserv.hopto.org:3000/users/username/" + username
+                Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                    if response.response?.statusCode == 204 {
+                        let url = "http://mocnodeserv.hopto.org:3000/users/"
+                        let parameters = [
+                            "userName" : username
+                            
+                            ] as [String : Any]
+                        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default,headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                            if response.response?.statusCode == 200 {
+                                self.saveInfoUser()
+                            }
+                        })
+                    } else if response.response?.statusCode == 200 {
+                        self.saveInfoUser()
+                    }
+                })
+            }
+            
+            
         }
     }
 
