@@ -85,7 +85,6 @@ module.exports = (api) => {
 			title: req.body.title
 		}, (err, data) => {
 			if (err) {
-				console.log("Problem step 1")
 				return res.status(500).send(err);
 			}
 			if (data) {
@@ -125,7 +124,6 @@ module.exports = (api) => {
 				User.find({
 					Rank: rank[0].id
 				}, (err, data) => {
-					console.log(data)
 					data.forEach(function (user) {
 						user.Rank = rank[1].id;
 						user.save(function (err) {
