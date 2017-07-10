@@ -98,8 +98,46 @@ module.exports = (api) => {
         });
     }
 
-    function addSong(req, res, next) {
-      Album.findById()
+    function putSong(req, res, next) {
+      Album.findByIdAndUpdate(req.params.id, {$push : { Artists : req.body.song}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
+    function delSong(req, res, next) {
+      Album.findByIdAndUpdate(req.params.id, {$push : { Artists : req.body.song}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
+    function getAllSongs(req, res, next) {
+      Album.findById(req.params.id).populate('Songs').exec((err, data) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+
+          if (!data) {
+            return res.status(204).send();
+          }
+
+          return res.send(data);
+      })
     }
 
     return {
@@ -108,6 +146,9 @@ module.exports = (api) => {
         findByTitle,
         create,
         update,
+        putSong,
+        delSong,
+        getAllSongs,
         remove
     };
 }

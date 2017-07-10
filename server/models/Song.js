@@ -14,18 +14,10 @@ module.exports = (api) => {
         duration: {
             type: Number
         },
-        PlaylistIn: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Playlist'
-        }],
         Artists: [{
             type: Schema.Types.ObjectId,
             ref: 'Artist'
-        }],
-        Album: {
-            type: Schema.Types.ObjectId,
-            ref: 'Album'
-        }
+        }]
     });
 
     schema.plugin(timestamps);

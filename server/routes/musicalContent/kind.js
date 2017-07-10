@@ -12,21 +12,17 @@ module.exports = (api) => {
 
     router.post('/',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
-        api.middlewares.musicalContentCreation,
         api.middlewares.cache.clean('Album'),
         api.actions.kind.create);
 
     router.put('/:id',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.middlewares.bodyParser.json(),
         api.actions.kind.update);
 
     router.delete('/:id',
         api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
         api.actions.kind.remove);
 
     return router;
