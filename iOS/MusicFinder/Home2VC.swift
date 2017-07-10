@@ -20,8 +20,6 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         self.setNavigationBarItem()
         self.addGestureMenu()
 
-        //self.navigationItem.leftBarButtonItem?.tintColor =  UIColor.darkGray
-
         self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 255, green: 200, blue: 40)]
         
