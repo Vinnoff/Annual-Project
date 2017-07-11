@@ -66,9 +66,6 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = playlists[indexPath.row]?.title
@@ -84,43 +81,46 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Add song
-        if let idplaylist = playlists[indexPath.row]?.id {
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
-            var parameters = [:] as [String : Any]
-            if trackItem != nil {
-                parameters = [
-                    "title": trackItem?.name,
-                    "url" : trackItem?.preview_url,
-                    "uri" : trackItem?.uri
-                ]
-            } else if track != nil {
-                parameters = [
-                    "title": track?.name,
-                    "url" : track?.preview_url,
-                    "uri" : track?.uri
-                ]
-            }
-            
-            let headers: HTTPHeaders = [
-                "Accept": "application/json"
-            ]
-            
-            Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
-                switch response.result {
-                case .success:
-                    print("SUCCESS")
-                    let alert = UIAlertController(title: "Alert", message: "Ajouté avec succes", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                case .failure:
-                    print("ERROR")
-                    print(response.response?.statusCode)
-                    let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+        if fromUser {
+            if let idplaylist = playlists[indexPath.row]?.id {
+                let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
+                var parameters = [:] as [String : Any]
+                if trackItem != nil {
+                    parameters = [
+                        "title": trackItem?.name,
+                        "url" : trackItem?.preview_url,
+                        "uri" : trackItem?.uri
+                    ]
+                } else if track != nil {
+                    parameters = [
+                        "title": track?.name,
+                        "url" : track?.preview_url,
+                        "uri" : track?.uri
+                    ]
                 }
-            })
+                
+                let headers: HTTPHeaders = [
+                    "Accept": "application/json"
+                ]
+                
+                Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                    switch response.result {
+                    case .success:
+                        print("SUCCESS")
+                        let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    case .failure:
+                        print("ERROR")
+                        print(response.response?.statusCode)
+                        let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
+            }
         }
+        
     }
 }
