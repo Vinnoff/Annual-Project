@@ -13,7 +13,7 @@ module.exports = (api) => {
     router.get('/:title',
         api.actions.playlist.findByTitle);
 
-    router.get('/allsongs',
+    router.get('/allsongs/:id',
         api.actions.playlist.getAllSongs);
 
     router.post('/',

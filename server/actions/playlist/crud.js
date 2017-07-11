@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Playlist = api.models.Playlist;
+    const Song = api.models.Song;
 
     function findAll(req, res, next) {
       Playlist.find((err,data) => {
