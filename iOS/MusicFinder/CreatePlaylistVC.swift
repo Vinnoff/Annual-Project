@@ -29,17 +29,15 @@ class CreatePlaylistVC: UIViewController {
     @IBAction func submitClicked(_ sender: Any) {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
-                let username = UserInfoSaver().getUsername()
+                let idUser = UserInfoSaver().getUserIdMusicFinder()
                 if textField.text != nil{
                     let headers: HTTPHeaders = [
-                        "Authorization": "Bearer " + session.accessToken,
                         "Accept": "application/json"
                     ]
                     let parameters = [
                         "title": textField.text as! String,
                         "isPublic" : "true",
-                        "Creator" : username
-                        
+                        "Creator" : idUser
                         ] as [String : Any]
                     
                     Alamofire.request("http://mocnodeserv.hopto.org:3000/playlist/", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
@@ -52,7 +50,7 @@ class CreatePlaylistVC: UIViewController {
                             
                         case .failure:
                             print("ERROR")
-                            
+                            print(response.response?.statusCode)
                             let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)

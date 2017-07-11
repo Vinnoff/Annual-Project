@@ -20,7 +20,7 @@ class Playlist : Mappable{
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
+        id <- map["_id"]
         title <- map["title"]
         creator <- map["Creator"]
     }

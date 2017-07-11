@@ -15,16 +15,24 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var playlists = [Playlist?]()
     
+    //Add
+    var fromUser = false
+    var trackItem: Item?
+    var track: Track?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarItem()
-        self.addGestureMenu()
-        
         tableView.delegate = self
         tableView.dataSource = self
-        requestPlaylists()
-        tableView.reloadData()
+        if fromUser {
+            requestPlaylists(fromUser: true)
+        } else {
+            self.setNavigationBarItem()
+            self.addGestureMenu()
+            requestPlaylists()
+        }
         
+        tableView.reloadData()
         
     }
 
@@ -33,28 +41,33 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    func requestPlaylists() {
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/"
-        
-        /*Alamofire.request(url, method: .get).responseObject(completionHandler: {
-            (response: DataResponse<[Playlist?]>) in
-            
-            print(response.result.value)
-            self.playlists = response.result.value
-        })*/
+    func requestPlaylists(fromUser: Bool = false) {
         let headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
-        Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
-            if let playlists = response.result.value {
-                self.playlists = playlists
-                self.tableView.reloadData()
-                
+        if fromUser {
+            let id = UserInfoSaver().getUserIdMusicFinder()
+            let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
+            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
+                if let playlists = response.result.value {
+                    self.playlists = playlists
+                    self.tableView.reloadData()
+                }
+            }
+        } else {
+            let url = "http://mocnodeserv.hopto.org:3000/playlist/"
+            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
+                if let playlists = response.result.value {
+                    self.playlists = playlists
+                    self.tableView.reloadData()
+                }
             }
         }
-            
-
+        
     }
+    
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
@@ -67,5 +80,47 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlists.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Add song
+        if let idplaylist = playlists[indexPath.row]?.id {
+            let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
+            var parameters = [:] as [String : Any]
+            if trackItem != nil {
+                parameters = [
+                    "title": trackItem?.name,
+                    "url" : trackItem?.preview_url,
+                    "uri" : trackItem?.uri
+                ]
+            } else if track != nil {
+                parameters = [
+                    "title": track?.name,
+                    "url" : track?.preview_url,
+                    "uri" : track?.uri
+                ]
+            }
+            
+            let headers: HTTPHeaders = [
+                "Accept": "application/json"
+            ]
+            
+            Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                switch response.result {
+                case .success:
+                    print("SUCCESS")
+                    let alert = UIAlertController(title: "Alert", message: "Ajouté avec succes", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case .failure:
+                    print("ERROR")
+                    print(response.response?.statusCode)
+                    let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
 }

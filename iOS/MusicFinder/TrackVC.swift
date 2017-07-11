@@ -16,6 +16,7 @@ class TrackVC: UIViewController {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     public var item: Item?
     public var track: Track?
@@ -123,6 +124,19 @@ class TrackVC: UIViewController {
         }
     }
     
+    @IBAction func addClicked(_ sender: Any) {
+        if item != nil && track == nil{
+            let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
+            listPlaylistVC.trackItem = item
+            listPlaylistVC.fromUser = true
+            navigationController?.pushViewController(listPlaylistVC, animated: true)
+        } else if track != nil && item == nil {
+            let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
+            listPlaylistVC.track = track
+            listPlaylistVC.fromUser = true
+            navigationController?.pushViewController(listPlaylistVC, animated: true)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
