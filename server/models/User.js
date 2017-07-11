@@ -31,6 +31,10 @@ module.exports = (api) => {
 			type: Number,
 			default: 0
 		},
+		gold: {
+			type: Number,
+			default: 0
+		},
 		Games: [{
 			type: Schema.Types.ObjectId,
 			ref: 'Game'

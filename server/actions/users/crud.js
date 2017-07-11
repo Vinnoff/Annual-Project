@@ -108,35 +108,6 @@ module.exports = (api) => {
 		});
 	}
 
-	function updateGlobalScore(req, res, next) {
-		if (req.userId != req.params.id) {
-			return res.status(401).send('cant.modify.another.user.account');
-		}
-		User.findById(req.params.id, (err, user) => {
-			if (err) {
-				return res.status(500).send(err);
-			}
-
-			if (!user) {
-				return res.status(204).send();
-			}
-			Score.find({
-				User: req.params.id
-			}, (err, scores) => {
-				user.globalScore = 0
-				scores.forEach(function (score) {
-					user.globalScore += score.scoreInGame
-				})
-				user.save((err, data) => {
-					if (err) {
-						return res.status(500).send(err);
-					}
-					return res.send(JSON.stringify(user.globalScore));
-				})
-			})
-		});
-	}
-
 	function updateFriends(req, res, next) {
 		User.findById(req.params.id, (err, data) => {
 			if (err) {
@@ -230,7 +201,6 @@ module.exports = (api) => {
 		findByUserName,
 		create,
 		update,
-		updateGlobalScore,
 		updateFriends,
 		remove
 	};

@@ -1,29 +1,35 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
-    router.get('/sorted',
-        api.actions.reward.findSortedByScore);
+	router.get('/',
+		api.actions.reward.findSortedByScore);
 
-    router.get('/:id',
-        api.actions.reward.findById);
+	router.get('/range/:min/:max',
+		api.actions.reward.findInRange);
 
-    router.post('/',
-        api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
-        api.middlewares.bodyParser.json(),
-        api.middlewares.cache.clean("Reward"),
-        api.actions.reward.create);
+	router.put('/give/:idUser/:idReward',
+		api.actions.reward.affectToUser);
 
-    router.put('/:id',
-        api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
-        api.middlewares.bodyParser.json(),
-        api.actions.reward.update)
+	router.get('/id/:id',
+		api.actions.reward.findById);
 
-    router.delete('/:id',
-        api.middlewares.ensureAuthentificated,
-        api.middlewares.ensureAdmin,
-        api.actions.reward.remove)
+	router.post('/',
+		api.middlewares.ensureAuthentificated,
+		api.middlewares.ensureAdmin,
+		api.middlewares.bodyParser.json(),
+		api.middlewares.cache.clean("Reward"),
+		api.actions.reward.create);
 
-    return router;
+	router.put('/:id',
+		api.middlewares.ensureAuthentificated,
+		api.middlewares.ensureAdmin,
+		api.middlewares.bodyParser.json(),
+		api.actions.reward.update)
+
+	router.delete('/:id',
+		api.middlewares.ensureAuthentificated,
+		api.middlewares.ensureAdmin,
+		api.actions.reward.remove)
+
+	return router;
 }
