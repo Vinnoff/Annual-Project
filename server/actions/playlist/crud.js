@@ -16,6 +16,22 @@ module.exports = (api) => {
       })
     }
 
+    function findAllFromUser(req, res, next) {
+      Playlist.find({
+        Creator: req.params.id,
+      }, (err,data) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+
+        if (!data || data.lenght == 0) {
+          return res.status(204).send(data);
+        }
+
+        return res.send(data);
+      })
+    }
+
     function findOne(req, res, next) {
       Playlist.findById(req.params.id, (err, data) => {
           if (err) {
