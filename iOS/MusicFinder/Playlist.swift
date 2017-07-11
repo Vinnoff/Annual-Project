@@ -13,7 +13,7 @@ class Playlist : Mappable{
     var id: String?
     var title: String?
     var creator: String?
-    //var songs: []
+    var image: String?
 
     
     required init?(map: Map){
@@ -23,5 +23,6 @@ class Playlist : Mappable{
         id <- map["_id"]
         title <- map["title"]
         creator <- map["Creator"]
+        image <- map["image"]
     }
 }
