@@ -48,9 +48,6 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         if UserInfoSaver().isAuth()! {
             self.saveInfoUser()
         }
-        
-        print(UserInfoSaver().getUsername())
-        print(UserInfoSaver().getUserIdMusicFinder())
     }
     
     func requestUserMusicFinder() {
@@ -78,8 +75,6 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
                     }
                 })
             }
-            
-            
         }
     }
 
