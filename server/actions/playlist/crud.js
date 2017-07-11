@@ -106,7 +106,7 @@ module.exports = (api) => {
     }
 
     function putSong(req, res, next) {
-      Playlist.findByIdAndUpdate(req.params.id, {$push : { Songs : req.body.song}}, (err,data) => {
+      Playlist.findById(req.params.id, (err,data) => {
         if (err) {
           return res.status(500).send(err)
         }
@@ -115,7 +115,22 @@ module.exports = (api) => {
           return res.status(204).send();
         }
 
-        return res.send(data);
+        let song = new Song(req.body);
+
+        data.Songs.push(song);
+
+        data.save((err,data) => {
+          if (err) {
+            return res.status(500).send(err)
+          }
+
+          if (!data) {
+            return res.status(204).send();
+          }
+
+          return res.send(data);
+        })
+
       })
     }
 

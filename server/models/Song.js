@@ -11,6 +11,10 @@ module.exports = (api) => {
             type: String,
             required: true
         },
+        uri: {
+            type: String,
+            required: true
+        },
         duration: {
             type: Number
         },
