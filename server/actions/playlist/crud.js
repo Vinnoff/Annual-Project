@@ -68,6 +68,10 @@ module.exports = (api) => {
               return res.status(500).send(err);
           }
 
+          if (!data) {
+            return res.status(204).send();
+          }
+
           return res.send(data);
       });
     }

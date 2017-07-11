@@ -19,7 +19,7 @@ module.exports = (api) => {
     router.post('/',
         api.middlewares.ensureAuthentificated,
         api.middlewares.bodyParser.json(),
-        api.middlewares.cache.clean('Album'),
+        api.middlewares.cache.clean('Playlist'),
         api.actions.playlist.create);
 
     router.put('/:id',
