@@ -7,6 +7,9 @@ module.exports = (api) => {
 	router.get('/range/:min/:max',
 		api.actions.reward.findInRange);
 
+	router.put('/give/:idUser/:idReward',
+		api.actions.reward.affectToUser);
+
 	router.get('/id/:id',
 		api.actions.reward.findById);
 

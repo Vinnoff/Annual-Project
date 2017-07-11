@@ -108,12 +108,46 @@ module.exports = (api) => {
 		});
 	}
 
+	function affectToUser(req, res, next) {
+		User.findById(req.params.idUser, (err, dataUser) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
+			if (!dataUser) {
+				console.log(req.params.idUser + " user dont exists")
+				return res.status(204).send(dataUser)
+			}
+			Reward.findById(req.params.idReward, (err, dataReward) => {
+				if (err) {
+					return res.status(500).send(err);
+				}
+				if (!dataReward) {
+					console.log(req.params.idReward + " reward dont exists")
+					return res.status(204).send(dataReward)
+				}
+				if (dataUser.gold < dataReward.goldToAccess) {
+					return res.status(401).send('not.enought.gold');
+				} else {
+					dataUser.gold -= dataReward.goldToAccess
+					dataUser.Rewards.push(req.params.idReward)
+					dataUser.save((err, data) => {
+						if (err) {
+							return res.status(500).send(err);
+						}
+						return res.send(data);
+					})
+				}
+			})
+		})
+	}
+
 	return {
 		findSortedByScore,
 		findInRange,
 		findById,
 		create,
 		update,
-		remove
+		remove,
+		affectToUser
 	};
 }
