@@ -167,6 +167,7 @@ module.exports = (api) => {
     return {
         findAll,
         findOne,
+        findAllFromUser,
         findByTitle,
         create,
         update,
