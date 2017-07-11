@@ -13,15 +13,16 @@ class Playlist : Mappable{
     var id: String?
     var title: String?
     var creator: String?
-    //var songs: []
+    var image: String?
 
     
     required init?(map: Map){
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
+        id <- map["_id"]
         title <- map["title"]
         creator <- map["Creator"]
+        image <- map["image"]
     }
 }

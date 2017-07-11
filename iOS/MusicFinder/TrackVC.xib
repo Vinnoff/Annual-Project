@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrackVC" customModule="MusicFinder" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="547-i9-o9W" id="6O0-OA-pRU"/>
                 <outlet property="albumLabel" destination="hiv-Oj-dbv" id="IoM-rg-NIc"/>
                 <outlet property="coverImageView" destination="G2k-iC-MGW" id="bGE-I6-OeJ"/>
                 <outlet property="durationLabel" destination="6T1-S8-HLi" id="xIp-Dk-T8c"/>
@@ -56,11 +57,27 @@
                         <constraint firstAttribute="height" constant="50" id="OJI-FR-0Q6"/>
                         <constraint firstAttribute="width" constant="250" id="eL2-3D-f08"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="15"/>
                     <state key="normal" title="Ecouter">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="playClicked:" destination="-1" eventType="touchUpInside" id="ykj-M4-Pcb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="547-i9-o9W">
+                    <rect key="frame" x="62.5" y="527" width="250" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.66480353861666663" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="Eq9-wT-mlD"/>
+                        <constraint firstAttribute="height" constant="50" id="Q6C-Km-hDW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="16"/>
+                    <state key="normal" title="Ajouter à votre quizz">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addClicked:" destination="-1" eventType="touchUpInside" id="3xi-DG-frC"/>
                     </connections>
                 </button>
             </subviews>
@@ -71,10 +88,12 @@
                 <constraint firstItem="6T1-S8-HLi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KG3-aa-iul"/>
                 <constraint firstItem="G2k-iC-MGW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="N7C-1l-dh7"/>
                 <constraint firstItem="hiv-Oj-dbv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VYp-xr-GSb"/>
+                <constraint firstItem="FNF-c4-0yi" firstAttribute="top" secondItem="547-i9-o9W" secondAttribute="bottom" constant="20" id="atu-en-uuv"/>
                 <constraint firstItem="FNF-c4-0yi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="faw-WX-N8X"/>
                 <constraint firstItem="eFC-tu-Bgc" firstAttribute="top" secondItem="G2k-iC-MGW" secondAttribute="bottom" constant="30" id="kav-OI-ohl"/>
                 <constraint firstItem="G2k-iC-MGW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="m0d-Bz-LnP"/>
                 <constraint firstAttribute="bottom" secondItem="FNF-c4-0yi" secondAttribute="bottom" constant="20" id="uZV-kM-ZWZ"/>
+                <constraint firstItem="547-i9-o9W" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vOb-LU-Qk6"/>
                 <constraint firstItem="hiv-Oj-dbv" firstAttribute="top" secondItem="eFC-tu-Bgc" secondAttribute="bottom" constant="10" id="zIi-r3-6Qc"/>
             </constraints>
         </view>
