@@ -138,20 +138,29 @@ module.exports = (api) => {
 
         let song = new Song(req.body);
 
-        data.Songs.push(song);
-
-        data.save((err,data) => {
+        song.save((err,songd) => {
           if (err) {
             return res.status(500).send(err)
           }
 
-          if (!data) {
+          if (!songd) {
             return res.status(204).send();
           }
 
-          return res.send(data);
-        })
+          data.Songs.push(songd);
 
+          data.save((err,data) => {
+            if (err) {
+              return res.status(500).send(err)
+            }
+
+            if (!data) {
+              return res.status(204).send();
+            }
+
+            return res.send(data);
+          })
+        })
       })
     }
 
