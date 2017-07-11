@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Artist = api.models.Artist;
+    const Album = api.models.Album;
 
     function findAll(req, res, next) {
       Artist.find((err,data) => {
@@ -95,6 +96,10 @@ module.exports = (api) => {
             });
 
         });
+    }
+
+    function gatAlbums(req, res, next) {
+      
     }
 
     return {

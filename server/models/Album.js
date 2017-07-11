@@ -8,10 +8,6 @@ module.exports = (api) => {
             type: String,
             required: true
         },
-        Statistics: {
-            type: Schema.Types.ObjectId,
-            ref: 'Statistics'
-        },
         Artists: [{
             type: Schema.Types.ObjectId,
             ref: 'Artist'
@@ -22,7 +18,7 @@ module.exports = (api) => {
         }],
         Genres: [{
             type: Schema.Types.ObjectId,
-            ref: 'Genre'
+            ref: 'Kind'
         }],
         image: {
             type: String

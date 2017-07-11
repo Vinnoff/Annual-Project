@@ -94,12 +94,57 @@ module.exports = (api) => {
         });
     }
 
+    function getAllArtists(req, res, next) {
+      Song.findById(req.params.id).populate('Artists').exec((err, data) => {
+          if (err) {
+            return res.status(500).send(err)
+          }
+
+          if (!data) {
+            return res.status(204).send();
+          }
+
+          return res.send(data);
+      })
+    }
+
+    function putArtist(req, res, next) {
+      Song.findByIdAndUpdate(req.params.id, {$push : { Artists : req.body.artist}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
+    function delArtist(req, res, next) {
+      Song.findByIdAndUpdate(req.params.id, {$pull : { Artists : req.body.artist}}, (err,data) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+
+        if (!data) {
+          return res.status(204).send();
+        }
+
+        return res.send(data);
+      })
+    }
+
     return {
         findAll,
         findOne,
         findByTitle,
         create,
         update,
+        getAllArtists,
+        putArtist,
+        delArtist,
         remove
     };
 }

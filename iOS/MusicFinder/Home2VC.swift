@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import Alamofire
+import SWRevealViewController
 
 class Home2VC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     var imageArray = [UIImage]()
-    
+    var authSuccess: Bool?
     @IBOutlet weak var controlePage: UIPageControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
         self.addGestureMenu()
-        //self.navigationItem.leftBarButtonItem?.tintColor =  UIColor.darkGray
 
         self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 255, green: 200, blue: 40)]
@@ -39,14 +40,53 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear*/
+    override func viewDidAppear(_ animated: Bool) {
+        if authSuccess != nil {
+            requestUserMusicFinder()
+        }
         
+        if UserInfoSaver().isAuth()! {
+            self.saveInfoUser()
+        }
+        
+        print(UserInfoSaver().getUsername())
+        print(UserInfoSaver().getUserIdMusicFinder())
+    }
+    
+    func requestUserMusicFinder() {
+        if UserInfoSaver().isAuth()!{
+            
+            if let username = UserInfoSaver().getUsername() {
+                let headers: HTTPHeaders = [
+                    "Accept": "application/json"
+                ]
+                let url = "http://mocnodeserv.hopto.org:3000/users/username/" + username
+                Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                    if response.response?.statusCode == 204 {
+                        let url = "http://mocnodeserv.hopto.org:3000/users/"
+                        let parameters = [
+                            "userName" : username
+                            
+                            ] as [String : Any]
+                        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default,headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                            if response.response?.statusCode == 200 {
+                                self.saveInfoUser()
+                            }
+                        })
+                    } else if response.response?.statusCode == 200 {
+                        self.saveInfoUser()
+                    }
+                })
+            }
+            
+            
+        }
     }
 
+    func saveInfoUser() {
+        UserInfoSaver().saveInfoUser()
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         controlePage.currentPage = Int(pageNumber)
@@ -56,5 +96,7 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
 
 }

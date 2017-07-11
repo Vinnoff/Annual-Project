@@ -10,10 +10,12 @@ module.exports = (api) => {
     router.get('/:title',
         api.actions.playlist.findByTitle);
 
+    router.get('/allsongs',
+        api.actions.playlist.getAllSongs);
+
     router.post('/',
         api.middlewares.ensureAuthentificated,
         api.middlewares.bodyParser.json(),
-        api.middlewares.musicalContentCreation,
         api.middlewares.cache.clean('Album'),
         api.actions.playlist.create);
 
@@ -22,9 +24,18 @@ module.exports = (api) => {
         api.middlewares.bodyParser.json(),
         api.actions.playlist.update);
 
+    router.put('/addsong/:id',
+        api.middlewares.ensureAuthentificated,
+        api.middlewares.bodyParser.json(),
+        api.actions.playlist.putSong);
+
     router.delete('/:id',
         api.middlewares.ensureAuthentificated,
         api.actions.playlist.remove);
+
+    router.delete('/delsong/:id',
+        api.middlewares.ensureAuthentificated,
+        api.actions.playlist.delSong);
 
     return router;
 }

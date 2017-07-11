@@ -27,7 +27,8 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 let token = session.accessToken
-                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!]
+                let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
+                                            "Accept": "application/json"]
                 
                 Alamofire.request(url!, headers: headers).responseObject(completionHandler: {
                     (response: DataResponse<Album>) in
