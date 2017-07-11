@@ -7,9 +7,6 @@ module.exports = (api) => {
 	router.get('/:id',
 		api.actions.album.findOne);
 
-	router.get('/user/:id',
-		api.actions.album.findAllFromUser);
-
 	router.get('/title/:title',
 		api.actions.album.findByTitle);
 

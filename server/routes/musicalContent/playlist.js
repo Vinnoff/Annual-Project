@@ -7,6 +7,9 @@ module.exports = (api) => {
     router.get('/:id',
         api.actions.playlist.findOne);
 
+    router.get('/user/:id',
+        api.actions.playlist.findAllFromUser);
+
     router.get('/:title',
         api.actions.playlist.findByTitle);
 
