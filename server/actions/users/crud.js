@@ -48,8 +48,13 @@ module.exports = (api) => {
 
 	function findByUserName(req, res, next) {
 		User
-			.findOne({
-				userName: req.params.userName,
+			.find({
+				userName: {
+					$regex: ".*" + req.params.userName + ".*"
+				}
+			})
+			.sort({
+				userName: 1
 			})
 			.populate('Rank', 'nb title')
 			.populate('Preferences',
