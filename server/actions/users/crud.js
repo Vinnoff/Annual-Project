@@ -35,15 +35,22 @@ module.exports = (api) => {
 	}
 
 	function findById(req, res, next) {
-		User.findById(req.params.id, (err, data) => {
-			if (err) {
-				return res.status(500).send(err);
-			}
-			if (!data) {
-				return res.status(204).send(data);
-			}
-			return res.send(data);
-		});
+		User.findById(req.params.id)
+			.sort({
+				userName: 1
+			})
+			.populate('Rank', 'nb title')
+			.populate('Preferences',
+				'Genres Artists Albums Songs')
+			.exec((err, data) => {
+				if (err) {
+					return res.status(500).send(err);
+				}
+				if (!data) {
+					return res.status(204).send(data);
+				}
+				return res.send(data);
+			});
 	}
 
 	function findByUserName(req, res, next) {

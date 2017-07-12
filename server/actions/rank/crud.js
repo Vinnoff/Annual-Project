@@ -67,6 +67,8 @@ module.exports = (api) => {
 				})
 				if (isCreated) {
 					return res.status(401).send('rank.already.created')
+				} else if (ranks[0].scoreToAccess >= req.body.scoreToAccess) {
+					return res.status(401).send('score.too.low')
 				} else {
 					newRank.nb = ranks[0].nb + 1;
 					newRank.save((err, data) => {

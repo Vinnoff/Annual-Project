@@ -1,4 +1,5 @@
 module.exports = (api) => {
+	const Rank = api.models.Rank;
 	const Score = api.models.Score;
 	const User = api.models.User;
 
@@ -18,7 +19,8 @@ module.exports = (api) => {
 		Score.findByIdAndUpdate(req.params.id, {
 			$inc: {
 				scoreInGame: req.body.scoreInGame
-			}
+			},
+			isFinished: req.body.isFinished
 		}, {
 			new: true
 		}, (err, data) => {
@@ -48,13 +50,22 @@ module.exports = (api) => {
 
 			user.globalScore += scoreData.scoreInGame;
 			user.gold += Math.trunc(scoreData.scoreInGame / 100);
-
-			user.save((err, data) => {
-				if (err) {
-					return res.status(500).send(err);
+			Rank.find({
+				scoreToAccess: {
+					$lte: user.globalScore
 				}
-				return res.send(scoreData);
-			})
+			}).sort({
+				scoreToAccess: -1
+			}).exec((err, data) => {
+				console.log(data)
+				user.Rank = data[0].id
+				user.save((err, data) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					return res.send(scoreData);
+				})
+			});
 		})
 	}
 
