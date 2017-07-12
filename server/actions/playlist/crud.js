@@ -1,6 +1,7 @@
 module.exports = (api) => {
     const Playlist = api.models.Playlist;
     const Song = api.models.Song;
+    const Artist = api.models.Artist;
 
     function findAll(req, res, next) {
       Playlist.find((err,data) => {
@@ -136,7 +137,8 @@ module.exports = (api) => {
           return res.status(204).send();
         }
 
-        let song = new Song(req.body);
+        let song = new Song(req.body.Song);
+        let artist = new Artist(req.body.Artist);
 
         song.save((err,songd) => {
           if (err) {
@@ -147,18 +149,42 @@ module.exports = (api) => {
             return res.status(204).send();
           }
 
-          data.Songs.push(songd);
-
-          data.save((err,data) => {
+          Artist.findOne({
+            title: artist.title,
+          }, (err, art) => {
             if (err) {
               return res.status(500).send(err)
             }
 
-            if (!data) {
-              return res.status(204).send();
+            if (!art) {
+              art.save((err, saved) => {
+                if (err) {
+                  return res.status(500).send(err)
+                }
+
+                if (!saved) {
+                  return res.status(204).send();
+                }
+
+                songd.Artist.push(saved);
+                data.Songs.push(songd);
+              })
+            } else {
+              songd.Artist.push(art);
+              data.Songs.push(songd);
             }
 
-            return res.send(data);
+            data.save((err,data) => {
+              if (err) {
+                return res.status(500).send(err)
+              }
+
+              if (!data) {
+                return res.status(204).send();
+              }
+
+              return res.send(data);
+            })
           })
         })
       })

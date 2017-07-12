@@ -7,9 +7,9 @@ module.exports = (api) => {
           type: String,
           required: true
       },
-      Albums: [{
+      Genres: [{
         type: Schema.Types.ObjectId,
-        ref: 'Album'
+        ref: 'Kind'
       }],
       image: {
         type: String
