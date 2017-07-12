@@ -5,29 +5,31 @@ module.exports = (api) => {
 	const Score = api.models.Score;
 
 	function findById(req, res, next) {
-		Game.findById(req.params.id, (err, data) => {
+		Game.findById(req.params.id).populate('Scores').exec((err, data) => {
 			if (err) {
 				return res.status(500).send(err);
 			}
 			if (!data) {
 				return res.status(204).send(data);
 			}
-			putScoresInGame(res, data);
-
+			return res.send(data)
 		})
 	}
 
 	function findByUser(req, res, next) {
+
+
+
 		Game.find({
 			"Scores.Player": req.params.id
-		}, (err, data) => {
+		}).populate('Scores').exec((err, data) => {
 			if (err) {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
 				return res.status(204).send(data)
 			}
-			putScoresInGame(res, data);
+			return res.send(data)
 		});
 	}
 
@@ -101,57 +103,7 @@ module.exports = (api) => {
 				});
 			}
 		);
-
-
-		//FACON STOCKAGE SCORE EN TEMPS QUE NUMERO
-		/*
-        req.body.Players.forEach(function (player) {
-            scores.push({
-                Score: Number(0),
-                Player: player
-            })
-        })
-        game.Scores = scores
-        game.save((err, data) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            req.body.Players.forEach(function (player) {
-                User.findById(player, function (err, user) {
-                    if (err) {
-                        return res.status(500).send(err)
-                    } else {
-                        user.Games.push(data.id);
-                        user.save(function (err) {
-                            if (err) {
-                                return res.status(500).send(err)
-                            }
-                        });
-                    }
-                });
-            });
-            return res.send(data)
-        });
-		*/
 	};
-
-	function putScoresInGame(res, game) {
-		async.eachSeries(
-			game.Scores,
-			function (scoreObject, next) {
-				Score.findById(scoreObject.Score, '-updated_at -created_at -Game -User -__v', (err, score) => {
-					if (err) {
-						return res.status(500).send();
-					}
-					scoreObject.Score = score;
-					next()
-				})
-			},
-			function () {
-				return res.send(game);
-			}
-		);
-	}
 
 	return {
 		findById,

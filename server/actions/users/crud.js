@@ -47,17 +47,22 @@ module.exports = (api) => {
 	}
 
 	function findByUserName(req, res, next) {
-		User.findOne({
-			userName: req.params.userName,
-		}, (err, data) => {
-			if (err) {
-				return res.status(500).send();
-			}
-			if (!data || data.length == 0) {
-				return res.status(204).send(data)
-			}
-			return res.send(data);
-		});
+		User
+			.findOne({
+				userName: req.params.userName,
+			})
+			.populate('Rank', 'nb title')
+			.populate('Preferences',
+				'Genres Artists Albums Songs')
+			.exec((err, data) => {
+				if (err) {
+					return res.status(500).send();
+				}
+				if (!data || data.length == 0) {
+					return res.status(204).send(data)
+				}
+				return res.send(data);
+			})
 	}
 
 	function create(req, res, next) {
