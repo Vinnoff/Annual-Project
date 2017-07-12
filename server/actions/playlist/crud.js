@@ -140,40 +140,39 @@ module.exports = (api) => {
         let song = new Song(req.body.Song);
         let artist = new Artist(req.body.Artist);
 
-        song.save((err,songd) => {
+        Artist.findOne({
+          title: artist.title,
+        }, (err, art) => {
           if (err) {
             return res.status(500).send(err)
           }
 
-          if (!songd) {
-            return res.status(204).send();
+          if (!art) {
+            artist.save((err, saved) => {
+              if (err) {
+                return res.status(500).send(err)
+              }
+
+              if (!saved) {
+                return res.status(204).send();
+              }
+
+              song.Artist.push(saved);
+              data.Songs.push(songd);
+            })
+          } else {
+            song.Artists.push(art);
+            data.Songs.push(song);
           }
 
-          Artist.findOne({
-            title: artist.title,
-          }, (err, art) => {
+          song.save((err,songd) => {
             if (err) {
               return res.status(500).send(err)
             }
 
-            if (!art) {
-              art.save((err, saved) => {
-                if (err) {
-                  return res.status(500).send(err)
-                }
-
-                if (!saved) {
-                  return res.status(204).send();
-                }
-
-                songd.Artist.push(saved);
-                data.Songs.push(songd);
-              })
-            } else {
-              songd.Artist.push(art);
-              data.Songs.push(songd);
+            if (!songd) {
+              return res.status(204).send();
             }
-
             data.save((err,data) => {
               if (err) {
                 return res.status(500).send(err)
