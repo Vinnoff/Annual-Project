@@ -14,6 +14,9 @@ class ListTracksVC: UIViewController {
     
     var idPlaylist : String?
     var tracks = [TrackMF]()
+    let headers: HTTPHeaders = [
+        "Accept": "application/json"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +35,7 @@ class ListTracksVC: UIViewController {
     }
     
     func requestTracks() {
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
+        
         let url = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + idPlaylist!
         Alamofire.request(url, headers: headers).responseObject { (response: DataResponse<Playlist>) in
             if let playlist = response.result.value {
@@ -44,8 +45,29 @@ class ListTracksVC: UIViewController {
         }
     }
     
-    func requestRemoveTrack() {
-        NSLog("REQUEST REMOVE TRACK")
+    func requestRemoveTrack(idTrack: String?) {
+        let url = "http://mocnodeserv.hopto.org:3000/playlist/delsong/" + idPlaylist! + "/" + idTrack!
+        
+        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+            switch response.result {
+            case .success:
+                print("SUCCESS")
+                let alert = UIAlertController(title: "Succès", message: "Supprimée avec succès", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                
+                
+            case .failure:
+                print("ERROR")
+                let alert = UIAlertController(title: "Alert", message: "ERREUR suppression musique dans playlist", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
     }
 }
 
@@ -64,7 +86,7 @@ extension ListTracksVC : UITableViewDelegate, UITableViewDataSource {
         let alert = UIAlertController(title: "Supprimer", message: "Voulez-vous supprimer cette musique de votre playlist ?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "Oui", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            self.requestRemoveTrack()
+            self.requestRemoveTrack(idTrack: self.tracks[indexPath.row].id)
         }
         let noAction = UIAlertAction(title: "Non", style: UIAlertActionStyle.default)
         alert.addAction(okAction)

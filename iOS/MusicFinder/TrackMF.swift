@@ -13,6 +13,7 @@ class TrackMF : Mappable{
     var title: String?
     var url: String?
     var uri: String?
+    var id: String?
     //var artists: [Artist]?
     
     required init?(map: Map){
@@ -23,6 +24,7 @@ class TrackMF : Mappable{
         title <- map["title"]
         url <- map["url"]
         uri <- map["uri"]
+        id <- map["_id"]
     }
 }
 

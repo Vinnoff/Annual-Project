@@ -130,7 +130,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     switch response.result {
                     case .success:
                         print("SUCCESS")
-                        let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Succès", message: "Ajoutée avec succès", preferredStyle: UIAlertControllerStyle.alert)
                         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                             UIAlertAction in
                             self.navigationController?.popViewController(animated: true)
@@ -141,7 +141,6 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                     case .failure:
                         print("ERROR")
-                        print(response.response?.statusCode)
                         let alert = UIAlertController(title: "Alert", message: "ERREUR ajout musique dans playlist", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
