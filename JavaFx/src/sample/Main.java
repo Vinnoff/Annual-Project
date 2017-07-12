@@ -4,33 +4,29 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Main extends Application {
-    Stage primaryStage;
+    public Stage primaryStage;
+    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("StatMaker");
         initRootLayout();
     }
 
     private void initRootLayout() {
-        AnchorPane root = null;
-        ObjectBuilder objb = new ObjectBuilder();
-        try {
-            objb.sendGetUsers();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         try {
             root = FXMLLoader.load(getClass().getResource("view/sample.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        primaryStage.setTitle("StatMaker");
+
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
