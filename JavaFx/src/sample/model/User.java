@@ -7,47 +7,81 @@ import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 /**
  * Created by MADMAX on 20/06/2017.
  */
 public class User {
-    private StringProperty id;
-    private StringProperty userName;
-    private StringProperty firstName;
-    private StringProperty lastName;
-    private StringProperty password;
-    private StringProperty mail;
-    private ObjectProperty<Rank> rank;
-    private LongProperty globalScore;
-    private LongProperty gold;
-    private ObservableList<ObjectProperty<Game>> games;
-    //private ObjectProperty<File> avatar;
-    private StringProperty location;
-    private ObjectProperty<LocalDate> birthDay;
-    private ObservableList<ObjectProperty<Rewards>> rewards;
-    private ObservableList<ObjectProperty<User>> friends;
-    private ObservableList<ObjectProperty<Playlist>> playlist;
-    private ObservableList<ObjectProperty<Preferences>> preferences;
-
-    public User(StringProperty id, StringProperty userName, StringProperty firstName, StringProperty lastName,
-                StringProperty password, StringProperty mail, ObjectProperty<Rank> rank, LongProperty globalScore,
-                LongProperty gold, StringProperty location, ObjectProperty<LocalDate> birthDay) {
-        this.id = id;
-        this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.mail = mail;
-        this.rank = rank;
-        this.globalScore = globalScore;
-        this.gold = gold;
-        this.location = location;
-        this.birthDay = birthDay;
-    }
+    private String id;
+    private String userName;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String mail;
+    private Rank rank;
+    private Long globalScore;
+    private Long gold;
+    private HashMap<String,Game> games;
+    private String location;
+    private LocalDate birthDay;
+    private LocalDate creation;
+    private LocalDate modification;
+    private Rewards rewards;
+    private HashMap<String, User> friends;
+    private HashMap<String, Playlist> playlist;
+    private HashMap<String, Preferences> preferences;
 
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setGlobalScore(Long globalScore) {
+        this.globalScore = globalScore;
+    }
+
+    public void setGold(Long gold) {
+        this.gold = gold;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setCreation(LocalDate creation) {
+        this.creation = creation;
+    }
+
+    public void setModification(LocalDate modification) {
+        this.modification = modification;
     }
 }

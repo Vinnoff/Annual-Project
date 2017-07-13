@@ -5,32 +5,47 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import com.google.gson.*;
 
 import org.json.*;
+import sample.model.User;
 
-public class ObjectBuilder {
-    private final String USER_AGENT = "Mozilla/5.0";
+public class ObjectBuilder implements Runnable {
 
     public void sendGetUsers() throws Exception {
         String s = "http://mocnodeserv.hopto.org:3000/users";
-
         URL url = new URL(s);
         Scanner scan = new Scanner(url.openStream());
         String res = new String();
+
         while (scan.hasNext())
             res += scan.nextLine();
-        scan.close();
 
+        scan.close();
         JSONArray arr = new JSONArray(res);
-        HashMap hs = new HashMap();
+        LinkedList<JSONObject> hs = new LinkedList<>();
+
         for (int i = 0; i < arr.length(); i++) {
-            JSONObject obj = arr.getJSONObject(i);
-            System.out.println(obj);
-            hs.put(obj.hashCode(), obj);
+            hs.add(arr.getJSONObject(i));
         }
 
-        System.out.print(hs.toString());
+        Iterator<JSONObject> it = hs.iterator();
+        Gson gson = new GsonBuilder().create();
+        while (it.hasNext()) {
+            JSONObject job = it.next();
+            Main.Users.put(job.getString("_id"),gson.fromJson(job.toString(), User.class));
+        }
+
+        System.out.println(Main.Users.toString());
+    }
+
+    @Override
+    public void run() {
+        try {
+            this.sendGetUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
