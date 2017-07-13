@@ -4,6 +4,18 @@ module.exports = (api) => {
 	const User = api.models.User;
 	const Score = api.models.Score;
 
+	function findAll(req, res, next) {
+		Game.find((err, data) => {
+			if (err) {
+				return res.status(500).send();
+			}
+			if (!data || data.length == 0) {
+				return res.status(204).send(data)
+			}
+			return res.send(data)
+		}).skip(Number(req.params.start)).limit(Number(req.params.limit));
+	}
+
 	function findById(req, res, next) {
 		Game.findById(req.params.id).populate('Scores Songs').exec((err, data) => {
 			if (err) {
@@ -17,9 +29,6 @@ module.exports = (api) => {
 	}
 
 	function findByUser(req, res, next) {
-
-
-
 		Game.find({
 			"Scores.Player": req.params.id
 		}).populate('Scores Songs').exec((err, data) => {
@@ -105,12 +114,12 @@ module.exports = (api) => {
 						return res.send(data)
 					});
 				});
-
 			}
 		);
 	};
 
 	return {
+		findAll,
 		findById,
 		findByUser,
 		findByDifficulty,

@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
+	router.get('/:start/:limit',
+		api.actions.game.findAll);
 
 	router.get('/:id',
 		api.actions.game.findById);
