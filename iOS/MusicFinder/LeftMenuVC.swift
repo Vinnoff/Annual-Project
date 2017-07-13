@@ -90,8 +90,8 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
         case 2:
-            let listGenreVC = ListGenreQuizzVC(nibName: ListGenreQuizzVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: listGenreVC)
+            let listQuizzVC = ListQuizzVC(nibName: ListQuizzVC.className(), bundle: nil)
+            let newRootVC = UINavigationController(rootViewController: listQuizzVC)
             revealVC.pushFrontViewController(newRootVC, animated: true)
             
         case 3:

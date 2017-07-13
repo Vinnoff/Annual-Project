@@ -120,9 +120,10 @@ class UploadPlaylistSpotifyVC: UIViewController {
     func requestAddSong(index: Int) {
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
-                for track in playlists[index].tracks {
+                //PICH TODO
+                /*for track in playlists[index].tracks {
                     
-                }
+                }*/
                 
                 
                 
