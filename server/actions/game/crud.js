@@ -5,7 +5,7 @@ module.exports = (api) => {
 	const Score = api.models.Score;
 
 	function findById(req, res, next) {
-		Game.findById(req.params.id).populate('Scores').exec((err, data) => {
+		Game.findById(req.params.id).populate('Scores Songs').exec((err, data) => {
 			if (err) {
 				return res.status(500).send(err);
 			}
@@ -22,7 +22,7 @@ module.exports = (api) => {
 
 		Game.find({
 			"Scores.Player": req.params.id
-		}).populate('Scores').exec((err, data) => {
+		}).populate('Scores Songs').exec((err, data) => {
 			if (err) {
 				return res.status(500).send();
 			}
@@ -81,26 +81,31 @@ module.exports = (api) => {
 			},
 			function (err) {
 				game.Scores = scores
-				game.save((err, data) => {
-					if (err) {
-						return res.status(500).send(err);
-					}
-					req.body.Players.forEach(function (player) {
-						User.findById(player, function (err, user) {
-							if (err) {
-								return res.status(500).send(err)
-							} else {
-								user.Games.push(data.id);
-								user.save(function (err) {
-									if (err) {
-										return res.status(500).send(err)
-									}
-								});
-							}
+				Game.populate(game, {
+					path: "Songs"
+				}, function (err, data) {
+					game.save((err, data) => {
+						if (err) {
+							return res.status(500).send(err);
+						}
+						req.body.Players.forEach(function (player) {
+							User.findById(player, function (err, user) {
+								if (err) {
+									return res.status(500).send(err)
+								} else {
+									user.Games.push(data.id);
+									user.save(function (err) {
+										if (err) {
+											return res.status(500).send(err)
+										}
+									});
+								}
+							});
 						});
+						return res.send(data)
 					});
-					return res.send(data)
 				});
+
 			}
 		);
 	};
