@@ -14,6 +14,7 @@ class Playlist : Mappable{
     var title: String?
     var creator: String?
     var image: String?
+    var tracks: [TrackMF]?
 
     
     required init?(map: Map){
@@ -24,5 +25,6 @@ class Playlist : Mappable{
         title <- map["title"]
         creator <- map["Creator"]
         image <- map["image"]
+        tracks <- map["Songs"]
     }
 }

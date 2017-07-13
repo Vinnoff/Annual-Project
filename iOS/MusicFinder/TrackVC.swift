@@ -26,7 +26,7 @@ class TrackVC: UIViewController {
     private var playerUrl: NSURL?
     public var imageUrlFromAlbumVC: String?
     public var album: Album?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,7 +125,14 @@ class TrackVC: UIViewController {
     }
     
     @IBAction func addClicked(_ sender: Any) {
-        if item != nil && track == nil{
+        if item?.preview_url == nil && track?.preview_url == nil {
+            let alert = UIAlertController(title: "Alerte", message: "La musique n'a pas d'extrait donc ne peut pas être ajoutée", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        else if item != nil && track == nil{
             let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
             listPlaylistVC.trackItem = item
             listPlaylistVC.fromUser = true

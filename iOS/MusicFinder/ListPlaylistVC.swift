@@ -31,7 +31,6 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.addGestureMenu()
             requestPlaylists()
         }
-        
         tableView.reloadData()
         
     }
@@ -85,7 +84,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let idplaylist = playlists[indexPath.row]?.id {
                 let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
                 var parameters = [:] as [String : Any]
-                if trackItem != nil {
+                /*if trackItem != nil {
                     parameters = [
                         "title": trackItem?.name,
                         "url" : trackItem?.preview_url,
@@ -97,6 +96,30 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         "url" : track?.preview_url,
                         "uri" : track?.uri
                     ]
+                }*/
+                
+                if trackItem != nil {
+                    parameters = [
+                        "Song": [
+                                    "title" : trackItem?.name,
+                                    "url" : trackItem?.preview_url,
+                                    "uri" : trackItem?.uri
+                                ],
+                        "Artist": [
+                                    "title": trackItem?.artists?[0].name
+                                  ]
+                    ]
+                } else if track != nil {
+                    parameters = [
+                        "Song": [
+                            "title" : track?.name,
+                            "url" : track?.preview_url,
+                            "uri" : track?.uri
+                        ],
+                        "Artist": [
+                            "title": track?.artists?[0].name
+                        ]
+                    ]
                 }
                 
                 let headers: HTTPHeaders = [
@@ -107,20 +130,28 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     switch response.result {
                     case .success:
                         print("SUCCESS")
-                        let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        let alert = UIAlertController(title: "Succès", message: "Ajoutée avec succès", preferredStyle: UIAlertControllerStyle.alert)
+                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                            UIAlertAction in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        alert.addAction(okAction)
                         self.present(alert, animated: true, completion: nil)
+                        
                         
                     case .failure:
                         print("ERROR")
-                        print(response.response?.statusCode)
-                        let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Alert", message: "ERREUR ajout musique dans playlist", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 })
             }
         }
-        
+        else {
+            let listTracksVC = ListTracksVC(nibName: ListTracksVC.className(), bundle: nil)
+            listTracksVC.idPlaylist = self.playlists[indexPath.row]?.id
+            navigationController?.pushViewController(listTracksVC, animated: true)
+        }
     }
 }

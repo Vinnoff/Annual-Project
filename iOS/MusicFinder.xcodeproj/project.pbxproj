@@ -17,6 +17,9 @@
 		0F220B8B1E87D938000589EC /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F220B8A1E87D938000589EC /* NSObject.swift */; };
 		0F2E8E8B1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */; };
 		0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */; };
+		0F436EBE1F16A06C0026F6BA /* ListTracksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F436EBC1F16A06C0026F6BA /* ListTracksVC.swift */; };
+		0F436EBF1F16A06C0026F6BA /* ListTracksVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */; };
+		0F436EC31F16B8B80026F6BA /* TrackMF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F436EC21F16B8B80026F6BA /* TrackMF.swift */; };
 		0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */; };
 		0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */; };
 		0F76423C1E87D3C400560D76 /* ListGenreQuizzVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */; };
@@ -92,6 +95,9 @@
 		0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPlaylistSpotifyVC.swift; sourceTree = "<group>"; };
 		0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadPlaylistSpotifyVC.xib; sourceTree = "<group>"; };
 		0F3C26ADCA39C443CD516399 /* Pods-MusicFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFinder/Pods-MusicFinder.release.xcconfig"; sourceTree = "<group>"; };
+		0F436EBC1F16A06C0026F6BA /* ListTracksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTracksVC.swift; sourceTree = "<group>"; };
+		0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTracksVC.xib; sourceTree = "<group>"; };
+		0F436EC21F16B8B80026F6BA /* TrackMF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMF.swift; sourceTree = "<group>"; };
 		0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
 		0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGenreQuizzVC.swift; sourceTree = "<group>"; };
 		0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListGenreQuizzVC.xib; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 				0F2E8E8D1F0A86F600F6FB6B /* UploadPlaylistSpotify */,
 				0F1A5ECE1F0D386500473697 /* ProfileVC */,
 				0FC3C93B1F11348F00D386ED /* Playlist */,
+				0F436EC01F16A06F0026F6BA /* ListTracks */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
@@ -271,6 +278,15 @@
 				0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */,
 			);
 			name = UploadPlaylistSpotify;
+			sourceTree = "<group>";
+		};
+		0F436EC01F16A06F0026F6BA /* ListTracks */ = {
+			isa = PBXGroup;
+			children = (
+				0F436EBC1F16A06C0026F6BA /* ListTracksVC.swift */,
+				0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */,
+			);
+			name = ListTracks;
 			sourceTree = "<group>";
 		};
 		0F7642411E87D47E00560D76 /* ListGenreCell */ = {
@@ -406,6 +422,7 @@
 				0FD52B3B1EF2AF970039543E /* Artist.swift */,
 				0FD52B391EF2AF370039543E /* Image.swift */,
 				0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */,
+				0F436EC21F16B8B80026F6BA /* TrackMF.swift */,
 				0FC3C9431F113E4300D386ED /* Playlist.swift */,
 			);
 			name = Class;
@@ -543,6 +560,7 @@
 				0FF5DB6A1F0EA5B600DA7E86 /* Home2VC.xib in Resources */,
 				0FF59FE31EF4236A00F853DB /* ArtistVC.xib in Resources */,
 				0FD52B281EF2882B0039543E /* SearchVC.xib in Resources */,
+				0F436EBF1F16A06C0026F6BA /* ListTracksVC.xib in Resources */,
 				0F8FFFD21E86E65F005FFDC3 /* LeftMenuVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,6 +635,7 @@
 				0F8DDFF01ED09ADE00289AE8 /* User.swift in Sources */,
 				0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */,
 				0F8FFFD11E86E65F005FFDC3 /* LeftMenuVC.swift in Sources */,
+				0F436EBE1F16A06C0026F6BA /* ListTracksVC.swift in Sources */,
 				0FD52B3A1EF2AF370039543E /* Image.swift in Sources */,
 				0F8DDFED1ED0997B00289AE8 /* UserInfoSaver.swift in Sources */,
 				0FD52B4D1EF32F580039543E /* TrackVC.swift in Sources */,
@@ -625,6 +644,7 @@
 				0F76423F1E87D47A00560D76 /* ListGenreCell.swift in Sources */,
 				0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */,
 				0FD52B481EF2B7A60039543E /* ResultSearchCell.swift in Sources */,
+				0F436EC31F16B8B80026F6BA /* TrackMF.swift in Sources */,
 				0FD52B3C1EF2AF970039543E /* Artist.swift in Sources */,
 				0FD52B361EF2ACFF0039543E /* Track.swift in Sources */,
 				0F201CC81E86DFC400F0B631 /* AppDelegate.swift in Sources */,
