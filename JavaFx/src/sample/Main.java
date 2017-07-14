@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import sample.model.User;
+import sample.model.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,6 +16,14 @@ public class Main extends Application {
     private BorderPane root;
     public Main mainApp;
     public static HashMap<String, User> Users;
+    public static HashMap<String, Song> Songs;
+    public static HashMap<String, Game> Games;
+    public static HashMap<String, Playlist> Playlists;
+    public static HashMap<String, Rank> Ranks;
+    public static HashMap<String, Genre> Genres;
+    public static HashMap<String, Score> Scores;
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -56,6 +64,13 @@ public class Main extends Application {
     public static void main(String[] args) {
         //launch(args);
         Users = new HashMap<>();
+        Songs = new HashMap<>();
+        Games = new HashMap<>();
+        Playlists = new HashMap<>();
+        Ranks = new HashMap<>();
+        Genres = new HashMap<>();
+        Scores = new HashMap<>();
+
         ObjectBuilder ob = new ObjectBuilder();
         ob.run();
     }

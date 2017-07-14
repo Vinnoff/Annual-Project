@@ -3,15 +3,16 @@ package sample.model;
 import java.time.LocalDate;
 
 /**
- * Created by MADMAX on 20/06/2017.
+ * Created by MADMAX on 14/07/2017.
  */
-public class Rank {
+public class Score {
     private String _id;
     private LocalDate created_at;
     private LocalDate updated_at;
-    private int nb;
-    private String title;
-    private int scoreToAcces;
+    private int scoreInGame;
+    private int isFinished;
+    private User user;
+    private Game game;
 
     public String get_id() {
         return _id;
@@ -37,39 +38,32 @@ public class Rank {
         this.updated_at = updated_at;
     }
 
-    public int getNb() {
-        return nb;
+    public int getScoreInGame() {
+        return scoreInGame;
     }
 
-    public void setNb(int nb) {
-        this.nb = nb;
+    public void setScoreInGame(int scoreInGame) {
+        this.scoreInGame = scoreInGame;
     }
 
-    public String getTitle() {
-        return title;
+    public int getIsFinished() {
+        return isFinished;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getScoreToAcces() {
-        return scoreToAcces;
-    }
-
-    public void setScoreToAcces(int scoreToAcces) {
-        this.scoreToAcces = scoreToAcces;
+    public void setIsFinished(int isFinished) {
+        this.isFinished = isFinished;
     }
 
     @Override
     public String toString() {
-        return "Rank{" +
+        return "Score{" +
                 "_id='" + _id + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-                ", nb=" + nb +
-                ", title='" + title + '\'' +
-                ", scoreToAcces=" + scoreToAcces +
+                ", scoreInGame=" + scoreInGame +
+                ", isFinished=" + isFinished +
+                ", user=" + user +
+                ", game=" + game +
                 '}';
     }
 }
