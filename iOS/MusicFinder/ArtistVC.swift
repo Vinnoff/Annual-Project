@@ -18,6 +18,9 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var albums = [Item]()
     var itemTypeAlbum: ItemType?
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
@@ -27,12 +30,24 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         self.tableView.register(UINib(nibName: "ResultSearchCell", bundle: nil), forCellReuseIdentifier: "resultcell")
         self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
-        
+        self.containerView.layer.cornerRadius = 10.0
         if artist != nil {
             let urlTopTrack = "https://api.spotify.com/v1/artists/" + (artist?.id)! + "/top-tracks?country=Fr"
             let urlAlbum = "https://api.spotify.com/v1/artists/" + (artist?.id)! + "/albums?album_type=album"
             requestTrackArtist(url: urlTopTrack)
             requestAlbumArtist(url: urlAlbum)
+            
+            if let imageURL = artist?.images?.first?.url {
+                let url = URL(string: imageURL)
+                let data = try? Data(contentsOf: url!)
+                imageView.image = UIImage(data: data!)
+            }
+            self.nameLabel.text = artist?.name
+            var allGenres = ""
+            for genre in (artist?.genres)! {
+                allGenres = allGenres + genre + " "
+            }
+            self.genreLabel.text = allGenres
         }
     }
 

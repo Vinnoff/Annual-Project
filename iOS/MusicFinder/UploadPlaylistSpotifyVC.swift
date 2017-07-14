@@ -195,9 +195,6 @@ extension UploadPlaylistSpotifyVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*if (playlists[indexPath.row].tracks?.count)! > 0 {
-            requestCreatePlaylist(index: indexPath.row)
-        }*/
         self.requestTracks(index: indexPath.row)
     }
 }

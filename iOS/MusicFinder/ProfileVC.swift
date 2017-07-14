@@ -12,55 +12,48 @@ import Alamofire
 
 class ProfileVC: UIViewController {
 
-    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var pseudoLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var goldLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var disconnectButton: UIButton!
+    var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarItem()
         self.addGestureMenu()
         self.edgesForExtendedLayout = []
-        let urlInfoAccount = "https://api.spotify.com/v1/me"
-        let headers: HTTPHeaders = [
-            //"Authorization": "Bearer " + session.accessToken,
-            "Accept": "application/json"
-        ]
-        
-        let parameters = [
-            "username": "serey",
-            
-            ] as [String : Any]
-        
-        
-        Alamofire.request("http://mocnodeserv.hopto.org:3000/song/", method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
-            switch response.result {
-            case .success:
-                print("SUCCESS")
-                break
-                
-            case .failure: break
+        self.title = "Profil"
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
+        self.disconnectButton.layer.cornerRadius = 10.0
+        self.requestUser()
+    }
 
+    func requestUser() {
+        let headers: HTTPHeaders = ["Accept": "application/json"]
+        let url = "http://mocnodeserv.hopto.org:3000/users/username/" + UserInfoSaver().getUsername()!
+        Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+            (response: DataResponse<User>) in
+            if let user = response.result.value {
+                self.user = user
+                self.bindData()
+                self.tableView.reloadData()
             }
         })
-        
-        requestDetailUserSpotify(url: urlInfoAccount)
     }
     
-    func requestDetailUserSpotify(url: String) {
-        let token: String?
-        
-        if let session = UserInfoSaver().getSessionSpotify() {
-            token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
-                                        "Accept": "application/json"]
-            print(headers)
-            Alamofire.request(url, headers: headers).responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value {
-                    print(JSON)
-                }
-            })
-        }
+    func bindData() {
+        self.pseudoLabel.text = user?.username
+        self.rankLabel.text = user?.rank?.title
+        self.scoreLabel.text = "\(String(describing: user!.globalScore!))"
+        self.goldLabel.text = "\(String(describing: user!.gold!))"
     }
+    
+    
     @IBAction func disconnectedClicked(_ sender: Any) {
         UserInfoSaver().disconnectAccount()
         
@@ -70,8 +63,66 @@ class ProfileVC: UIViewController {
         let newRootVC = UINavigationController(rootViewController: homeVC)
         revealVC.pushFrontViewController(newRootVC, animated: true)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            if let count = user?.rewards?.count {
+                return count
+            }
+            return 1
+        }
+        else {
+            if let count = user?.friends?.count {
+                return count
+            }
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+            if indexPath.row % 2 == 0 {
+                cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+            } else {
+                cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+            }
+            cell.bindData(title: self.user?.rewards?[indexPath.row].title)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+            if indexPath.row % 2 == 0 {
+                cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+            } else {
+                cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+            }
+            cell.bindData(title: self.user?.friends?[indexPath.row].username)
+            return cell
+        }
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = UIColor(red: 228, green: 74, blue: 102)
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(red: 211, green: 232, blue: 225)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Récompense(s)"
+        } else {
+            return "Ami(s)"
+        }
     }
 }
