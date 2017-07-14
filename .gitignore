@@ -3,28 +3,28 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
+JavaFx/.idea/**/workspace.xml
+JavaFx/.idea/**/tasks.xml
+JavaFx/.idea/dictionaries
 
 # Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
+JavaFx/.idea/**/dataSources/
+JavaFx/.idea/**/dataSources.ids
+JavaFx/.idea/**/dataSources.xml
+JavaFx/.idea/**/dataSources.local.xml
+JavaFx/.idea/**/sqlDataSources.xml
+JavaFx/.idea/**/dynamic.xml
+JavaFx/.idea/**/uiDesigner.xml
 
 # Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
+JavaFx/.idea/**/gradle.xml
+JavaFx/.idea/**/libraries
 
 # CMake
 cmake-build-debug/
 
 # Mongo Explorer plugin:
-.idea/**/mongoSettings.xml
+JavaFx/.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -35,7 +35,7 @@ cmake-build-debug/
 /out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+JavaFx/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
