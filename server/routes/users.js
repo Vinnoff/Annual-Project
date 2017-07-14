@@ -15,6 +15,9 @@ module.exports = (api) => {
 	router.get('/userName/:userName',
 		api.actions.users.findByUserName);
 
+	router.get('/userNameResearch/:userName',
+		api.actions.users.findByAproximateUserName);
+
 	router.post('/',
 		api.middlewares.bodyParser.json(),
 		api.middlewares.cache.clean('User'),

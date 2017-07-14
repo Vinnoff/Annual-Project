@@ -55,6 +55,25 @@ module.exports = (api) => {
 
 	function findByUserName(req, res, next) {
 		User
+			.findOne({
+				userName: req.params.userName
+			})
+			.populate('Rank', 'nb title')
+			.populate('Preferences',
+				'Genres Artists Albums Songs')
+			.exec((err, data) => {
+				if (err) {
+					return res.status(500).send();
+				}
+				if (!data || data.length == 0) {
+					return res.status(204).send(data)
+				}
+				return res.send(data);
+			})
+	}
+
+	function findByAproximateUserName(req, res, next) {
+		User
 			.find({
 				userName: {
 					$regex: ".*" + req.params.userName + ".*"
@@ -63,9 +82,6 @@ module.exports = (api) => {
 			.sort({
 				userName: 1
 			})
-			.populate('Rank', 'nb title')
-			.populate('Preferences',
-				'Genres Artists Albums Songs')
 			.exec((err, data) => {
 				if (err) {
 					return res.status(500).send();
@@ -216,6 +232,7 @@ module.exports = (api) => {
 		findSorted,
 		findById,
 		findByUserName,
+		findByAproximateUserName,
 		create,
 		update,
 		updateFriends,
