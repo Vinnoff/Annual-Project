@@ -24,6 +24,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         if fromUser {
             requestPlaylists(fromUser: true)
         } else {
@@ -66,8 +67,13 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = playlists[indexPath.row]?.title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+        }
+        cell.bindData(title: self.playlists[indexPath.row]?.title)
         return cell
     }
     

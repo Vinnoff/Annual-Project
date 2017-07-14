@@ -29,7 +29,7 @@ class TrackVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.edgesForExtendedLayout = []
         playButton.layer.cornerRadius = 5.0
         
         if item != nil {

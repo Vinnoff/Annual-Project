@@ -23,6 +23,7 @@ class LeftMenuCell: UITableViewCell {
     func bindData(title: String?, imageName: String? = nil) {
         label.text = title
         icon.image = UIImage(named: imageName!)
+        icon.tintColor = UIColor.red
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

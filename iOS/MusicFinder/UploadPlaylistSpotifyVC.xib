@@ -6,13 +6,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadPlaylistSpotifyVC" customModule="MusicFinder" customModuleProvider="target">
             <connections>
-                <outlet property="button" destination="D2y-kS-i3e" id="RRc-yC-e9Z"/>
-                <outlet property="textfield" destination="B6q-9c-0uA" id="te2-ne-ONw"/>
+                <outlet property="tableView" destination="lsX-IY-LWU" id="tZU-wA-QjM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,32 +21,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B6q-9c-0uA">
-                    <rect key="frame" x="139" y="125" width="97" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTO-fc-6KW">
-                    <rect key="frame" x="126" y="286" width="130" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Test add music"/>
-                    <connections>
-                        <action selector="addClicked:" destination="-1" eventType="touchUpInside" id="KqH-0C-kIt"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2y-kS-i3e">
-                    <rect key="frame" x="118" y="196" width="138" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Créer playlist"/>
-                    <connections>
-                        <action selector="buttonClicked:" destination="-1" eventType="touchUpInside" id="h6W-gu-0LT"/>
-                    </connections>
-                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundupload" translatesAutoresizingMaskIntoConstraints="NO" id="hYT-w6-d1k">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lsX-IY-LWU">
+                    <rect key="frame" x="0.0" y="266" width="375" height="401"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="lsX-IY-LWU" secondAttribute="height" multiplier="375:401" id="tLR-ZF-tuT"/>
+                    </constraints>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lsX-IY-LWU" secondAttribute="bottom" id="8AR-9Z-4f9"/>
+                <constraint firstAttribute="trailing" secondItem="lsX-IY-LWU" secondAttribute="trailing" id="9TC-Wv-rKa"/>
+                <constraint firstItem="hYT-w6-d1k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="U8X-5O-Oww"/>
+                <constraint firstAttribute="trailing" secondItem="hYT-w6-d1k" secondAttribute="trailing" id="XTX-Uk-D8b"/>
+                <constraint firstItem="hYT-w6-d1k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hCX-16-vvt"/>
+                <constraint firstItem="lsX-IY-LWU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iZA-xG-hwu"/>
+                <constraint firstAttribute="bottom" secondItem="hYT-w6-d1k" secondAttribute="bottom" id="ndW-pP-0dv"/>
+            </constraints>
             <point key="canvasLocation" x="34.5" y="88.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="backgroundupload" width="540" height="960"/>
+    </resources>
 </document>
