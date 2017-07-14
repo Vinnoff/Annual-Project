@@ -20,7 +20,10 @@ class QuizzCell: UITableViewCell {
 
     func bindData(title: String?, creator: String?) {
         titleLabel.text = title
-        creatorLabel.text = creator
+        if creator != nil {
+            creatorLabel.text = creator
+        }
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

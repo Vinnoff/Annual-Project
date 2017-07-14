@@ -18,7 +18,7 @@ class CreatePlaylistVC: UIViewController {
         self.setNavigationBarItem()
         self.addGestureMenu()
         self.title = "Créer une playlist"
-        // Do any additional setup after loading the view.
+        self.submitButton.layer.cornerRadius = 10.0
     }
 
     override func didReceiveMemoryWarning() {

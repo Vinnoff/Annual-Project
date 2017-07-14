@@ -32,13 +32,16 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBa-b5-9kJ">
-                    <rect key="frame" x="62.5" y="160" width="250" height="40"/>
+                    <rect key="frame" x="87.5" y="160" width="200" height="40"/>
+                    <color key="backgroundColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="YIo-k1-5BH"/>
-                        <constraint firstAttribute="width" constant="250" id="p52-uw-5gd"/>
+                        <constraint firstAttribute="width" constant="200" id="p52-uw-5gd"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Créer"/>
+                    <state key="normal" title="Créer">
+                        <color key="titleColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
                     <connections>
                         <action selector="submitClicked:" destination="-1" eventType="touchUpInside" id="SvL-4Y-ma1"/>
                     </connections>

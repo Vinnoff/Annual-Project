@@ -128,7 +128,7 @@ class DetailMusicVC: UIViewController {
             "isFinished": true
             ] as [String : Any]
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+        Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
                 print("SUCCESS")

@@ -14,6 +14,8 @@ class UploadPlaylistSpotifyVC: UIViewController {
 
     let url = "https://api.spotify.com/v1/users/alkrox/playlists"
     var playlists = [Playlist]()
+    var tracks = [TrackMF]()
+    var idPlaylistSpotify: String?
     let headers: HTTPHeaders = [
         "Accept": "application/json"
     ]
@@ -26,34 +28,13 @@ class UploadPlaylistSpotifyVC: UIViewController {
         self.addGestureMenu()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
         // https://api.spotify.com/v1/users/alkrox/playlists
         //Authorization: Bearer
 
         self.requestPlaylist()
         self.tableView.reloadData()
     }
-    
-    
-    
-    /*@IBAction func addClicked(_ sender: Any) {
-        //1sOYqfD1K4HYOWzi7l7iIW
-        //spotify:album:6XMTRp9sURjgP9g23ppEri
-        
-        if UserInfoSaver().isAuth()! {
-            if let session = UserInfoSaver().getSessionSpotify() {
-                let uris = "spotify:track:4IIUaKqGMElZ3rGtuvYlNc"
-                let playlistId = "1sOYqfD1K4HYOWzi7l7iIW"
-                let urisUpdated = uris.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil)
-                let url = "https://api.spotify.com/v1/users/alkrox/playlists/" + playlistId + "/tracks?uris=" + urisUpdated
-                let headers: HTTPHeaders = [
-                    "Authorization": "Bearer " + session.accessToken,
-                    "Accept": "application/json"
-                ]
-                Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
-            }
-        }
-    }*/
-    
     
     func showAuthSpotify() {
         var revealVC: SWRevealViewController
@@ -74,15 +55,17 @@ class UploadPlaylistSpotifyVC: UIViewController {
         }
     }
     
+    
+    //1 CREER PLAYLIST
     func requestCreatePlaylist(index: Int) {
         if UserInfoSaver().isAuth()! {
             let username = UserInfoSaver().getUsername()
             if let session = UserInfoSaver().getSessionSpotify() {
-                
-                let headers: HTTPHeaders = [
+                let headersSpotify: HTTPHeaders = [
                     "Authorization": "Bearer " + session.accessToken,
                     "Accept": "application/json"
                 ]
+                
                 let parameters = [
                     "description": "",
                     "public" : "true",
@@ -90,19 +73,14 @@ class UploadPlaylistSpotifyVC: UIViewController {
                     
                     ] as [String : Any]
                 
-                Alamofire.request("https://api.spotify.com/v1/users/" + username! + "/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                Alamofire.request("https://api.spotify.com/v1/users/" + username! + "/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headersSpotify).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success:
-                        /*print("SUCCESS")
-                        let alert = UIAlertController(title: "Alert", message: "Ajouté avec succes", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)*/
-                        
-                        self.requestAddSong(index: index)
+                        //self.requestGetIdPlaylistSpotify(token: session.accessToken, index: index)
+                        self.requestTracks(index: index, token: session.accessToken)
                         
                     case .failure:
-                        print("ERROR")
-                        let alert = UIAlertController(title: "Alert", message: "ERREUR", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Alert", message: "Erreur création playlist", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -118,26 +96,71 @@ class UploadPlaylistSpotifyVC: UIViewController {
         }
     }
     
-    func requestAddSong(index: Int) {
-        if UserInfoSaver().isAuth()! {
-            if let session = UserInfoSaver().getSessionSpotify() {
-                //PICH TODO
-                /*for track in playlists[index].tracks {
-                    
-                }*/
-                
-                
-                
-                let uris = "spotify:track:4IIUaKqGMElZ3rGtuvYlNc"
-                let playlistId = "1sOYqfD1K4HYOWzi7l7iIW"
-                let urisUpdated = uris.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil)
-                let url = "https://api.spotify.com/v1/users/alkrox/playlists/" + playlistId + "/tracks?uris=" + urisUpdated
-                let headers: HTTPHeaders = [
-                    "Authorization": "Bearer " + session.accessToken,
-                    "Accept": "application/json"
-                ]
-                Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
+    func requestTracks(index: Int, token: String) {
+        let idPlaylist = playlists[index].id
+        let url = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + idPlaylist!
+        Alamofire.request(url, headers: headers).responseObject { (response: DataResponse<Playlist>) in
+            if let playlist = response.result.value {
+                self.tracks = playlist.tracks!
+                self.requestGetIdPlaylistSpotify(token: token, index: index)
             }
+        }
+    }
+    
+    
+    func requestGetIdPlaylistSpotify(token: String, index: Int) {
+        let username = UserInfoSaver().getUsername()
+        let url = "https://api.spotify.com/v1/users/" + username! + "/playlists"
+        let headersSpotify: HTTPHeaders = [
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json"
+        ]
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headersSpotify).validate(statusCode: 200..<300).responseObject(completionHandler: { (response: DataResponse<PlaylistSpotify>) in
+            switch response.result {
+            case .success:
+                if let playlistSpotify = response.result.value {
+                    if let id = playlistSpotify.items?.first?.id {
+                        self.requestAddSong(index: index, id: id, token: token)
+                    }
+                }
+                
+            case .failure:
+                let alert = UIAlertController(title: "Alert", message: "Erreur création playlist", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+        
+    }
+    
+    func requestAddSong(index: Int, id: String, token: String) {
+        var uriUpdated = ""
+        let username = UserInfoSaver().getUsername()
+        let headersSpotify: HTTPHeaders = [
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json"
+        ]
+        if UserInfoSaver().isAuth()! {
+            for track in self.tracks {
+                uriUpdated = uriUpdated + (track.uri?.replacingOccurrences(of: ":", with: "%3A", options: .literal, range: nil))! + ","
+            }
+            
+            let url = "https://api.spotify.com/v1/users/" + username! + "/playlists/" + id + "/tracks?uris=" + uriUpdated.substring(to: uriUpdated.index(before: uriUpdated.endIndex))
+            
+            Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headersSpotify).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                switch response.result {
+                case .success:
+                    let alert = UIAlertController(title: "Succès", message: "Votre playlist est sur Spotify !", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case .failure:
+                    let alert = UIAlertController(title: "Alert", message: "Erreur création playlist", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
         }
     }
     
@@ -145,6 +168,8 @@ class UploadPlaylistSpotifyVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
 }
 
 extension UploadPlaylistSpotifyVC : UITableViewDelegate, UITableViewDataSource {
@@ -153,8 +178,13 @@ extension UploadPlaylistSpotifyVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = playlists[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+        }
+        cell.bindData(title: self.playlists[indexPath.row].title)
         return cell
     }
     

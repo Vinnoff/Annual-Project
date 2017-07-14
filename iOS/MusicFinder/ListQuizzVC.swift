@@ -24,11 +24,10 @@ class ListQuizzVC: UIViewController {
         self.addGestureMenu()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: QuizzCell.className(), bundle: nil), forCellReuseIdentifier: "quizzcell")
+        self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
         self.requestPlaylist()
     }
-    
-    
+
     func requestPlaylist() {
         let url = "http://mocnodeserv.hopto.org:3000/playlist/"
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
@@ -96,13 +95,13 @@ extension ListQuizzVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "quizzcell", for: indexPath) as! QuizzCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
         if indexPath.row % 2 == 0 {
             cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         } else {
             cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
         }
-        cell.bindData(title: self.playlists[indexPath.row].title, creator: self.playlists[indexPath.row].creator)
+        cell.bindData(title: self.playlists[indexPath.row].title)
         return cell
     }
     
