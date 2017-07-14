@@ -16,7 +16,6 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir playlist"]
     var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_home", "ico_home"]
     
-    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -24,7 +23,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.darkGray
+        tableView.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         tableView.register(UINib(nibName: LeftMenuCell.className(), bundle: nil), forCellReuseIdentifier: "leftmenucell")
     }
     
@@ -59,7 +58,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.bindData(title: self.items[indexPath.row], imageName: self.ico[indexPath.row])
         }
-        cell.backgroundColor = UIColor.darkGray
+        cell.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         
         return cell
     }
@@ -90,29 +89,59 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
         case 2:
-            let listQuizzVC = ListQuizzVC(nibName: ListQuizzVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: listQuizzVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
+            if UserInfoSaver().isAuth()! {
+                let listQuizzVC = ListQuizzVC(nibName: ListQuizzVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: listQuizzVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
             
         case 3:
-            let searchVC = SearchVC(nibName: SearchVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: searchVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
+            if UserInfoSaver().isAuth()! {
+                let searchVC = SearchVC(nibName: SearchVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: searchVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
+
             
         case 4:
-            let uploadPlaylistVC = UploadPlaylistSpotifyVC(nibName: UploadPlaylistSpotifyVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: uploadPlaylistVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
-            
+            if UserInfoSaver().isAuth()! {
+                let uploadPlaylistVC = UploadPlaylistSpotifyVC(nibName: UploadPlaylistSpotifyVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: uploadPlaylistVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
         case 5:
-            let createPlaylistVC = CreatePlaylistVC(nibName: CreatePlaylistVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: createPlaylistVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
+            if UserInfoSaver().isAuth()! {
+                let createPlaylistVC = CreatePlaylistVC(nibName: CreatePlaylistVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: createPlaylistVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
             
         case 6:
-            let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
-            let newRootVC = UINavigationController(rootViewController: listPlaylistVC)
-            revealVC.pushFrontViewController(newRootVC, animated: true)
+            if UserInfoSaver().isAuth()! {
+                let listPlaylistVC = ListPlaylistVC(nibName: ListPlaylistVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: listPlaylistVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
             
             
         default:

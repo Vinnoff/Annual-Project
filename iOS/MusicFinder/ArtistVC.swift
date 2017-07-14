@@ -22,9 +22,11 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = []
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(UINib(nibName: "ResultSearchCell", bundle: nil), forCellReuseIdentifier: "resultcell")
+        self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         
         if artist != nil {
             let urlTopTrack = "https://api.spotify.com/v1/artists/" + (artist?.id)! + "/top-tracks?country=Fr"
@@ -90,8 +92,13 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = tracks[indexPath.row].name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+            if indexPath.row % 2 == 0 {
+                cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+            } else {
+                cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+            }
+            cell.bindData(title: self.tracks[indexPath.row].name)
             return cell
         }
         else {

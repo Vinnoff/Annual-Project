@@ -20,8 +20,8 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         self.setNavigationBarItem()
         self.addGestureMenu()
 
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 255, green: 200, blue: 40)]
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 211, green: 232, blue: 225)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 228, green: 74, blue: 102)]
         
         self.title = "Music Finder"
         scrollView.frame = view.frame

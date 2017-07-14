@@ -22,6 +22,7 @@ class ListTracksVC: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.requestTracks()
     }
 
@@ -73,8 +74,13 @@ class ListTracksVC: UIViewController {
 
 extension ListTracksVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = tracks[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+        }
+        cell.bindData(title: self.tracks[indexPath.row].title)
         return cell
     }
     

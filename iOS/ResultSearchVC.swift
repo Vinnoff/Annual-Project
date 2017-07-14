@@ -147,9 +147,9 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultcell", for: indexPath) as! ResultSearchCell
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor.gray
+            cell.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         } else {
-            cell.backgroundColor = UIColor.darkGray
+            cell.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
         }
         if searchType == "artist" {
             cell.bindData(title: names[indexPath.row])

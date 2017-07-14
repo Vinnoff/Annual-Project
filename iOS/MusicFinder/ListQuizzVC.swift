@@ -24,8 +24,8 @@ class ListQuizzVC: UIViewController {
         self.addGestureMenu()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
         self.requestPlaylist()
-        
     }
     
     
@@ -67,12 +67,10 @@ class ListQuizzVC: UIViewController {
                     switch response.result {
                     case .success:
                         if let quizz = response.result.value {
-                            let listQuizzSongs = ListQuizzSongsVC(nibName: ListQuizzSongsVC.className(), bundle: nil)
-                            listQuizzSongs.quizz = quizz
-                            self.navigationController?.pushViewController(listQuizzSongs, animated: true)
+                            let detailMusicVC = DetailMusicVC(nibName: DetailMusicVC.className(), bundle: nil)
+                            detailMusicVC.quizz = quizz
+                            self.navigationController?.pushViewController(detailMusicVC, animated: true)
                         }
-                        
-                        
                         
                     case .failure:
                         print("ERROR")
@@ -98,8 +96,13 @@ extension ListQuizzVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = self.playlists[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+        }
+        cell.bindData(title: self.playlists[indexPath.row].title)
         return cell
     }
     

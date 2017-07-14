@@ -21,6 +21,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = []
         self.setNavigationBarItem()
         self.addGestureMenu()
         self.tableView.dataSource = self

@@ -19,6 +19,7 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         self.setNavigationBarItem()
         self.addGestureMenu()
+        self.edgesForExtendedLayout = []
         let urlInfoAccount = "https://api.spotify.com/v1/me"
         let headers: HTTPHeaders = [
             //"Authorization": "Bearer " + session.accessToken,

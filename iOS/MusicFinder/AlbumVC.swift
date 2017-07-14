@@ -23,7 +23,8 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.darkGray
+        self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         if UserInfoSaver().isAuth()! {
             if let session = UserInfoSaver().getSessionSpotify() {
                 let token = session.accessToken
@@ -56,12 +57,13 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if let name = tracks[indexPath.row].name {
-            cell.textLabel?.text = name
-            cell.backgroundColor = UIColor.darkGray
-            cell.textLabel?.textColor = UIColor(red: 255, green: 229, blue: 53)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
         }
+        cell.bindData(title: self.tracks[indexPath.row].name)
         return cell
     }
     

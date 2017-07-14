@@ -23,18 +23,20 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4na-CX-S7s">
                     <rect key="frame" x="166.5" y="323" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ini-6z-6iW">
                     <rect key="frame" x="172.5" y="364" width="30" height="30"/>
-                    <state key="normal" title="OK"/>
+                    <state key="normal" title="OK">
+                        <color key="titleColor" red="1" green="0.66480353859999997" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
                     <connections>
                         <action selector="buttonClicked:" destination="-1" eventType="touchUpInside" id="lrL-PZ-TGW"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.82745098039215681" green="0.90980392156862744" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ini-6z-6iW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2gN-CS-1og"/>
                 <constraint firstItem="ini-6z-6iW" firstAttribute="top" secondItem="4na-CX-S7s" secondAttribute="bottom" constant="20" id="VYd-Hf-vYl"/>
