@@ -19,6 +19,10 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor =  UIColor(red: 228, green: 74, blue: 102)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 211, green: 232, blue: 225)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 228, green: 74, blue: 102)]
+        //let backbutton = UIImage(named: "backbutton1")
+        //self.navigationController?.navigationBar.backIndicatorImage = backbutton
+        //self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backbutton
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 228, green: 74, blue: 102)
     }
     
     func addGestureMenu() {

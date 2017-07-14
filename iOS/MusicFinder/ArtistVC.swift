@@ -103,6 +103,11 @@ class ArtistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "resultcell", for: indexPath) as! ResultSearchCell
+            if indexPath.row % 2 == 0 {
+                cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+            } else {
+                cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+            }
             if  (albums[indexPath.row].images?.isEmpty)! {
                 cell.bindData(title: albums[indexPath.row].name)
             } else {

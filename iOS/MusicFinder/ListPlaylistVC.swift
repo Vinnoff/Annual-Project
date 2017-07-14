@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireObjectMapper
 import Alamofire
+import SWRevealViewController
 
 class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -155,9 +156,30 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         else {
-            let listTracksVC = ListTracksVC(nibName: ListTracksVC.className(), bundle: nil)
-            listTracksVC.idPlaylist = self.playlists[indexPath.row]?.id
-            navigationController?.pushViewController(listTracksVC, animated: true)
+            if self.playlists[indexPath.row]?.tracks?.count == 0 {
+                let alert = UIAlertController(title: "Oops !", message: "Il n'y a aucune musique", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let listTracksVC = ListTracksVC(nibName: ListTracksVC.className(), bundle: nil)
+                listTracksVC.idPlaylist = self.playlists[indexPath.row]?.id
+                navigationController?.pushViewController(listTracksVC, animated: true)
+            }
+            
         }
+    }
+    @IBAction func addPlaylistClicked(_ sender: Any) {
+        var revealVC: SWRevealViewController
+        revealVC = self.revealViewController()
+        if UserInfoSaver().isAuth()! {
+            let createPlaylistVC = CreatePlaylistVC(nibName: CreatePlaylistVC.className(), bundle: nil)
+            let newRootVC = UINavigationController(rootViewController: createPlaylistVC)
+            revealVC.pushFrontViewController(newRootVC, animated: true)
+        } else {
+            let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+            let newRootVC = UINavigationController(rootViewController: authVC)
+            revealVC.pushFrontViewController(newRootVC, animated: true)
+        }
+
     }
 }

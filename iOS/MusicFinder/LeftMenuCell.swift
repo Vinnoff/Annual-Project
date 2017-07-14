@@ -12,7 +12,9 @@ class LeftMenuCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var view: UIView!
 
+    
     var title: String?
     var imageURL: String?
     

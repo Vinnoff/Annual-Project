@@ -24,7 +24,7 @@ class ListQuizzVC: UIViewController {
         self.addGestureMenu()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
+        self.tableView.register(UINib(nibName: QuizzCell.className(), bundle: nil), forCellReuseIdentifier: "quizzcell")
         self.requestPlaylist()
     }
     
@@ -96,18 +96,29 @@ extension ListQuizzVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "quizzcell", for: indexPath) as! QuizzCell
         if indexPath.row % 2 == 0 {
             cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
         } else {
             cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
         }
-        cell.bindData(title: self.playlists[indexPath.row].title)
+        cell.bindData(title: self.playlists[indexPath.row].title, creator: self.playlists[indexPath.row].creator)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        requestCreationGame(playlist: playlists[indexPath.row])
+        if self.playlists[indexPath.row].tracks?.count == 0 {
+            let alert = UIAlertController(title: "Oops !", message: "Il n'y aucune musique dans cette playlist", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            requestCreationGame(playlist: playlists[indexPath.row])
+        }
+        
     }
 }
 

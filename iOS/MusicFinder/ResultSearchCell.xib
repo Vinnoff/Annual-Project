@@ -44,6 +44,7 @@
             <connections>
                 <outlet property="coverImageView" destination="778-2J-FH8" id="78g-9q-x1V"/>
                 <outlet property="titleLabel" destination="vSM-ne-YCW" id="1RG-9u-Ubr"/>
+                <outlet property="view" destination="H2p-sc-9uM" id="fDW-kB-eaJ"/>
             </connections>
             <point key="canvasLocation" x="34" y="63.5"/>
         </tableViewCell>

@@ -48,9 +48,7 @@ class DetailMusicVC: UIViewController {
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
         
-        //self.createTimer()
-        //self.changeMusic()
-        self.titleLabel.text = "Musique \(indexMusic + 1) / \(String(describing: quizz?.tracks?.count))"
+        self.titleLabel.text = "Musique \(indexMusic + 1) / \(String(describing: (quizz?.tracks?.count)!))"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,7 +76,7 @@ class DetailMusicVC: UIViewController {
     
     func changeMusic() {
         if self.indexMusic < (quizz?.tracks?.count)! {
-            self.titleLabel.text = "Musique \(indexMusic + 1) / \(String(describing: quizz?.tracks?.count))"
+            self.titleLabel.text = "Musique \(indexMusic + 1) / \(String(describing: (quizz?.tracks?.count)!))"
             self.textField.text = ""
             self.createTimer()
             self.initPlayer(url: quizz?.tracks?[indexMusic].url)

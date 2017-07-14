@@ -23,6 +23,7 @@ class ListTracksVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.title = "Supprimer"
         self.requestTracks()
     }
 

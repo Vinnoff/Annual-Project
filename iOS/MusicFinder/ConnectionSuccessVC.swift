@@ -30,19 +30,7 @@ class ConnectionSuccessVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func buttonClicked(_ sender: Any) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/username/vinnoff"
-        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
-            switch response.result {
-            case .success:
-                print("SUCCESS VINNOFF")
-                
-            case .failure:
-                print("ERROR")
-            }
-        })
-
-        
+    @IBAction func buttonClicked(_ sender: Any) {        
         var revealVC: SWRevealViewController
         revealVC = self.revealViewController()
         let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)

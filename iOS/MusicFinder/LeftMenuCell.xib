@@ -43,6 +43,7 @@
             <connections>
                 <outlet property="icon" destination="4NL-Ir-Hsf" id="51Y-Bd-rG8"/>
                 <outlet property="label" destination="3Bz-Ma-j3H" id="MQZ-if-lrD"/>
+                <outlet property="view" destination="Xuu-jC-Wnm" id="2Is-y0-Wbn"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="-125.5"/>
         </tableViewCell>

@@ -13,7 +13,7 @@ class TrackVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var albumLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     
     @IBOutlet weak var addButton: UIButton!
@@ -30,11 +30,17 @@ class TrackVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
-        playButton.layer.cornerRadius = 5.0
+        playButton.layer.cornerRadius = 10.0
+        addButton.layer.cornerRadius = 10.0
+        var allArtist = ""
         
         if item != nil {
             titleLabel.text = item?.name
             
+            for artist in (item?.artists)! {
+                allArtist = allArtist + "\(String(describing: artist.name!)) "
+            }
+            artistLabel.text = allArtist
             if let name = item?.album?.name {
                 albumLabel.text = name
             }
@@ -76,7 +82,10 @@ class TrackVC: UIViewController {
         
         else if track != nil {
             titleLabel.text = track?.name
-            
+            for artist in (track?.artists)! {
+                allArtist = allArtist + "\(String(describing: artist.name!)) / "
+            }
+            artistLabel.text = allArtist
             if let name = track?.album?.name {
                 albumLabel.text = name
             }

@@ -14,7 +14,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var mainViewController: UIViewController!
     var listGenreQuizz: ListGenreQuizzVC!
     var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir playlist"]
-    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_home", "ico_home"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,7 +58,11 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.bindData(title: self.items[indexPath.row], imageName: self.ico[indexPath.row])
         }
-        cell.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        if indexPath.row % 2 == 0 {
+            cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
+        } else {
+            cell.view.backgroundColor = UIColor(red: 211, green: 232, blue: 225)
+        }
         
         return cell
     }
