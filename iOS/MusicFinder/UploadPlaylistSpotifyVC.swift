@@ -76,8 +76,8 @@ class UploadPlaylistSpotifyVC: UIViewController {
                 Alamofire.request("https://api.spotify.com/v1/users/" + username! + "/playlists", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headersSpotify).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success:
-                        //self.requestGetIdPlaylistSpotify(token: session.accessToken, index: index)
-                        self.requestTracks(index: index, token: session.accessToken)
+                        self.requestGetIdPlaylistSpotify(token: session.accessToken, index: index)
+                        //self.requestTracks(index: index, token: session.accessToken)
                         
                     case .failure:
                         let alert = UIAlertController(title: "Alert", message: "Erreur création playlist", preferredStyle: UIAlertControllerStyle.alert)
@@ -96,13 +96,19 @@ class UploadPlaylistSpotifyVC: UIViewController {
         }
     }
     
-    func requestTracks(index: Int, token: String) {
+    func requestTracks(index: Int) {
         let idPlaylist = playlists[index].id
         let url = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + idPlaylist!
         Alamofire.request(url, headers: headers).responseObject { (response: DataResponse<Playlist>) in
             if let playlist = response.result.value {
                 self.tracks = playlist.tracks!
-                self.requestGetIdPlaylistSpotify(token: token, index: index)
+                if self.tracks.count > 0 {
+                    self.requestCreatePlaylist(index: index)
+                } else {
+                    let alert = UIAlertController(title: "Oops", message: "Il n'y a pas de musique dans cette playlist !", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -189,6 +195,9 @@ extension UploadPlaylistSpotifyVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        requestCreatePlaylist(index: indexPath.row)
+        /*if (playlists[indexPath.row].tracks?.count)! > 0 {
+            requestCreatePlaylist(index: indexPath.row)
+        }*/
+        self.requestTracks(index: indexPath.row)
     }
 }
