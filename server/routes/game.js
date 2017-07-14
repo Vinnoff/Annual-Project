@@ -4,7 +4,7 @@ module.exports = (api) => {
 	router.get('/:start/:limit',
 		api.actions.game.findAll);
 
-	router.get('/:id',
+	router.get('/id/:id',
 		api.actions.game.findById);
 
 	router.get('/user/:id',
