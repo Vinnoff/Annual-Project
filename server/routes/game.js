@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
-	router.get('/:start/:limit',
+	router.get('/sorted/:start/:limit',
 		api.actions.game.findAll);
 
 	router.get('/id/:id',
