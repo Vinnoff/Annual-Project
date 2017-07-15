@@ -121,7 +121,11 @@ class TrackVC: UIViewController {
         }
     }
 
- 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.playButton.setTitle("Ecouter", for: .normal)
+        player?.pause()
+    }
+    
     @IBAction func playClicked(_ sender: Any) {
         count += 1
         player?.play()

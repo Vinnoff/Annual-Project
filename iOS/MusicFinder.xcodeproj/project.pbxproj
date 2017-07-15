@@ -28,6 +28,8 @@
 		0F2E48B21F1923E100D9D23C /* PlaylistSpotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E48B11F1923E100D9D23C /* PlaylistSpotify.swift */; };
 		0F2E8E8B1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */; };
 		0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */; };
+		0F4045011F1A108800D202FE /* RewardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4044FF1F1A108800D202FE /* RewardVC.swift */; };
+		0F4045021F1A108800D202FE /* RewardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4045001F1A108800D202FE /* RewardVC.xib */; };
 		0F436EBE1F16A06C0026F6BA /* ListTracksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F436EBC1F16A06C0026F6BA /* ListTracksVC.swift */; };
 		0F436EBF1F16A06C0026F6BA /* ListTracksVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */; };
 		0F436EC31F16B8B80026F6BA /* TrackMF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F436EC21F16B8B80026F6BA /* TrackMF.swift */; };
@@ -115,6 +117,8 @@
 		0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPlaylistSpotifyVC.swift; sourceTree = "<group>"; };
 		0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadPlaylistSpotifyVC.xib; sourceTree = "<group>"; };
 		0F3C26ADCA39C443CD516399 /* Pods-MusicFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFinder/Pods-MusicFinder.release.xcconfig"; sourceTree = "<group>"; };
+		0F4044FF1F1A108800D202FE /* RewardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardVC.swift; sourceTree = "<group>"; };
+		0F4045001F1A108800D202FE /* RewardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardVC.xib; sourceTree = "<group>"; };
 		0F436EBC1F16A06C0026F6BA /* ListTracksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTracksVC.swift; sourceTree = "<group>"; };
 		0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTracksVC.xib; sourceTree = "<group>"; };
 		0F436EC21F16B8B80026F6BA /* TrackMF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMF.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				0FC3C93B1F11348F00D386ED /* Playlist */,
 				0F436EC01F16A06F0026F6BA /* ListTracks */,
 				0F2E48AA1F18F63000D9D23C /* SimpleCell */,
+				0F4045031F1A108D00D202FE /* Reward */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
@@ -319,6 +324,15 @@
 				0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */,
 			);
 			name = UploadPlaylistSpotify;
+			sourceTree = "<group>";
+		};
+		0F4045031F1A108D00D202FE /* Reward */ = {
+			isa = PBXGroup;
+			children = (
+				0F4044FF1F1A108800D202FE /* RewardVC.swift */,
+				0F4045001F1A108800D202FE /* RewardVC.xib */,
+			);
+			name = Reward;
 			sourceTree = "<group>";
 		};
 		0F436EC01F16A06F0026F6BA /* ListTracks */ = {
@@ -573,6 +587,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F4045021F1A108800D202FE /* RewardVC.xib in Resources */,
 				0F201CD21E86DFC400F0B631 /* LaunchScreen.storyboard in Resources */,
 				0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */,
 				0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */,
@@ -684,6 +699,7 @@
 				0F76423F1E87D47A00560D76 /* ListGenreCell.swift in Sources */,
 				0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */,
 				0FD52B481EF2B7A60039543E /* ResultSearchCell.swift in Sources */,
+				0F4045011F1A108800D202FE /* RewardVC.swift in Sources */,
 				0F436EC31F16B8B80026F6BA /* TrackMF.swift in Sources */,
 				0FD52B3C1EF2AF970039543E /* Artist.swift in Sources */,
 				0FD52B361EF2ACFF0039543E /* Track.swift in Sources */,
