@@ -19,13 +19,15 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         self.setNavigationBarItem()
         self.addGestureMenu()
-
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 211, green: 232, blue: 225)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 228, green: 74, blue: 102)]
         
         self.title = "Music Finder"
-        scrollView.frame = view.frame
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        scrollView.frame = view.frame
         imageArray = [UIImage(named: "home1")!, UIImage(named: "home2")!]
         controlePage.numberOfPages = imageArray.count
         for i in 0..<imageArray.count {
@@ -38,9 +40,7 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
             scrollView.addSubview(imageView)
             scrollView.delegate = self
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         if authSuccess != nil {
             requestUserMusicFinder()
         }
