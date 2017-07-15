@@ -61,7 +61,7 @@ module.exports = (api) => {
 			}
 
 			user.globalScore += scoreData.scoreInGame;
-			user.gold += Math.trunc(scoreData.scoreInGame / 100);
+			user.gold += Math.round(scoreData.scoreInGame / 100);
 			Rank.find({
 				scoreToAccess: {
 					$lte: user.globalScore
