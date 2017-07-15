@@ -24,6 +24,7 @@ class ListQuizzVC: UIViewController {
         self.addGestureMenu()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.title = "Quizz"
         self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
         self.requestPlaylist()
     }

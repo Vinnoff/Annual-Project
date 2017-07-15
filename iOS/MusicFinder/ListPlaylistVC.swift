@@ -25,6 +25,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        self.title = "Playlists"
         self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         if fromUser {
             requestPlaylists(fromUser: true)
