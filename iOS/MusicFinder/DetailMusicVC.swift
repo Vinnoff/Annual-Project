@@ -111,7 +111,7 @@ class DetailMusicVC: UIViewController {
     }
     
     func updateScore() {
-        self.score += (Int(delay) - counterTimerScore) * 100
+        self.score += (Int(delay) - counterTimerScore)
     }
     
     func requestSendScore() {
