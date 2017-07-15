@@ -3,6 +3,18 @@ module.exports = (api) => {
 	const Score = api.models.Score;
 	const User = api.models.User;
 
+	function findAll(req, res, next) {
+		Score.find((err, data) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
+			if (!data || data.length == 0) {
+				return res.status(204).send(data)
+			}
+			return res.send(data);
+		})
+	}
+
 	function findById(req, res, next) {
 		Score.findById(req.params.id, (err, data) => {
 			if (err) {
@@ -70,6 +82,7 @@ module.exports = (api) => {
 	}
 
 	return {
+		findAll,
 		findById,
 		update
 	};
