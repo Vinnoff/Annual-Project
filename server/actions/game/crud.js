@@ -13,6 +13,18 @@ module.exports = (api) => {
 				return res.status(204).send(data)
 			}
 			return res.send(data)
+		})
+	}
+
+	function findInRange(req, res, next) {
+		Game.find((err, data) => {
+			if (err) {
+				return res.status(500).send();
+			}
+			if (!data || data.length == 0) {
+				return res.status(204).send(data)
+			}
+			return res.send(data)
 		}).skip(Number(req.params.start)).limit(Number(req.params.limit));
 	}
 
@@ -120,6 +132,7 @@ module.exports = (api) => {
 
 	return {
 		findAll,
+		findInRange,
 		findById,
 		findByUser,
 		findByDifficulty,
