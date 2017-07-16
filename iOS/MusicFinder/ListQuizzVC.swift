@@ -73,7 +73,6 @@ class ListQuizzVC: UIViewController {
                         }
                         
                     case .failure:
-                        print("ERROR")
                         let alert = UIAlertController(title: "Alert", message: "ERREUR création musique \(response.response?.statusCode)", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)

@@ -52,7 +52,6 @@ class ListTracksVC: UIViewController {
         Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
-                print("SUCCESS")
                 let alert = UIAlertController(title: "Succès", message: "Supprimée avec succès", preferredStyle: UIAlertControllerStyle.alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                     UIAlertAction in
@@ -63,8 +62,7 @@ class ListTracksVC: UIViewController {
                 
                 
             case .failure:
-                print("ERROR")
-                let alert = UIAlertController(title: "Alert", message: "ERREUR suppression musique dans playlist", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Alert", message: "ERREUR suppression musique dans playlist \(response.response?.statusCode)", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }

@@ -26,6 +26,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
         self.edgesForExtendedLayout = []
         self.setNavigationBarItem()
         self.addGestureMenu()
+        self.title = "Upload sur Spotify"
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")

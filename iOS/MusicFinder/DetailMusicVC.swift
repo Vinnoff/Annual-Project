@@ -131,9 +131,6 @@ class DetailMusicVC: UIViewController {
         Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
-                print("SUCCESS")
-                print(parameters)
-                print(response.result.value)
                 let alert = UIAlertController(title: "Félicitations !", message: "La partie est terminé \n Score final: \(self.score)", preferredStyle: UIAlertControllerStyle.alert)
                 let closeAction = UIAlertAction(title: "Fermer", style: UIAlertActionStyle.default) {
                     UIAlertAction in
@@ -143,9 +140,7 @@ class DetailMusicVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 
             case .failure:
-                print("ERROR")
-                print(response.response?.statusCode)
-                let alert = UIAlertController(title: "Alert", message: "Erreur envoie score", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Alert", message: "Erreur envoie score \(response.response?.statusCode)", preferredStyle: UIAlertControllerStyle.alert)
                 let closeAction = UIAlertAction(title: "Fermer", style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     self.navigationController?.popViewController(animated: true)

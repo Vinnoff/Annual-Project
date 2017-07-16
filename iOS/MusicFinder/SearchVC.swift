@@ -19,6 +19,7 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         self.setNavigationBarItem()
         self.addGestureMenu()
+        self.title = "Rechercher"
         submitButton.layer.cornerRadius = 5.0
         containerView.layer.cornerRadius = 5.0
     }

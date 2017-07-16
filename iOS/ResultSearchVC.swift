@@ -30,7 +30,6 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Rechercher"
         tableView.delegate = self
         tableView.dataSource = self
         self.edgesForExtendedLayout = []
