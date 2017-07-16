@@ -120,6 +120,8 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             }
             if self.rewards.indices.contains(indexPath.row) {
                 cell.bindData(title: self.rewards[indexPath.row].title)
+            } else {
+                cell.bindData(title: "")
             }
             return cell
         } else {
@@ -131,6 +133,8 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             }
             if self.friends.indices.contains(indexPath.row) {
                 cell.bindData(title: self.friends[indexPath.row].username)
+            } else {
+                cell.bindData(title: "")
             }
             return cell
         }

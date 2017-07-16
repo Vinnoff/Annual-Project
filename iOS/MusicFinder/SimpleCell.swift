@@ -20,6 +20,8 @@ class SimpleCell: UITableViewCell {
     func bindData(title: String?) {
         if title != nil {
             label.text = title
+        } else {
+            label.text = ""
         }
     }
 

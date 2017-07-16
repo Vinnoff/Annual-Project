@@ -36,6 +36,7 @@ class DetailMusicVC: UIViewController {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
         self.wrongLabel.isHidden = true
+        self.submitButton.layer.cornerRadius = 10.0
         let alert = UIAlertController(title: "Attention", message: "Êtes-vous prêt ?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "GO !", style: UIAlertActionStyle.default) {
             UIAlertAction in
