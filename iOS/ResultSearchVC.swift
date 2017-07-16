@@ -55,23 +55,23 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     //Track
                     Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                         (response: DataResponse<ItemTypeTrack>) in
-                        
-                        let itemType = response.result.value
-                        self.tracks = itemType?.tracks
-                        
-                        if let items = self.tracks?.items {
-                            for item in items {
-                                self.allItems.append(item)
-                                self.names.append(item.name!)
-                                if let images = item.album?.images {
-                                    if images.indices.contains(2) {
-                                        self.imagesTest.append(images[2].url!)
+                        if let itemType = response.result.value {
+                            self.tracks = itemType.tracks
+                            
+                            if let items = self.tracks?.items {
+                                for item in items {
+                                    self.allItems.append(item)
+                                    self.names.append(item.name!)
+                                    if let images = item.album?.images {
+                                        if images.indices.contains(2) {
+                                            self.imagesTest.append(images[2].url!)
+                                        }
                                     }
+                                    
                                 }
-                                
                             }
+
                         }
-                        
                         if self.names.count == 0 {
                             self.noResultView.isHidden = false
                         }else {
@@ -83,18 +83,19 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 else if type == "album" {
                     Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                         (response: DataResponse<ItemTypeAlbum>) in
-                        
-                        let itemType = response.result.value
-                        self.albums = itemType?.albums
-                        for item in (self.albums?.items)! {
-                            self.allItems.append(item)
-                            self.names.append(item.name!)
-                            if (item.images?.indices.contains(2))! {
-                                if item.images?[2].url != nil {
-                                    self.imagesTest.append((item.images?[2].url)!)
+                        if let itemType = response.result.value {
+                            self.albums = itemType.albums
+                            for item in (self.albums?.items)! {
+                                self.allItems.append(item)
+                                self.names.append(item.name!)
+                                if (item.images?.indices.contains(2))! {
+                                    if item.images?[2].url != nil {
+                                        self.imagesTest.append((item.images?[2].url)!)
+                                    }
                                 }
                             }
                         }
+                        
                         if self.names.count == 0 {
                             self.noResultView.isHidden = false
                         }else {
@@ -107,13 +108,14 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 else if type == "artist"{
                     Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                         (response: DataResponse<ItemTypeArtist>) in
-                        
-                        let itemType = response.result.value
-                        self.artists = itemType?.artists
-                        for item in (self.artists?.items)! {
-                            self.allItems.append(item)
-                            self.names.append(item.name!)
+                        if let itemType = response.result.value {
+                            self.artists = itemType.artists
+                            for item in (self.artists?.items)! {
+                                self.allItems.append(item)
+                                self.names.append(item.name!)
+                            }
                         }
+                        
                         if self.names.count == 0 {
                             self.noResultView.isHidden = false
                         }else {

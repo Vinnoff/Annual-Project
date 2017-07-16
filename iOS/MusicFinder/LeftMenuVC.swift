@@ -13,8 +13,8 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
     var listGenreQuizz: ListGenreQuizzVC!
-    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir playlist"]
-    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist"]
+    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir mes playlists", "Récompenses"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist", "ico_reward"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,13 +45,6 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Se connecter" {
-            cell.textLabel?.text = "Profil"
-        } else {
-            cell.textLabel?.text = self.items[indexPath.row]
-        }*/
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "leftmenucell", for: indexPath) as! LeftMenuCell
         if UserInfoSaver().isAuth()! && self.items[indexPath.row] == "Se connecter" {
             cell.bindData(title: "Profil", imageName: self.ico[indexPath.row])
@@ -147,6 +140,16 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 revealVC.pushFrontViewController(newRootVC, animated: true)
             }
             
+        case 7:
+            if UserInfoSaver().isAuth()! {
+                let rewardVC = RewardVC(nibName: RewardVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: rewardVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
             
         default:
             break
