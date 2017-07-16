@@ -157,7 +157,7 @@ module.exports = (api) => {
                 return res.status(204).send();
               }
 
-              song.Artist.push(saved);
+              song.Artists.push(saved);
               data.Songs.push(songd);
             })
           } else {
