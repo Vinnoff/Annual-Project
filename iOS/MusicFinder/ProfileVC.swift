@@ -19,6 +19,8 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var disconnectButton: UIButton!
     var user: User?
+    var rewards = [Reward]()
+    let headers: HTTPHeaders = ["Accept": "application/json"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +34,30 @@ class ProfileVC: UIViewController {
         self.disconnectButton.layer.cornerRadius = 10.0
         self.requestUser()
     }
-
+    
     func requestUser() {
-        let headers: HTTPHeaders = ["Accept": "application/json"]
         let url = "http://mocnodeserv.hopto.org:3000/users/username/" + UserInfoSaver().getUsername()!
         Alamofire.request(url, headers: headers).responseObject(completionHandler: {
             (response: DataResponse<User>) in
             if let user = response.result.value {
                 self.user = user
                 self.bindData()
-                self.tableView.reloadData()
+                self.requestReward()
             }
         })
+    }
+    
+    func requestReward() {
+        for reward in (user?.rewards)! {
+            let url = "http://mocnodeserv.hopto.org:3000/reward/id/" + reward
+            Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                (response: DataResponse<Reward>) in
+                if let rewardReceived = response.result.value {
+                    self.rewards.append(rewardReceived)
+                }
+                self.tableView.reloadData()
+            })
+        }
     }
     
     func bindData() {
@@ -89,7 +103,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
             }
-            cell.bindData(title: self.user?.rewards?[indexPath.row].title)
+            if self.rewards.indices.contains(indexPath.row) {
+                cell.bindData(title: self.rewards[indexPath.row].title)
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SimpleCell

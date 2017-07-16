@@ -28,7 +28,8 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.title = "Playlists"
         self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         if fromUser {
-            requestPlaylists(fromUser: true)
+           // self.requestPlaylists(fromUser: true)
+            self.requestPlaylists()
         } else {
             self.setNavigationBarItem()
             self.addGestureMenu()
@@ -36,7 +37,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             longPress.minimumPressDuration = 1.0
             longPress.delegate = self
             tableView.addGestureRecognizer(longPress)
-            requestPlaylists()
+            self.requestPlaylists()
         }
         tableView.reloadData()
         
@@ -47,7 +48,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
 
-    func requestPlaylists(fromUser: Bool = false) {
+    /*func requestPlaylists(fromUser: Bool = false) {
         let headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
@@ -67,6 +68,20 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.playlists = playlists
                     self.tableView.reloadData()
                 }
+            }
+        }
+    }*/
+    
+    func requestPlaylists() {
+        let headers: HTTPHeaders = [
+            "Accept": "application/json"
+        ]
+        let id = UserInfoSaver().getUserIdMusicFinder()
+        let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
+        Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
+            if let playlists = response.result.value {
+                self.playlists = playlists
+                self.tableView.reloadData()
             }
         }
         
@@ -91,25 +106,11 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Add song
         if fromUser {
             if let idplaylist = playlists[indexPath.row]?.id {
                 let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
                 var parameters = [:] as [String : Any]
-                /*if trackItem != nil {
-                    parameters = [
-                        "title": trackItem?.name,
-                        "url" : trackItem?.preview_url,
-                        "uri" : trackItem?.uri
-                    ]
-                } else if track != nil {
-                    parameters = [
-                        "title": track?.name,
-                        "url" : track?.preview_url,
-                        "uri" : track?.uri
-                    ]
-                }*/
-                
+
                 if trackItem != nil {
                     parameters = [
                         "Song": [

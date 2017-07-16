@@ -18,7 +18,7 @@ class User : Mappable{
     var gold: Int?
     var games: [Quizz]?
     var globalScore: Int?
-    var rewards: [Reward]?
+    var rewards: [String]?
     
     required init?(map: Map) {
     }

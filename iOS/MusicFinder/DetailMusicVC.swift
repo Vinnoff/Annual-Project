@@ -118,7 +118,7 @@ class DetailMusicVC: UIViewController {
         var idScore: String?
         for score in (quizz?.scores)! {
             if score.playerId == UserInfoSaver().getUserIdMusicFinder() {
-                idScore = score.id
+                idScore = score.score
             }
         }
         
@@ -132,6 +132,8 @@ class DetailMusicVC: UIViewController {
             switch response.result {
             case .success:
                 print("SUCCESS")
+                print(parameters)
+                print(response.result.value)
                 let alert = UIAlertController(title: "Félicitations !", message: "La partie est terminé \n Score final: \(self.score)", preferredStyle: UIAlertControllerStyle.alert)
                 let closeAction = UIAlertAction(title: "Fermer", style: UIAlertActionStyle.default) {
                     UIAlertAction in
