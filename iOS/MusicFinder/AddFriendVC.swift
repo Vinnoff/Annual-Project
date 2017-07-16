@@ -41,7 +41,7 @@ class AddFriendVC: UIViewController {
     }
     
     func requestAddUser(user: User) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + user.id!
+        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()!
         let parameters = [
             "friend": user.id!
             ] as [String : Any]
@@ -54,9 +54,15 @@ class AddFriendVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 
             case .failure:
-                let alert = UIAlertController(title: "Alert", message: "Erreur ajout ami \(String(describing: response.response?.statusCode))", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                if response.response?.statusCode == 401 {
+                    let alert = UIAlertController(title: "Oops !", message: "Vous êtes déjà amis", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Alert", message: "Erreur ajout ami \(String(describing: response.response?.statusCode))", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         })
     }
@@ -70,7 +76,6 @@ class AddFriendVC: UIViewController {
             self.requestSearch(word: usernameTextfield.text!)
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,7 +100,7 @@ extension AddFriendVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Ajout", message: "Voulez-vous ajouter \(String(describing: self.users[indexPath.row].username)) en ami ?", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Ajout", message: "Voulez-vous ajouter \(String(describing: self.users[indexPath.row].username!)) en ami ?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "Oui", style: UIAlertActionStyle.default) {
             UIAlertAction in
             self.requestAddUser(user: self.users[indexPath.row])

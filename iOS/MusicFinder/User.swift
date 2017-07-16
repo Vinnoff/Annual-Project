@@ -14,7 +14,7 @@ class User : Mappable{
     var id: String?
     var playlist: [Playlist]?
     var rank: Rank?
-    var friends: [User]?
+    var friends: [String]?
     var gold: Int?
     var games: [Quizz]?
     var globalScore: Int?

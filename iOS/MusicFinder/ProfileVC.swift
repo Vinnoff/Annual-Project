@@ -21,6 +21,7 @@ class ProfileVC: UIViewController {
     var user: User?
     var rewards = [Reward]()
     let headers: HTTPHeaders = ["Accept": "application/json"]
+    var friends = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class ProfileVC: UIViewController {
                 self.user = user
                 self.bindData()
                 self.requestReward()
+                self.requestFriend()
             }
         })
     }
@@ -54,6 +56,19 @@ class ProfileVC: UIViewController {
                 (response: DataResponse<Reward>) in
                 if let rewardReceived = response.result.value {
                     self.rewards.append(rewardReceived)
+                }
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    func requestFriend() {
+        for friendId in (user?.friends)! {
+            let url = "http://mocnodeserv.hopto.org:3000/users/id/" + friendId
+            Alamofire.request(url, headers: headers).responseObject(completionHandler: {
+                (response: DataResponse<User>) in
+                if let user = response.result.value {
+                    self.friends.append(user)
                 }
                 self.tableView.reloadData()
             })
@@ -114,7 +129,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
             }
-            cell.bindData(title: self.user?.friends?[indexPath.row].username)
+            if self.friends.indices.contains(indexPath.row) {
+                cell.bindData(title: self.friends[indexPath.row].username)
+            }
             return cell
         }
         
