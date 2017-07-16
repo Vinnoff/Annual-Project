@@ -190,7 +190,7 @@ module.exports = (api) => {
     }
 
     function delSong(req, res, next) {
-      Playlist.findByIdAndUpdate(req.params.id, {$pull : { Songs : req.body.song}}, (err,data) => {
+      Playlist.findByIdAndUpdate(req.params.id, {$pull : { Songs : req.params.id2}}, (err,data) => {
         if (err) {
           return res.status(500).send(err)
         }
