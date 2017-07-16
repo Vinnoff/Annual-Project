@@ -36,7 +36,7 @@ module.exports = (api) => {
         api.middlewares.ensureAuthentificated,
         api.actions.playlist.remove);
 
-    router.delete('/delsong/:id',
+    router.delete('/delsong/:id/:id2',
         api.middlewares.ensureAuthentificated,
         api.actions.playlist.delSong);
 
