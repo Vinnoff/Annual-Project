@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddFriendVC" customModule="MusicFinder" customModuleProvider="target">
+            <connections>
+                <outlet property="searchButton" destination="XnI-DC-ISt" id="uNB-tf-im5"/>
+                <outlet property="tableView" destination="e1z-46-ZBY" id="38Z-cu-mZV"/>
+                <outlet property="usernameTextfield" destination="HUk-Du-fJf" id="gUA-ad-wqn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="pseudo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUk-Du-fJf">
+                    <rect key="frame" x="10" y="10" width="230" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Jni-53-hnm"/>
+                        <constraint firstAttribute="width" constant="230" id="ev0-LF-L0L"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnI-DC-ISt">
+                    <rect key="frame" x="265" y="8.5" width="100" height="40"/>
+                    <color key="backgroundColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="8Ul-7T-dpx"/>
+                        <constraint firstAttribute="height" constant="40" id="PgG-q5-rZM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Rechercher">
+                        <color key="titleColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="searchButtonClicked:" destination="-1" eventType="touchUpInside" id="xsU-cD-5SL"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1z-46-ZBY">
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                    <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="e1z-46-ZBY" firstAttribute="top" secondItem="HUk-Du-fJf" secondAttribute="bottom" constant="10" id="6rp-Fq-aRj"/>
+                <constraint firstAttribute="bottom" secondItem="e1z-46-ZBY" secondAttribute="bottom" id="FjK-E1-6Gm"/>
+                <constraint firstItem="HUk-Du-fJf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Hog-rg-SVU"/>
+                <constraint firstAttribute="trailing" secondItem="XnI-DC-ISt" secondAttribute="trailing" constant="10" id="NMa-HV-KSE"/>
+                <constraint firstItem="XnI-DC-ISt" firstAttribute="baseline" secondItem="HUk-Du-fJf" secondAttribute="baseline" id="RhB-uE-WOO"/>
+                <constraint firstAttribute="trailing" secondItem="e1z-46-ZBY" secondAttribute="trailing" id="UUH-6Y-QGk"/>
+                <constraint firstItem="HUk-Du-fJf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="i7J-Ci-29A"/>
+                <constraint firstItem="e1z-46-ZBY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uZW-nL-98a"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

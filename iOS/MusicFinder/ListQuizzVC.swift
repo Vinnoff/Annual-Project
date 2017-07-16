@@ -38,11 +38,6 @@ class ListQuizzVC: UIViewController {
             }
         }
     }
-    
-    func requestTracks(idPlaylist: String) {
-        
-        
-    }
 
     func requestCreationGame(playlist: Playlist) {
         let url = "http://mocnodeserv.hopto.org:3000/game/"
@@ -80,7 +75,6 @@ class ListQuizzVC: UIViewController {
                 })
             }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
