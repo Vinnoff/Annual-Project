@@ -15,6 +15,7 @@ class DetailMusicVC: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var wrongLabel: UILabel!
     
     var quizz: Quizz?
     var timer: Timer?
@@ -34,6 +35,7 @@ class DetailMusicVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
+        self.wrongLabel.isHidden = true
         let alert = UIAlertController(title: "Attention", message: "Êtes-vous prêt ?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "GO !", style: UIAlertActionStyle.default) {
             UIAlertAction in
@@ -49,6 +51,10 @@ class DetailMusicVC: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
         self.titleLabel.text = "Musique \(indexMusic + 1) / \(String(describing: (quizz?.tracks?.count)!))"
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Retour", style: UIBarButtonItemStyle.plain, target: self, action: #selector(DetailMusicVC.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,12 +107,13 @@ class DetailMusicVC: UIViewController {
             let closeAction = UIAlertAction(title: "Fermer", style: UIAlertActionStyle.default) {
                 UIAlertAction in
                 self.indexMusic += 1
+                self.wrongLabel.isHidden = true
                 self.changeMusic()
             }
             alert.addAction(closeAction)
             self.present(alert, animated: true, completion: nil)
         } else {
-            print("FAUX")
+            self.wrongLabel.isHidden = false
         }
     }
     
@@ -149,6 +156,17 @@ class DetailMusicVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         })
+    }
+    
+    func back(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Attention", message: "Voulez-vous arrêter ?", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Oui", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        alert.addAction(UIAlertAction(title: "Non", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func submitButtonClicked(_ sender: Any) {
