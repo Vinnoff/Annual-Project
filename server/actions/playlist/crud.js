@@ -158,7 +158,7 @@ module.exports = (api) => {
               }
 
               song.Artists.push(saved);
-              data.Songs.push(songd);
+              data.Songs.push(song);
             })
           } else {
             song.Artists.push(art);
