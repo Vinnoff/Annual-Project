@@ -41,15 +41,12 @@ class AddFriendVC: UIViewController {
     }
     
     func requestAddUser(user: User) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()!
-        let parameters = [
-            "friend": user.id!
-            ] as [String : Any]
-        
-        Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
+
+        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
-                let alert = UIAlertController(title: "Succès", message: "\(String(describing: user.username)) ajouté(e) à votre liste ", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Succès", message: "\(String(describing: user.username!)) ajouté(e) à votre liste ", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 
