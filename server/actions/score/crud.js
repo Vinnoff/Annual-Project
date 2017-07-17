@@ -9,7 +9,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("score.not.found")
 			}
 			return res.send(data);
 		})
@@ -21,7 +21,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data) {
-				return res.status(204).send(data);
+				return res.status(404).send("score.not.found")
 			}
 			return res.send(data);
 		});
@@ -41,7 +41,7 @@ module.exports = (api) => {
 			}
 
 			if (!data) {
-				return res.status(204).send();
+				return res.status(404).send("score.not.found")
 			}
 			if (req.body.isFinished == true) {
 				updateScoreAndGold(data, res, next);
@@ -57,7 +57,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!user) {
-				return res.status(204).send();
+				return res.status(404).send("user.not.found");
 			}
 
 			user.globalScore += scoreData.scoreInGame;

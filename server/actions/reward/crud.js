@@ -8,7 +8,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("reward.not.found")
 			}
 			return res.send(data);
 		}).sort({
@@ -27,7 +27,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("reward.not.found")
 			}
 			return res.send(data);
 		}).sort({
@@ -41,7 +41,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("reward.not.found")
 			}
 			return res.send(data);
 		})
@@ -77,7 +77,7 @@ module.exports = (api) => {
 			}
 
 			if (!data) {
-				return res.status(204).send();
+				return res.status(404).send("reward.not.found")
 			}
 			return res.send(data);
 		});
@@ -114,16 +114,14 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!dataUser) {
-				console.log(req.params.idUser + " user dont exists")
-				return res.status(204).send(dataUser)
+				return res.status(404).send("user.dont.exist")
 			}
 			Reward.findById(req.params.idReward, (err, dataReward) => {
 				if (err) {
 					return res.status(500).send(err);
 				}
 				if (!dataReward) {
-					console.log(req.params.idReward + " reward dont exists")
-					return res.status(204).send(dataReward)
+					return res.status(404).send("reward.dont.exist")
 				}
 				if (dataUser.gold < dataReward.goldToAccess) {
 					return res.status(401).send('not.enought.gold');

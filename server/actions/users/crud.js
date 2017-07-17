@@ -13,7 +13,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(204).send("no.users")
 			}
 			api.middlewares.cache.set('User', data, req.originalUrl);
 			return res.send(data);
@@ -26,7 +26,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(204).send("no.users")
 			}
 			return res.send(data)
 		}).sort({
@@ -47,7 +47,7 @@ module.exports = (api) => {
 					return res.status(500).send(err);
 				}
 				if (!data) {
-					return res.status(204).send(data);
+					return res.status(404).send("user.not.found");
 				}
 				return res.send(data);
 			});
@@ -66,7 +66,7 @@ module.exports = (api) => {
 					return res.status(500).send();
 				}
 				if (!data || data.length == 0) {
-					return res.status(204).send(data)
+					return res.status(404).send("user.not.found");
 				}
 				return res.send(data);
 			})
@@ -87,7 +87,7 @@ module.exports = (api) => {
 					return res.status(500).send();
 				}
 				if (!data || data.length == 0) {
-					return res.status(204).send(data)
+					return res.status(204).send("no.users");
 				}
 				return res.send(data);
 			})
@@ -135,23 +135,27 @@ module.exports = (api) => {
 			}
 
 			if (!data) {
-				return res.status(204).send();
+				return res.status(404).send("user.not.found");
 			}
 			return res.send(data);
 		});
 	}
 
 	function updateFriends(req, res, next) {
-		User.findById(req.params.id, (err, data) => {
+		if (req.params.firstId === req.params.secondId) {
+			return res.status(401).send("same.ids")
+		}
+
+		User.findById(req.params.firstId, (err, data) => {
 			if (err) {
 				return res.status(500).send(err)
 			}
 			if (!data) {
-				return res.status(204).send();
+				return res.status(404).send("user.not.found");
 			}
 			let alreadyFriends = false
 			data.Friends.some(function (friend) {
-				if (JSON.stringify(req.body.friend) === JSON.stringify(friend)) {
+				if (JSON.stringify(req.params.secondId) === JSON.stringify(friend)) {
 					alreadyFriends = true
 					return true
 				}
@@ -161,9 +165,9 @@ module.exports = (api) => {
 				return res.status(401).send('users.already.friends')
 
 			} else {
-				User.findByIdAndUpdate(req.params.id, {
+				User.findByIdAndUpdate(req.params.secondId, {
 					$push: {
-						Friends: req.body.friend
+						Friends: req.params.firstId
 					}
 				}, {
 					new: true
@@ -171,12 +175,9 @@ module.exports = (api) => {
 					if (err) {
 						return res.status(500).send(err);
 					}
-					if (!data) {
-						return res.status(204).send();
-					}
-					User.findByIdAndUpdate(req.body.friend, {
+					User.findByIdAndUpdate(req.params.firstId, {
 						$push: {
-							Friends: req.params.id
+							Friends: req.params.secondId
 						}
 					}, {
 						new: true
@@ -184,10 +185,7 @@ module.exports = (api) => {
 						if (err) {
 							return res.status(500).send(err);
 						}
-						if (!data) {
-							return res.status(204).send();
-						}
-						return res.send("OK");
+						return res.send(data);
 					})
 				});
 			}

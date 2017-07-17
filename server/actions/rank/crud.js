@@ -8,7 +8,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("rank.not.found")
 			}
 			return res.send(data);
 		}).sort({
@@ -22,7 +22,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data) {
-				return res.status(204).send(data);
+				return res.status(404).send("rank.not.found")
 			}
 			return res.send(data);
 		});
@@ -36,7 +36,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data) {
-				return res.status(204).send(data);
+				return res.status(404).send("rank.not.found")
 			}
 			return data;
 			next();
@@ -118,7 +118,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!rank) {
-				return res.status(204).send();
+				return res.status(404).send("rank.not.found")
 			}
 			if (rank[0].id != req.params.id) {
 				return res.status(401).send('not.highest.rank');
@@ -135,16 +135,16 @@ module.exports = (api) => {
 						});
 					});
 				});
+				Rank.findByIdAndRemove(req.params.id, (err, data) => {
+					if (err) {
+						return res.status(500).send();
+					}
+					if (!data) {
+						return res.status(404).send("rank.not.found")
+					}
+					return res.send(data);
+				});
 			}
-			Rank.findByIdAndRemove(req.params.id, (err, data) => {
-				if (err) {
-					return res.status(500).send();
-				}
-				if (!data) {
-					return res.status(204).send();
-				}
-				return res.send(data);
-			});
 		});
 	}
 

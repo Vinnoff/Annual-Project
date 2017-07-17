@@ -10,7 +10,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("game.not.found")
 			}
 			return res.send(data)
 		})
@@ -22,7 +22,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(404).send("game.not.found")
 			}
 			return res.send(data)
 		}).skip(Number(req.params.start)).limit(Number(req.params.limit));
@@ -34,7 +34,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data) {
-				return res.status(204).send(data);
+				return res.status(404).send("game.not.found")
 			}
 			return res.send(data)
 		})
@@ -48,7 +48,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(204).send("no.games")
 			}
 			return res.send(data)
 		});
@@ -65,7 +65,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!data || data.length == 0) {
-				return res.status(204).send(data)
+				return res.status(204).send("no.games")
 			}
 
 			return res.send(data)
@@ -78,10 +78,6 @@ module.exports = (api) => {
 		if (req.body.Players.length >= 2) {
 			game.isMultiplayer = true
 		}
-		let i = 0
-
-		//      FACON STOCKAGE OBJETS SCORE        
-
 		async.eachSeries(
 			req.body.Players,
 			function (player, next) {
@@ -109,21 +105,33 @@ module.exports = (api) => {
 						if (err) {
 							return res.status(500).send(err);
 						}
-						req.body.Players.forEach(function (player) {
+						let problem = false
+						req.body.Players.some(function (player) {
+							if (problem == true) {
+								return true
+							}
 							User.findById(player, function (err, user) {
 								if (err) {
+									problem = true
 									return res.status(500).send(err)
+								}
+								if (!user) {
+									problem = true
+									return res.status(404).send("user.not.found")
 								} else {
 									user.Games.push(data.id);
 									user.save(function (err) {
 										if (err) {
+											problem = true
 											return res.status(500).send(err)
+										}
+										if (problem == false) {
+											return res.send(data)
 										}
 									});
 								}
 							});
 						});
-						return res.send(data)
 					});
 				});
 			}

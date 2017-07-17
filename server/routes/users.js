@@ -28,7 +28,7 @@ module.exports = (api) => {
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.update);
 
-	router.put('/friend/:id',
+	router.put('/friend/:firstId/:secondId',
 		api.middlewares.bodyParser.json(),
 		api.middlewares.ensureAuthentificated,
 		api.actions.users.updateFriends)
