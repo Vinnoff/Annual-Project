@@ -10,5 +10,4 @@ module.exports = (api) => {
 	api.use('/rank', require('./rank')(api));
 	api.use('/reward', require('./reward')(api));
 	api.use('/users', require('./users')(api));
-	api.use('/score', require('./score')(api));
 };
