@@ -141,7 +141,7 @@ module.exports = (api) => {
 		});
 	}
 
-	function updateFriends(req, res, next) {
+	function addFriends(req, res, next) {
 		if (req.params.firstId === req.params.secondId) {
 			return res.status(401).send("same.ids")
 		}
@@ -177,6 +177,55 @@ module.exports = (api) => {
 					}
 					User.findByIdAndUpdate(req.params.firstId, {
 						$push: {
+							Friends: req.params.secondId
+						}
+					}, {
+						new: true
+					}, (err, data) => {
+						if (err) {
+							return res.status(500).send(err);
+						}
+						return res.send(data);
+					})
+				});
+			}
+		})
+	}
+
+	function delFriends(req, res, next) {
+		if (req.params.firstId === req.params.secondId) {
+			return res.status(401).send("same.ids")
+		}
+
+		User.findById(req.params.firstId, (err, data) => {
+			if (err) {
+				return res.status(500).send(err)
+			}
+			if (!data) {
+				return res.status(404).send("user.not.found");
+			}
+			let areFriends = false
+			data.Friends.some(function (friend) {
+				if (JSON.stringify(req.params.secondId) === JSON.stringify(friend)) {
+					areFriends = true
+					return true
+				}
+			})
+			if (!areFriends) {
+				return res.status(401).send('users.not.friends')
+			} else {
+				User.findByIdAndUpdate(req.params.secondId, {
+					$pull: {
+						Friends: req.params.firstId
+					}
+				}, {
+					new: true
+				}, (err, data) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					User.findByIdAndUpdate(req.params.firstId, {
+						$pull: {
 							Friends: req.params.secondId
 						}
 					}, {
@@ -233,7 +282,8 @@ module.exports = (api) => {
 		findByAproximateUserName,
 		create,
 		update,
-		updateFriends,
+		addFriends,
+		delFriends,
 		remove
 	};
 }
