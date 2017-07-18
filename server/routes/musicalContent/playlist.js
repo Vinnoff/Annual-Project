@@ -16,7 +16,7 @@ module.exports = (api) => {
     router.get('/allsongs/:id',
         api.actions.playlist.getAllSongs);
 
-    router.post('/',
+    router.post('/:id',
         api.middlewares.ensureAuthentificated,
         api.middlewares.bodyParser.json(),
         api.middlewares.cache.clean('Playlist'),
