@@ -9,7 +9,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(404).send("score.not.found")
+				return res.status(204).send("no.scores")
 			}
 			return res.send(data);
 		})
