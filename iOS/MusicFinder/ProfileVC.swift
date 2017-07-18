@@ -10,7 +10,7 @@ import UIKit
 import SWRevealViewController
 import Alamofire
 
-class ProfileVC: UIViewController {
+class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var pseudoLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -33,6 +33,12 @@ class ProfileVC: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
         self.disconnectButton.layer.cornerRadius = 10.0
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ProfileVC.longPress(longPressGestureRecognizer:)))
+        longPress.minimumPressDuration = 1.0
+        longPress.delegate = self
+        tableView.addGestureRecognizer(longPress)
+        
         self.requestUser()
     }
     
@@ -82,6 +88,53 @@ class ProfileVC: UIViewController {
         self.goldLabel.text = "\(String(describing: user!.gold!))"
     }
     
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
+        if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+            if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+                if indexPath.section == 1 {
+                    self.askDeleteFriend(index: indexPath.row)
+                }
+            }
+        }
+    }
+    
+    func askDeleteFriend(index: Int?) {
+        if let id = self.friends[index!].id {
+            let alert = UIAlertController(title: "Attention", message: "Voulez-vous supprimer cette utilisateur de votre liste ?", preferredStyle: UIAlertControllerStyle.alert)
+            let yesAction = UIAlertAction(title: "Oui", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                self.requestRemoveFriend(user: self.friends[index!], index: index!)
+            }
+            alert.addAction(yesAction)
+            alert.addAction(UIAlertAction(title: "Non", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func requestRemoveFriend(user: User, index: Int) {
+        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
+        
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+            switch response.result {
+            case .success:
+                let alert = UIAlertController(title: "Succès", message: "\(String(describing: user.username!)) retiré(e) de votre liste ", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    self.friends.remove(at: index)
+                    self.tableView.reloadData()
+                }
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                
+            case .failure:
+                let alert = UIAlertController(title: "Alert", message: "Erreur suppression ami \(String(describing: response.response?.statusCode))", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
     
     @IBAction func disconnectedClicked(_ sender: Any) {
         UserInfoSaver().disconnectAccount()

@@ -39,7 +39,8 @@ class CreatePlaylistVC: UIViewController {
                     "Creator" : idUser
                     ] as [String : Any]
                 
-                Alamofire.request("http://mocnodeserv.hopto.org:3000/playlist/", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                let url = "http://mocnodeserv.hopto.org:3000/playlist/" + UserInfoSaver().getUserIdMusicFinder()!
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success:
                         let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)
