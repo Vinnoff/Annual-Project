@@ -8,7 +8,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(404).send("rank.not.found")
+				return res.status(204).send("no.ranks")
 			}
 			return res.send(data);
 		}).sort({
@@ -118,7 +118,7 @@ module.exports = (api) => {
 				return res.status(500).send();
 			}
 			if (!rank) {
-				return res.status(404).send("rank.not.found")
+				return res.status(204).send("no.ranks")
 			}
 			if (rank[0].id != req.params.id) {
 				return res.status(401).send('not.highest.rank');

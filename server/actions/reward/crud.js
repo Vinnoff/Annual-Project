@@ -8,7 +8,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(404).send("reward.not.found")
+				return res.status(204).send("no.rewards")
 			}
 			return res.send(data);
 		}).sort({
@@ -27,7 +27,7 @@ module.exports = (api) => {
 				return res.status(500).send(err);
 			}
 			if (!data || data.length == 0) {
-				return res.status(404).send("reward.not.found")
+				return res.status(204).send("no.rewards")
 			}
 			return res.send(data);
 		}).sort({

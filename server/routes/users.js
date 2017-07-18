@@ -29,9 +29,12 @@ module.exports = (api) => {
 		api.actions.users.update);
 
 	router.put('/friend/:firstId/:secondId',
-		api.middlewares.bodyParser.json(),
 		api.middlewares.ensureAuthentificated,
-		api.actions.users.updateFriends)
+		api.actions.users.addFriends);
+
+	router.delete('/friend/:firstId/:secondId',
+		api.middlewares.ensureAuthentificated,
+		api.actions.users.delFriends);
 
 	router.delete('/:id',
 		api.middlewares.ensureAuthentificated,

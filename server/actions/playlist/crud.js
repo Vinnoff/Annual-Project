@@ -2,6 +2,7 @@ module.exports = (api) => {
     const Playlist = api.models.Playlist;
     const Song = api.models.Song;
     const Artist = api.models.Artist;
+    const User = api.models.User;
 
     function findAll(req, res, next) {
       Playlist.find((err,data) => {
@@ -65,6 +66,7 @@ module.exports = (api) => {
     function create(req, res, next) {
       let playlist = new Playlist(req.body);
 
+
       playlist.save((err, data) => {
           if (err) {
               return res.status(500).send(err);
@@ -74,7 +76,18 @@ module.exports = (api) => {
             return res.status(204).send();
           }
 
-          return res.send(data);
+          User.findByIdAndUpdate(req.params.id, {$push: {Playlists:data._id}}, (err, user) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            if (!user) {
+              return res.status(204).send();
+            }
+
+            return res.send(data);
+          })
+
       });
     }
 
@@ -158,7 +171,7 @@ module.exports = (api) => {
               }
 
               song.Artists.push(saved);
-              data.Songs.push(songd);
+              data.Songs.push(song);
             })
           } else {
             song.Artists.push(art);
