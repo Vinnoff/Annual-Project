@@ -96,6 +96,7 @@ class UserInfoSaver {
                             Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
                                 (response) in
                                 if let token = response.result.value {
+                                    print(token)
                                     self.userDefaults?.set(token, forKey: "token_mf")
                                     self.userDefaults?.synchronize()
                                 }
