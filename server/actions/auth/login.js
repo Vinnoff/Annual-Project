@@ -28,7 +28,8 @@ module.exports = (api) => {
 		}
 		User.findOne({
 			userName: req.body.userName,
-			password: sha1(req.body.password)
+			password: sha1(req.body.password),
+			isAdmin: true
 		}, (err, user) => {
 			if (err) {
 				return res.status(500).send(err);
