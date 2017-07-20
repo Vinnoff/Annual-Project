@@ -130,7 +130,9 @@ module.exports = (api) => {
 		if (req.userId != req.params.id) {
 			return res.status(401).send('cant.modify.another.user.account');
 		}
-
+		if (req.body.password) {
+			req.body.password = sha1(req.body.password)
+		}
 		User.findByIdAndUpdate(req.params.id, req.body, {
 			new: true
 		}, (err, data) => {
