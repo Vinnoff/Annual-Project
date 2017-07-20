@@ -58,7 +58,10 @@ class ListQuizzVC: UIViewController {
                     "Songs": tabIdSong
                 ] as [String : Any]
                 
-                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: self.headers).responseObject(completionHandler: { (response: DataResponse<Quizz>) in
+                let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                            "Accept": "application/json"]
+                
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headersMF).responseObject(completionHandler: { (response: DataResponse<Quizz>) in
                     switch response.result {
                     case .success:
                         if let quizz = response.result.value {

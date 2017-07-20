@@ -48,8 +48,10 @@ class ListTracksVC: UIViewController {
     
     func requestRemoveTrack(idTrack: String?) {
         let url = "http://mocnodeserv.hopto.org:3000/playlist/delsong/" + idPlaylist! + "/" + idTrack!
+        let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                      "Accept": "application/json"]
         
-        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
                 let alert = UIAlertController(title: "Succès", message: "Supprimée avec succès", preferredStyle: UIAlertControllerStyle.alert)

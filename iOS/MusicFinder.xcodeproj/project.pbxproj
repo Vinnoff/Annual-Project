@@ -36,10 +36,6 @@
 		0F436EBF1F16A06C0026F6BA /* ListTracksVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */; };
 		0F436EC31F16B8B80026F6BA /* TrackMF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F436EC21F16B8B80026F6BA /* TrackMF.swift */; };
 		0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */; };
-		0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */; };
-		0F76423C1E87D3C400560D76 /* ListGenreQuizzVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */; };
-		0F76423F1E87D47A00560D76 /* ListGenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76423D1E87D47A00560D76 /* ListGenreCell.swift */; };
-		0F7642401E87D47A00560D76 /* ListGenreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F76423E1E87D47A00560D76 /* ListGenreCell.xib */; };
 		0F7642431E87D88000560D76 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7642421E87D88000560D76 /* UICollectionView.swift */; };
 		0F7642451E87D8AE00560D76 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7642441E87D8AE00560D76 /* UITableView.swift */; };
 		0F8DDFE01ED06DB600289AE8 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8DDFDD1ED06DB600289AE8 /* SpotifyAudioPlayback.framework */; };
@@ -55,8 +51,6 @@
 		0F9C31931E87C8D100A84F2C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C31921E87C8D100A84F2C /* UIViewController.swift */; };
 		0F9C31961E87CA2100A84F2C /* DetailMusicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C31941E87CA2100A84F2C /* DetailMusicVC.swift */; };
 		0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C31951E87CA2100A84F2C /* DetailMusicVC.xib */; };
-		0F9C31A01E87CCC600A84F2C /* ListGenreReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C319E1E87CCC600A84F2C /* ListGenreReusableView.swift */; };
-		0F9C31A11E87CCC600A84F2C /* ListGenreReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C319F1E87CCC600A84F2C /* ListGenreReusableView.xib */; };
 		0FC1F8CE1F0E7C0C00C34908 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC1F8CD1F0E7C0C00C34908 /* UIColor.swift */; };
 		0FC1F8D01F0E8F4800C34908 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC1F8CF1F0E8F4800C34908 /* LeftMenuCell.swift */; };
 		0FC1F8D21F0E8F5700C34908 /* LeftMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC1F8D11F0E8F5700C34908 /* LeftMenuCell.xib */; };
@@ -127,10 +121,6 @@
 		0F436EBD1F16A06C0026F6BA /* ListTracksVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTracksVC.xib; sourceTree = "<group>"; };
 		0F436EC21F16B8B80026F6BA /* TrackMF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackMF.swift; sourceTree = "<group>"; };
 		0F55748C1EF6A05C004DCCB6 /* TopTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTrack.swift; sourceTree = "<group>"; };
-		0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGenreQuizzVC.swift; sourceTree = "<group>"; };
-		0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListGenreQuizzVC.xib; sourceTree = "<group>"; };
-		0F76423D1E87D47A00560D76 /* ListGenreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGenreCell.swift; sourceTree = "<group>"; };
-		0F76423E1E87D47A00560D76 /* ListGenreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListGenreCell.xib; sourceTree = "<group>"; };
 		0F7642421E87D88000560D76 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		0F7642441E87D8AE00560D76 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		0F8DDFDD1ED06DB600289AE8 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
@@ -147,8 +137,6 @@
 		0F9C31921E87C8D100A84F2C /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		0F9C31941E87CA2100A84F2C /* DetailMusicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMusicVC.swift; sourceTree = "<group>"; };
 		0F9C31951E87CA2100A84F2C /* DetailMusicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMusicVC.xib; sourceTree = "<group>"; };
-		0F9C319E1E87CCC600A84F2C /* ListGenreReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGenreReusableView.swift; sourceTree = "<group>"; };
-		0F9C319F1E87CCC600A84F2C /* ListGenreReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListGenreReusableView.xib; sourceTree = "<group>"; };
 		0FC1F8CD1F0E7C0C00C34908 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0FC1F8CF1F0E8F4800C34908 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		0FC1F8D11F0E8F5700C34908 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuCell.xib; sourceTree = "<group>"; };
@@ -279,22 +267,9 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		0F201CE21E86E23500F0B631 /* ListGenre */ = {
-			isa = PBXGroup;
-			children = (
-				0F9C31A21E87CCCD00A84F2C /* ListGenreReusableView */,
-				0F7642411E87D47E00560D76 /* ListGenreCell */,
-				0F7642391E87D3C400560D76 /* ListGenreQuizzVC.swift */,
-				0F76423A1E87D3C400560D76 /* ListGenreQuizzVC.xib */,
-			);
-			name = ListGenre;
-			sourceTree = "<group>";
-		};
 		0F201CE31E86E23B00F0B631 /* Quizz */ = {
 			isa = PBXGroup;
 			children = (
-				0F201CE21E86E23500F0B631 /* ListGenre */,
-				0F9C31981E87CA2800A84F2C /* DetailMusic */,
 				0F2E48AF1F191ACB00D9D23C /* QuizzCell */,
 				0F2E48921F18039100D9D23C /* ListQuizzVC.swift */,
 				0F2E48931F18039100D9D23C /* ListQuizzVC.xib */,
@@ -358,15 +333,6 @@
 			name = ListTracks;
 			sourceTree = "<group>";
 		};
-		0F7642411E87D47E00560D76 /* ListGenreCell */ = {
-			isa = PBXGroup;
-			children = (
-				0F76423D1E87D47A00560D76 /* ListGenreCell.swift */,
-				0F76423E1E87D47A00560D76 /* ListGenreCell.xib */,
-			);
-			name = ListGenreCell;
-			sourceTree = "<group>";
-		};
 		0F8DDFEB1ED06E9C00289AE8 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,22 +374,6 @@
 				0FC1F8CD1F0E7C0C00C34908 /* UIColor.swift */,
 			);
 			name = Extension;
-			sourceTree = "<group>";
-		};
-		0F9C31981E87CA2800A84F2C /* DetailMusic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DetailMusic;
-			sourceTree = "<group>";
-		};
-		0F9C31A21E87CCCD00A84F2C /* ListGenreReusableView */ = {
-			isa = PBXGroup;
-			children = (
-				0F9C319E1E87CCC600A84F2C /* ListGenreReusableView.swift */,
-				0F9C319F1E87CCC600A84F2C /* ListGenreReusableView.xib */,
-			);
-			name = ListGenreReusableView;
 			sourceTree = "<group>";
 		};
 		0FC3C93B1F11348F00D386ED /* Playlist */ = {
@@ -606,7 +556,6 @@
 				0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */,
 				0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */,
 				0F8DDFEA1ED06E9600289AE8 /* AuthOtherAccount.xib in Resources */,
-				0F7642401E87D47A00560D76 /* ListGenreCell.xib in Resources */,
 				0F201CDC1E86E02A00F0B631 /* HomeVC.xib in Resources */,
 				0FD52B491EF2B7A60039543E /* ResultSearchCell.xib in Resources */,
 				0FD52B4E1EF32F580039543E /* TrackVC.xib in Resources */,
@@ -620,8 +569,6 @@
 				0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */,
 				0F2E48951F18039100D9D23C /* ListQuizzVC.xib in Resources */,
 				0F201CCF1E86DFC400F0B631 /* Assets.xcassets in Resources */,
-				0F9C31A11E87CCC600A84F2C /* ListGenreReusableView.xib in Resources */,
-				0F76423C1E87D3C400560D76 /* ListGenreQuizzVC.xib in Resources */,
 				0FF5DB6A1F0EA5B600DA7E86 /* Home2VC.xib in Resources */,
 				0F3F9D951F1BA20E00FC15E9 /* AddFriendVC.xib in Resources */,
 				0F2E48A91F18F62B00D9D23C /* SimpleCell.xib in Resources */,
@@ -691,7 +638,6 @@
 				0F7642431E87D88000560D76 /* UICollectionView.swift in Sources */,
 				0FC3C9471F12083800D386ED /* ConnectionSuccessVC.swift in Sources */,
 				0F2E48AD1F190B9400D9D23C /* QuizzCell.swift in Sources */,
-				0F9C31A01E87CCC600A84F2C /* ListGenreReusableView.swift in Sources */,
 				0FD52B2C1EF2899F0039543E /* ResultSearchVC.swift in Sources */,
 				0F2E48941F18039100D9D23C /* ListQuizzVC.swift in Sources */,
 				0FD52B3E1EF2B1AE0039543E /* Item.swift in Sources */,
@@ -702,7 +648,6 @@
 				0FD52B381EF2AE9C0039543E /* Album.swift in Sources */,
 				0FC3C9391F11348B00D386ED /* CreatePlaylistVC.swift in Sources */,
 				0F8DDFF01ED09ADE00289AE8 /* User.swift in Sources */,
-				0F76423B1E87D3C400560D76 /* ListGenreQuizzVC.swift in Sources */,
 				0F8FFFD11E86E65F005FFDC3 /* LeftMenuVC.swift in Sources */,
 				0F436EBE1F16A06C0026F6BA /* ListTracksVC.swift in Sources */,
 				0FD52B3A1EF2AF370039543E /* Image.swift in Sources */,
@@ -712,7 +657,6 @@
 				0F8DDFE91ED06E9600289AE8 /* AuthOtherAccount.swift in Sources */,
 				0FC3C9441F113E4300D386ED /* Playlist.swift in Sources */,
 				0F3F9D941F1BA20E00FC15E9 /* AddFriendVC.swift in Sources */,
-				0F76423F1E87D47A00560D76 /* ListGenreCell.swift in Sources */,
 				0F55748D1EF6A05C004DCCB6 /* TopTrack.swift in Sources */,
 				0FD52B481EF2B7A60039543E /* ResultSearchCell.swift in Sources */,
 				0F4045011F1A108800D202FE /* RewardVC.swift in Sources */,
