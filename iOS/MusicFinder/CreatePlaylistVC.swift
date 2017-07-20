@@ -30,9 +30,8 @@ class CreatePlaylistVC: UIViewController {
         if UserInfoSaver().isAuth()! {
             let idUser = UserInfoSaver().getUserIdMusicFinder()
             if textField.text != nil{
-                let headers: HTTPHeaders = [
-                    "Accept": "application/json"
-                ]
+                let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                              "Accept": "application/json"]
                 let parameters = [
                     "title": textField.text as! String,
                     "isPublic" : "true",
@@ -40,7 +39,7 @@ class CreatePlaylistVC: UIViewController {
                     ] as [String : Any]
                 
                 let url = "http://mocnodeserv.hopto.org:3000/playlist/" + UserInfoSaver().getUserIdMusicFinder()!
-                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success:
                         let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)

@@ -28,7 +28,6 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.title = "Playlists"
         self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         if fromUser {
-           // self.requestPlaylists(fromUser: true)
             self.requestPlaylists()
         } else {
             self.setNavigationBarItem()
@@ -135,11 +134,10 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     ]
                 }
                 
-                let headers: HTTPHeaders = [
-                    "Accept": "application/json"
-                ]
+                let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                              "Accept": "application/json"]
                 
-                Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+                Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success:
                         let alert = UIAlertController(title: "Succès", message: "Ajoutée avec succès", preferredStyle: UIAlertControllerStyle.alert)
@@ -198,11 +196,10 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func requestDeletePlaylist(url: String, index: Int) {
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
+        let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                      "Accept": "application/json"]
         
-        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
                 let alert = UIAlertController(title: "Succès", message: "La playlist est supprimée", preferredStyle: UIAlertControllerStyle.alert)

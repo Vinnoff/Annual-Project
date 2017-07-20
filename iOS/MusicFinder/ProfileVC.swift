@@ -116,7 +116,10 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     func requestRemoveFriend(user: User, index: Int) {
         let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
         
-        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+        let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                      "Accept": "application/json"]
+        
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {
             case .success:
                 let alert = UIAlertController(title: "Succès", message: "\(String(describing: user.username!)) retiré(e) de votre liste ", preferredStyle: UIAlertControllerStyle.alert)
@@ -137,8 +140,31 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func disconnectedClicked(_ sender: Any) {
-        UserInfoSaver().disconnectAccount()
+        let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
+                                      "Accept": "application/json"]
+        let url = "http://mocnodeserv.hopto.org:3000/auth/logout"
         
+        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
+            switch response.result {
+            case .success:
+                let alert = UIAlertController(title: "Succès", message: "Déconnexion réussie !", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    UserInfoSaver().disconnectAccount()
+                    self.showHomeVC()
+                }
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                
+            case .failure:
+                let alert = UIAlertController(title: "Alert", message: "Erreur déconnexion \(String(describing: response.response?.statusCode))", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func showHomeVC() {
         var revealVC: SWRevealViewController
         revealVC = self.revealViewController()
         let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
