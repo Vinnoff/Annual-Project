@@ -1,35 +1,33 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (api) => {
-	//const Token = api.models.Token;
+	const Token = api.models.Token;
 
 	return (req, res, next) => {
-		/*    if (!req.headers || !req.headers.authorization) {
-            return res.status(401).send('authentication.required');
-        }
+		if (!req.headers || !req.headers.authorization) {
+			return res.status(401).send('authentication.required');
+		}
 
-        const encryptedToken = req.headers.authorization;
+		const encryptedToken = req.headers.authorization;
 
-        jwt.verify(encryptedToken, api.settings.security.salt, null, (err, decryptedToken) => {
-            if (err) {
-                return res.status(404).send('token.dont.exists');
-            }
+		jwt.verify(encryptedToken, api.settings.security.salt, null, (err, decryptedToken) => {
+			if (err) {
+				return res.status(404).send('token.dont.exists');
+			}
 
-            Token.findById(decryptedToken.tokenId, (err, token) => {
-                if (err) {
-                    return res.status(401).send('invalid.token');
-                }
+			Token.findById(decryptedToken.tokenId, (err, token) => {
+				if (err) {
+					return res.status(401).send('invalid.token');
+				}
 
-                if (!token) {
-                    return res.status(401).send('authentication.expired');
-                }
+				if (!token) {
+					return res.status(401).send('authentication.expired');
+				}
 
-                req.userId = token.userId;
+				req.userId = token.userId;
 
-                return next();
-            });
-        });
-		*/
-		return next();
+				return next();
+			});
+		});
 	};
 };

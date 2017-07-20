@@ -36,9 +36,6 @@ module.exports = (api) => {
 
 	function findById(req, res, next) {
 		User.findById(req.params.id)
-			.sort({
-				userName: 1
-			})
 			.populate('Rank', 'nb title')
 			.populate('Preferences',
 				'Genres Artists Albums Songs')
@@ -110,7 +107,15 @@ module.exports = (api) => {
 				}
 				user.Preferences = prefData.id;
 				user.Rank = "594fb1c9ab2572510210f8dd"
-				user.birthdate = new Date(user.birthDate);
+
+				if (user.isAdmin == true) {
+					if (!req.body.password) {
+						return res.status(401).send('no.password')
+					} else {
+						user.password = sha1(user.password);
+					}
+				}
+
 				user.save((err, userData) => {
 					if (err) {
 						return res.status(500).send(err);
@@ -118,14 +123,13 @@ module.exports = (api) => {
 					return res.send(userData);
 				})
 			})
-
 		});
 	}
 
 	function update(req, res, next) {
-		//		if (req.userId != req.params.id) {
-		//			return res.status(401).send('cant.modify.another.user.account');
-		//		}
+		if (req.userId != req.params.id) {
+			return res.status(401).send('cant.modify.another.user.account');
+		}
 
 		User.findByIdAndUpdate(req.params.id, req.body, {
 			new: true
@@ -242,9 +246,9 @@ module.exports = (api) => {
 	}
 
 	function remove(req, res, next) {
-		//		if (req.userId != req.params.id) {
-		//			return res.status(401).send('cant.delete.another.user.account');
-		//		}
+		if (req.userId != req.params.id) {
+			return res.status(401).send('cant.delete.another.user.account');
+		}
 		User.update({
 			Friends: {
 				$in: [req.params.id]

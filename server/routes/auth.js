@@ -1,9 +1,12 @@
 const router = require('express').Router();
 
 module.exports = (api) => {
-	router.post('/login',
+	router.post('/login/iOs/:id/',
+		api.actions.auth.login.iOs);
+
+	router.post('/login/adminSys/',
 		api.middlewares.bodyParser.json(),
-		api.actions.auth.login);
+		api.actions.auth.login.adminSys);
 
 	router.post('/logout',
 		api.middlewares.ensureAuthentificated,

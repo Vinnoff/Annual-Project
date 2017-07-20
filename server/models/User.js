@@ -8,6 +8,9 @@ module.exports = (api) => {
 			required: true,
 			unique: true
 		},
+		password: {
+			type: String
+		},
 		firstName: {
 			type: String
 		},

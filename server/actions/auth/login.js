@@ -2,83 +2,70 @@ const sha1 = require('sha1');
 const jwt = require('jsonwebtoken');
 
 module.exports = (api) => {
-    const User = api.models.User;
-    const Token = api.models.Token;
+	const User = api.models.User;
+	const Token = api.models.Token;
 
-    return function login(req, res, next) {
-        if ((!req.body.mail && !req.body.userName) || !req.body.password) {
-            return res.status(500).send('no.credentials');
-        }
-        if (req.body.userName) {
-            User.findOne({
-                userName: req.body.userName,
-                password: sha1(req.body.password)
-            }, (err, user) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
+	function iOs(req, res, next) {
+		if (!req.params.id) {
+			return res.status(401).send('id.required');
+		}
+		User.findById(req.params.id, (err, user) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
 
-                if (!user) {
-                    return res.status(401).send('invalid.credentials');
-                }
+			if (!user) {
+				return res.status(401).send('invalid.id');
+			}
 
-                var token = new Token();
-                token.userId = user._id.toString();
+			createToken(user, res, next);
+		});
+	}
 
-                token.save((err, token) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
+	function adminSys(req, res, next) {
+		if (!req.body.userName || !req.body.password) {
+			return res.status(401).send('no.credentials');
+		}
+		User.findOne({
+			userName: req.body.userName,
+			password: sha1(req.body.password)
+		}, (err, user) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
 
-                    jwt.sign({
-                            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                            tokenId: token._id.toString()
-                        },
-                        api.settings.security.salt, {}, (err, encryptedToken) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }
+			if (!user) {
+				return res.status(401).send('invalid.credentials');
+			}
 
-                            return res.send(encryptedToken);
-                        }
-                    );
-                });
-            });
-        } else {
-            User.findOne({
-                mail: req.body.mail,
-                password: sha1(req.body.password)
-            }, (err, user) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
+			createToken(user, res, next);
+		});
+	}
 
-                if (!user) {
-                    return res.status(401).send('invalid.credentials');
-                }
+	function createToken(user, res, next) {
+		var token = new Token();
+		token.userId = user.id.toString();
+		token.save((err, token) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
 
-                var token = new Token();
-                token.userId = user._id.toString();
+			jwt.sign({
+					exp: Math.floor(Date.now() / 1000) + (60 * 60),
+					tokenId: token.id.toString()
+				},
+				api.settings.security.salt, {}, (err, encryptedToken) => {
+					if (err) {
+						return res.status(500).send(err);
+					}
+					return res.send(encryptedToken);
+				}
+			);
+		});
+	}
 
-                token.save((err, token) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-
-                    jwt.sign({
-                            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                            tokenId: token._id.toString()
-                        },
-                        api.settings.security.salt, {}, (err, encryptedToken) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }
-
-                            return res.send(encryptedToken);
-                        }
-                    );
-                });
-            });
-        }
-    }
+	return {
+		iOs,
+		adminSys
+	};
 };
