@@ -96,9 +96,30 @@ class UserInfoSaver {
                             Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
                                 (response) in
                                 if let token = response.result.value {
-                                    print(token)
                                     self.userDefaults?.set(token, forKey: "token_mf")
                                     self.userDefaults?.synchronize()
+                                }
+                            })
+                        } else {
+                            let urlCreate = "http://mocnodeserv.hopto.org:3000/users/"
+                            let parameters = [
+                                "userName": (userSpotify?.id)!
+                                ] as [String : Any]
+                            
+                            Alamofire.request(urlCreate, method: .post, parameters: parameters, headers: headers).responseObject(completionHandler: {
+                                (response: DataResponse<User>) in
+                                if let userResponse = response.result.value {
+                                    self.userDefaults?.set(userResponse.id, forKey: "id_user")
+                                    self.userDefaults?.synchronize()
+                                    
+                                    let urlAuthMF = "http://mocnodeserv.hopto.org:3000/auth/login/iOs/" + userResponse.id!
+                                    Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
+                                        (response) in
+                                        if let token = response.result.value {
+                                            self.userDefaults?.set(token, forKey: "token_mf")
+                                            self.userDefaults?.synchronize()
+                                        }
+                                    })
                                 }
                             })
                         }
