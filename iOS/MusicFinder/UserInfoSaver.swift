@@ -106,9 +106,9 @@ class UserInfoSaver {
                                 "userName": (userSpotify?.id)!
                                 ] as [String : Any]
                             
-                            Alamofire.request(urlCreate, method: .post, parameters: parameters, headers: headers).responseObject(completionHandler: {
+                            Alamofire.request(urlCreate, method: .post, parameters: parameters, encoding: JSONEncoding.default,headers: headers).responseObject(completionHandler: {
                                 (response: DataResponse<User>) in
-                                if let userResponse = response.result.value {
+                                /*if let userResponse = response.result.value {
                                     self.userDefaults?.set(userResponse.id, forKey: "id_user")
                                     self.userDefaults?.synchronize()
                                     
@@ -120,6 +120,26 @@ class UserInfoSaver {
                                             self.userDefaults?.synchronize()
                                         }
                                     })
+                                }*/
+                                
+                                
+                                switch response.result {
+                                case .success:
+                                    self.userDefaults?.set(response.result.value?.id, forKey: "id_user")
+                                    self.userDefaults?.synchronize()
+                                    
+                                    let urlAuthMF = "http://mocnodeserv.hopto.org:3000/auth/login/iOs/" + (response.result.value?.id!)!
+                                    Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
+                                        (response) in
+                                        if let token = response.result.value {
+                                            self.userDefaults?.set(token, forKey: "token_mf")
+                                            self.userDefaults?.synchronize()
+                                        }
+                                    })
+                                    
+                                case .failure:
+                                   print("error")
+                                    
                                 }
                             })
                         }
