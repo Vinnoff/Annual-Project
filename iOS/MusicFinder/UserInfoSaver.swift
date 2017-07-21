@@ -108,21 +108,6 @@ class UserInfoSaver {
                             
                             Alamofire.request(urlCreate, method: .post, parameters: parameters, encoding: JSONEncoding.default,headers: headers).responseObject(completionHandler: {
                                 (response: DataResponse<User>) in
-                                /*if let userResponse = response.result.value {
-                                    self.userDefaults?.set(userResponse.id, forKey: "id_user")
-                                    self.userDefaults?.synchronize()
-                                    
-                                    let urlAuthMF = "http://mocnodeserv.hopto.org:3000/auth/login/iOs/" + userResponse.id!
-                                    Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
-                                        (response) in
-                                        if let token = response.result.value {
-                                            self.userDefaults?.set(token, forKey: "token_mf")
-                                            self.userDefaults?.synchronize()
-                                        }
-                                    })
-                                }*/
-                                
-                                
                                 switch response.result {
                                 case .success:
                                     self.userDefaults?.set(response.result.value?.id, forKey: "id_user")
@@ -138,12 +123,15 @@ class UserInfoSaver {
                                     })
                                     
                                 case .failure:
-                                   print("error")
-                                    
+                                   print("Erreur connexion")
+                                   UserInfoSaver().disconnectAccount()
                                 }
                             })
                         }
                     })
+                } else {
+                    print("Erreur connexion")
+                    UserInfoSaver().disconnectAccount()
                 }
             })
         }
