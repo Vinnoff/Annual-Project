@@ -34,7 +34,11 @@ class AddFriendVC: UIViewController {
         let url = "http://mocnodeserv.hopto.org:3000/users/userNameResearch/" + word.lowercased()
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[User]>) in
             if let users = response.result.value {
-                self.users = users
+                for user in users {
+                    if !(user.id == UserInfoSaver().getUserIdMusicFinder()) {
+                        self.users.append(user)
+                    }
+                }
                 self.tableView.reloadData()
             }
         }
