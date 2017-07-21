@@ -114,15 +114,22 @@ module.exports = (api) => {
             if (!data) {
                 return res.status(204).send();
             }
-
-            data.remove((err, data) => {
+            User.findByIdAndUpdate(data.Creator, {$pull:{Playlists:data._id}}, (err, user) => {
               if (err) {
-                return res.status(500).send();
+                  return res.status(500).send(err);
               }
 
-              return res.send(data);
-            });
+              if (!user) {
+                  return res.status(204).send()
+              }
+              data.remove((err, data) => {
+                if (err) {
+                  return res.status(500).send();
+                }
 
+                return res.send(data);
+              });
+            })
         });
     }
 
