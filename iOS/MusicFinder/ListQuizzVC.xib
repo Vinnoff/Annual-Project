@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,18 +21,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yWF-A9-DqT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundquizz" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-JC-5MK">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yWF-A9-DqT">
+                    <rect key="frame" x="0.0" y="254" width="375" height="413"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="yWF-A9-DqT" secondAttribute="height" multiplier="375:413" id="uE0-m2-NjT"/>
+                    </constraints>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="6gl-JC-5MK" secondAttribute="trailing" id="0XS-Je-oX5"/>
+                <constraint firstItem="6gl-JC-5MK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="77M-Nl-ELf"/>
+                <constraint firstItem="6gl-JC-5MK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="99b-ej-1Qw"/>
                 <constraint firstAttribute="bottom" secondItem="yWF-A9-DqT" secondAttribute="bottom" id="WNV-QA-Z8e"/>
+                <constraint firstAttribute="bottom" secondItem="6gl-JC-5MK" secondAttribute="bottom" id="bTU-90-KYT"/>
                 <constraint firstAttribute="trailing" secondItem="yWF-A9-DqT" secondAttribute="trailing" id="dMq-dF-1xh"/>
                 <constraint firstItem="yWF-A9-DqT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l38-5Z-NNP"/>
-                <constraint firstItem="yWF-A9-DqT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rxX-qp-WES"/>
             </constraints>
+            <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="backgroundquizz" width="540" height="960"/>
+    </resources>
 </document>

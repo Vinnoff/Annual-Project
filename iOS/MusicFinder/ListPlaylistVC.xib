@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dpK-cC-rgZ">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJ4-lU-qPY">
@@ -38,16 +38,28 @@
                         <action selector="addPlaylistClicked:" destination="-1" eventType="touchUpInside" id="UZm-7p-ag9"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astuce: maintenir pour supprimer une playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHo-GI-8vq">
+                    <rect key="frame" x="10" y="577" width="365" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="kk5-hr-inI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="WHo-GI-8vq" firstAttribute="top" secondItem="dpK-cC-rgZ" secondAttribute="bottom" constant="10" id="Ff5-hF-cdN"/>
                 <constraint firstAttribute="trailing" secondItem="VJ4-lU-qPY" secondAttribute="trailing" id="I03-V2-mZT"/>
-                <constraint firstItem="VJ4-lU-qPY" firstAttribute="top" secondItem="dpK-cC-rgZ" secondAttribute="bottom" id="IVb-TA-fy7"/>
                 <constraint firstItem="dpK-cC-rgZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ndv-v7-Jf8"/>
                 <constraint firstItem="VJ4-lU-qPY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Nge-gj-NBM"/>
                 <constraint firstItem="dpK-cC-rgZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="V6a-pG-dVg"/>
                 <constraint firstAttribute="trailing" secondItem="dpK-cC-rgZ" secondAttribute="trailing" id="ZeD-k5-ZM3"/>
                 <constraint firstAttribute="bottom" secondItem="VJ4-lU-qPY" secondAttribute="bottom" id="bRQ-lL-KoA"/>
+                <constraint firstAttribute="trailing" secondItem="WHo-GI-8vq" secondAttribute="trailing" id="ckR-bb-jhT"/>
+                <constraint firstItem="WHo-GI-8vq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="jRi-NA-53L"/>
+                <constraint firstItem="VJ4-lU-qPY" firstAttribute="top" secondItem="WHo-GI-8vq" secondAttribute="bottom" constant="10" id="z1B-B6-iWr"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="99.5"/>
         </view>

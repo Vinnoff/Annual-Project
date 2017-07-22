@@ -174,7 +174,6 @@ class DetailMusicVC: UIViewController {
         if !(textField.text?.isEmpty)! {
             let userAnswer = textField.text?.lowercased()
             let answer = quizz?.tracks?[indexMusic].title?.lowercased()
-            print(userAnswer! + " " + answer!)
             self.checkAnswer(userAnswer: userAnswer!, answer: answer!)
         } else {
             let alert = UIAlertController(title: "Oops !", message: "Écrivez un mot dans la barre de saisie avant", preferredStyle: UIAlertControllerStyle.alert)
