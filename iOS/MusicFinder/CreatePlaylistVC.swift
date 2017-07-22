@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SWRevealViewController
 
 class CreatePlaylistVC: UIViewController {
 
@@ -24,6 +25,14 @@ class CreatePlaylistVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showSearchVC() {
+        var revealVC: SWRevealViewController
+        revealVC = self.revealViewController()
+        let searchVC = SearchVC(nibName: SearchVC.className(), bundle: nil)
+        let newRootVC = UINavigationController(rootViewController: searchVC)
+        revealVC.pushFrontViewController(newRootVC, animated: true)
     }
     
     @IBAction func submitClicked(_ sender: Any) {
@@ -43,7 +52,11 @@ class CreatePlaylistVC: UIViewController {
                     switch response.result {
                     case .success:
                         let alert = UIAlertController(title: "Succès", message: "Ajouté avec succès", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                            UIAlertAction in
+                            self.showSearchVC()
+                        }
+                        alert.addAction(okAction)
                         self.present(alert, animated: true, completion: nil)
                         
                     case .failure:
