@@ -16,6 +16,7 @@ class DetailMusicVC: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var wrongLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     var quizz: Quizz?
     var timer: Timer?
@@ -99,11 +100,14 @@ class DetailMusicVC: UIViewController {
     
     func updateCounterScore() {
         self.counterTimerScore += 1
+        self.timerLabel.text = "\(30 - counterTimerScore)"
     }
     
     func checkAnswer(userAnswer: String, answer: String) {
         if userAnswer == answer {
             self.updateScore()
+            self.timerScore?.invalidate()
+            self.timer?.invalidate()
             let alert = UIAlertController(title: "Bravo !", message: "Bonne réponse \n Score: \(self.score)", preferredStyle: UIAlertControllerStyle.alert)
             let closeAction = UIAlertAction(title: "Fermer", style: UIAlertActionStyle.default) {
                 UIAlertAction in
