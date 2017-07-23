@@ -13,7 +13,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
     var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir mes playlists", "Récompenses", "Ajouter un ami", "Classement"]
-    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist", "ico_reward", "ico_addfriend", "ico_home"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist", "ico_reward", "ico_addfriend", "ico_ranking"]
     
     @IBOutlet weak var tableView: UITableView!
     
