@@ -252,10 +252,9 @@
 				0F2E48AA1F18F63000D9D23C /* SimpleCell */,
 				0F4045031F1A108D00D202FE /* Reward */,
 				0F3F9D961F1BA21D00FC15E9 /* AddFriend */,
+				0F3D07D31F24C62C00CD2FE9 /* Ranking */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
-				0F3D07CA1F2493D400CD2FE9 /* RankingVC.swift */,
-				0F3D07CB1F2493D400CD2FE9 /* RankingVC.xib */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
 				0F8DDFE31ED06DF200289AE8 /* MusicFinder-Bridging-Header.h */,
 			);
@@ -310,6 +309,15 @@
 				0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */,
 			);
 			name = UploadPlaylistSpotify;
+			sourceTree = "<group>";
+		};
+		0F3D07D31F24C62C00CD2FE9 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				0F3D07CA1F2493D400CD2FE9 /* RankingVC.swift */,
+				0F3D07CB1F2493D400CD2FE9 /* RankingVC.xib */,
+			);
+			name = Ranking;
 			sourceTree = "<group>";
 		};
 		0F3F9D961F1BA21D00FC15E9 /* AddFriend */ = {
