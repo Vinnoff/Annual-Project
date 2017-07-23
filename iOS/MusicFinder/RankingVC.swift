@@ -20,9 +20,17 @@ class RankingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBarItem()
+        self.addGestureMenu()
+        self.edgesForExtendedLayout = []
+        self.title = "Classement"
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "SimpleCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.tableView.reloadData()
+        
+        self.requestUser()
+        self.requestReward()
     }
 
     func requestReward() {
@@ -41,7 +49,7 @@ class RankingVC: UIViewController {
         Alamofire.request(url, headers: headers).responseObject(completionHandler: {
             (response: DataResponse<User>) in
             if let user = response.result.value {
-                self.scoreLabel.text = "Votre score: \(String(describing: user.globalScore))"
+                self.scoreLabel.text = "Votre score: \(String(describing: (user.globalScore)!))"
                 self.requestReward()
             }
         })
@@ -65,7 +73,7 @@ extension RankingVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.view.backgroundColor = UIColor(red: 194, green: 214, blue: 208)
         }
-        let fullString = self.users[indexPath.row].username! + " (Score: \(String(describing: self.users[indexPath.row].globalScore)))"
+        let fullString = self.users[indexPath.row].username! + " (Score: \(String(describing: (self.users[indexPath.row].globalScore)!)))"
         cell.bindData(title: fullString)
         return cell
     }

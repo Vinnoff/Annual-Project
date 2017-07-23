@@ -12,8 +12,8 @@ import SWRevealViewController
 class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var mainViewController: UIViewController!
-    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir mes playlists", "Récompenses", "Ajouter un ami"]
-    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist", "ico_reward", "ico_addfriend"]
+    var items: [String] = ["Accueil","Se connecter", "Quizz", "Rechercher", "Upload Playlist", "Creer Playlist", "Voir mes playlists", "Récompenses", "Ajouter un ami", "Classement"]
+    var ico: [String] = ["ico_home", "ico_profile", "ico_quizz", "ico_search", "ico_upload", "ico_addplaylist", "ico_playlist", "ico_reward", "ico_addfriend", "ico_home"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -154,6 +154,16 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if UserInfoSaver().isAuth()! {
                 let addFriendVC = AddFriendVC(nibName: AddFriendVC.className(), bundle: nil)
                 let newRootVC = UINavigationController(rootViewController: addFriendVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            } else {
+                let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: authVC)
+                revealVC.pushFrontViewController(newRootVC, animated: true)
+            }
+        case 9:
+            if UserInfoSaver().isAuth()! {
+                let rankingVC = RankingVC(nibName: RankingVC.className(), bundle: nil)
+                let newRootVC = UINavigationController(rootViewController: rankingVC)
                 revealVC.pushFrontViewController(newRootVC, animated: true)
             } else {
                 let authVC = AuthOtherAccount(nibName: AuthOtherAccount.className(), bundle: nil)

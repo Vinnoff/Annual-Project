@@ -32,8 +32,8 @@
                     <color key="textColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZX8-UG-XhZ">
-                    <rect key="frame" x="0.0" y="623" width="375" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZX8-UG-XhZ">
+                    <rect key="frame" x="20" y="623" width="355" height="24"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" red="0.89411764709999997" green="0.2901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
             <color key="backgroundColor" red="0.82745098039999998" green="0.90980392160000001" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hDf-mI-dsa" secondAttribute="trailing" id="5r8-0J-1NO"/>
-                <constraint firstItem="ZX8-UG-XhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JSO-VX-1hp"/>
+                <constraint firstItem="ZX8-UG-XhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="JSO-VX-1hp"/>
                 <constraint firstAttribute="trailing" secondItem="og5-On-0As" secondAttribute="trailing" id="OOr-6e-TIp"/>
                 <constraint firstAttribute="bottom" secondItem="ZX8-UG-XhZ" secondAttribute="bottom" constant="20" id="QaY-0k-gHm"/>
                 <constraint firstItem="hDf-mI-dsa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="RFA-hF-TaW"/>
