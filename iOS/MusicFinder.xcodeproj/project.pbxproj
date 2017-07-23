@@ -28,8 +28,6 @@
 		0F2E48B21F1923E100D9D23C /* PlaylistSpotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E48B11F1923E100D9D23C /* PlaylistSpotify.swift */; };
 		0F2E8E8B1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */; };
 		0F2E8E8C1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */; };
-		0F3D07D01F24C3B700CD2FE9 /* RankingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D07CE1F24C3B700CD2FE9 /* RankingVC.swift */; };
-		0F3D07D11F24C3B700CD2FE9 /* RankingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3D07CF1F24C3B700CD2FE9 /* RankingVC.xib */; };
 		0F3F9D941F1BA20E00FC15E9 /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F9D921F1BA20E00FC15E9 /* AddFriendVC.swift */; };
 		0F3F9D951F1BA20E00FC15E9 /* AddFriendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3F9D931F1BA20E00FC15E9 /* AddFriendVC.xib */; };
 		0F4045011F1A108800D202FE /* RewardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4044FF1F1A108800D202FE /* RewardVC.swift */; };
@@ -115,8 +113,6 @@
 		0F2E8E891F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPlaylistSpotifyVC.swift; sourceTree = "<group>"; };
 		0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadPlaylistSpotifyVC.xib; sourceTree = "<group>"; };
 		0F3C26ADCA39C443CD516399 /* Pods-MusicFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFinder/Pods-MusicFinder.release.xcconfig"; sourceTree = "<group>"; };
-		0F3D07CE1F24C3B700CD2FE9 /* RankingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingVC.swift; sourceTree = "<group>"; };
-		0F3D07CF1F24C3B700CD2FE9 /* RankingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingVC.xib; sourceTree = "<group>"; };
 		0F3F9D921F1BA20E00FC15E9 /* AddFriendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		0F3F9D931F1BA20E00FC15E9 /* AddFriendVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendVC.xib; sourceTree = "<group>"; };
 		0F4044FF1F1A108800D202FE /* RewardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardVC.swift; sourceTree = "<group>"; };
@@ -252,7 +248,6 @@
 				0F2E48AA1F18F63000D9D23C /* SimpleCell */,
 				0F4045031F1A108D00D202FE /* Reward */,
 				0F3F9D961F1BA21D00FC15E9 /* AddFriend */,
-				0F3D07D21F24C3CD00CD2FE9 /* RankingVC */,
 				0F201CCE1E86DFC400F0B631 /* Assets.xcassets */,
 				0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */,
 				0F201CD31E86DFC400F0B631 /* Info.plist */,
@@ -309,15 +304,6 @@
 				0F2E8E8A1F0A86ED00F6FB6B /* UploadPlaylistSpotifyVC.xib */,
 			);
 			name = UploadPlaylistSpotify;
-			sourceTree = "<group>";
-		};
-		0F3D07D21F24C3CD00CD2FE9 /* RankingVC */ = {
-			isa = PBXGroup;
-			children = (
-				0F3D07CE1F24C3B700CD2FE9 /* RankingVC.swift */,
-				0F3D07CF1F24C3B700CD2FE9 /* RankingVC.xib */,
-			);
-			name = RankingVC;
 			sourceTree = "<group>";
 		};
 		0F3F9D961F1BA21D00FC15E9 /* AddFriend */ = {
@@ -566,7 +552,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F4045021F1A108800D202FE /* RewardVC.xib in Resources */,
-				0F3D07D11F24C3B700CD2FE9 /* RankingVC.xib in Resources */,
 				0F201CD21E86DFC400F0B631 /* LaunchScreen.storyboard in Resources */,
 				0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */,
 				0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */,
@@ -658,7 +643,6 @@
 				0FD52B3E1EF2B1AE0039543E /* Item.swift in Sources */,
 				0FF5DB691F0EA5B600DA7E86 /* Home2VC.swift in Sources */,
 				0F8DDFF21ED0A5D000289AE8 /* UserSpotify.swift in Sources */,
-				0F3D07D01F24C3B700CD2FE9 /* RankingVC.swift in Sources */,
 				0F2E48B21F1923E100D9D23C /* PlaylistSpotify.swift in Sources */,
 				0FD52B521EF335750039543E /* AlbumVC.swift in Sources */,
 				0FD52B381EF2AE9C0039543E /* Album.swift in Sources */,
