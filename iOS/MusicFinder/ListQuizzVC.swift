@@ -117,12 +117,3 @@ extension ListQuizzVC: UITableViewDataSource, UITableViewDelegate {
         
     }
 }
-
-
-//LIste playlist > liste amis > creer requete post > attendre reponse > 
-
-
-//Id score dans la requete poste
-//Envoie score: http://mocnodeserv.hopto.org:3000/game/score/:id  id score
-//Creation game post : http://mocnodeserv.hopto.org:3000/game/
-//

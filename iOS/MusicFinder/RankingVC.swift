@@ -2,7 +2,7 @@
 //  RankingVC.swift
 //  MusicFinder
 //
-//  Created by TRAING Serey on 23/07/2017.
+//  Created by OFFROY Vincent on 23/07/2017.
 //  Copyright © 2017 TRAING Serey. All rights reserved.
 //
 
@@ -58,7 +58,6 @@ class RankingVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }
 
 extension RankingVC: UITableViewDelegate, UITableViewDataSource {
