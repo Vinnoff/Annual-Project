@@ -162,7 +162,7 @@ class LeftMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         case 9:
             if UserInfoSaver().isAuth()! {
-                let rankingVC = AddFriendVC(nibName: RankingVC.className(), bundle: nil)
+                let rankingVC = RankingVC(nibName: RankingVC.className(), bundle: nil)
                 let newRootVC = UINavigationController(rootViewController: rankingVC)
                 revealVC.pushFrontViewController(newRootVC, animated: true)
             } else {
