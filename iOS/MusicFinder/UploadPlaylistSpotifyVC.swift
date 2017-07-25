@@ -12,7 +12,6 @@ import SWRevealViewController
 
 class UploadPlaylistSpotifyVC: UIViewController {
 
-    let url = "https://api.spotify.com/v1/users/alkrox/playlists"
     var playlists = [Playlist]()
     var tracks = [TrackMF]()
     var idPlaylistSpotify: String?
