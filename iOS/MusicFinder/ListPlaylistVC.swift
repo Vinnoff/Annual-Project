@@ -46,30 +46,6 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*func requestPlaylists(fromUser: Bool = false) {
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
-        if fromUser {
-            let id = UserInfoSaver().getUserIdMusicFinder()
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
-            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
-                if let playlists = response.result.value {
-                    self.playlists = playlists
-                    self.tableView.reloadData()
-                }
-            }
-        } else {
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/"
-            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
-                if let playlists = response.result.value {
-                    self.playlists = playlists
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }*/
     
     func requestPlaylists() {
         let headers: HTTPHeaders = [
