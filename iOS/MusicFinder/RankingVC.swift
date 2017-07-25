@@ -34,7 +34,7 @@ class RankingVC: UIViewController {
     }
 
     func requestReward() {
-        let url = "http://mocnodeserv.hopto.org:3000/users/sorted/0/5"
+        let url = "http://mocnodeserv.hopto.org:80/users/sorted/0/5"
         Alamofire.request(url, headers: headers).responseArray(completionHandler: {
             (response: DataResponse<[User]>) in
             if let users = response.result.value {
@@ -45,7 +45,7 @@ class RankingVC: UIViewController {
     }
     
     func requestUser() {
-        let url = "http://mocnodeserv.hopto.org:3000/users/username/" + UserInfoSaver().getUsername()!
+        let url = "http://mocnodeserv.hopto.org:80/users/username/" + UserInfoSaver().getUsername()!
         Alamofire.request(url, headers: headers).responseObject(completionHandler: {
             (response: DataResponse<User>) in
             if let user = response.result.value {

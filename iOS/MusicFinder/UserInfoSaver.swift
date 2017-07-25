@@ -85,14 +85,14 @@ class UserInfoSaver {
                     self.userDefaults?.synchronize()
                     
                     let headers: HTTPHeaders = ["Accept": "application/json"]
-                    let url = "http://mocnodeserv.hopto.org:3000/users/username/" + (userSpotify?.id)!
+                    let url = "http://mocnodeserv.hopto.org:80/users/username/" + (userSpotify?.id)!
                     Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                         (response: DataResponse<User>) in
                         if let userResponse = response.result.value {
                             self.userDefaults?.set(userResponse.id, forKey: "id_user")
                             self.userDefaults?.synchronize()
                             
-                            let urlAuthMF = "http://mocnodeserv.hopto.org:3000/auth/login/iOs/" + userResponse.id!
+                            let urlAuthMF = "http://mocnodeserv.hopto.org:80/auth/login/iOs/" + userResponse.id!
                             Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
                                 (response) in
                                 if let token = response.result.value {
@@ -101,7 +101,7 @@ class UserInfoSaver {
                                 }
                             })
                         } else {
-                            let urlCreate = "http://mocnodeserv.hopto.org:3000/users/"
+                            let urlCreate = "http://mocnodeserv.hopto.org:80/users/"
                             let parameters = [
                                 "userName": (userSpotify?.id)!
                                 ] as [String : Any]
@@ -113,7 +113,7 @@ class UserInfoSaver {
                                     self.userDefaults?.set(response.result.value?.id, forKey: "id_user")
                                     self.userDefaults?.synchronize()
                                     
-                                    let urlAuthMF = "http://mocnodeserv.hopto.org:3000/auth/login/iOs/" + (response.result.value?.id!)!
+                                    let urlAuthMF = "http://mocnodeserv.hopto.org:80/auth/login/iOs/" + (response.result.value?.id!)!
                                     Alamofire.request(urlAuthMF, method: .post, headers: headers).responseString(completionHandler: {
                                         (response) in
                                         if let token = response.result.value {

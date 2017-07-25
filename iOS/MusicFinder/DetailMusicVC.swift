@@ -134,7 +134,7 @@ class DetailMusicVC: UIViewController {
             }
         }
         
-        let url = "http://mocnodeserv.hopto.org:3000/game/score/" + idScore!
+        let url = "http://mocnodeserv.hopto.org:80/game/score/" + idScore!
         let parameters = [
             "scoreInGame": score,
             "isFinished": true

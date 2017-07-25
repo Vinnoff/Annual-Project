@@ -35,7 +35,7 @@ class RewardVC: UIViewController {
     }
     
     func requestUser() {
-        let url = "http://mocnodeserv.hopto.org:3000/users/username/" + UserInfoSaver().getUsername()!
+        let url = "http://mocnodeserv.hopto.org:80/users/username/" + UserInfoSaver().getUsername()!
         Alamofire.request(url, headers: headers).responseObject(completionHandler: {
             (response: DataResponse<User>) in
             if let user = response.result.value {
@@ -47,7 +47,7 @@ class RewardVC: UIViewController {
     }
     
     func requestReward() {
-        let url = "http://mocnodeserv.hopto.org:3000/reward/range/0/" + String(describing: user!.gold!)
+        let url = "http://mocnodeserv.hopto.org:80/reward/range/0/" + String(describing: user!.gold!)
         Alamofire.request(url, headers: headers).responseArray(completionHandler: {
             (response: DataResponse<[Reward]>) in
             if let rewards = response.result.value {
@@ -58,7 +58,7 @@ class RewardVC: UIViewController {
     }
     
     func requestBuy(reward: Reward) {
-        let url = "http://mocnodeserv.hopto.org:3000/reward/give/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + reward.id!
+        let url = "http://mocnodeserv.hopto.org:80/reward/give/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + reward.id!
         
         Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {

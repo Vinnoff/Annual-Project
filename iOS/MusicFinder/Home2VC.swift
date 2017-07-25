@@ -57,10 +57,10 @@ class Home2VC: UIViewController, UIScrollViewDelegate {
                 let headers: HTTPHeaders = [
                     "Accept": "application/json"
                 ]
-                let url = "http://mocnodeserv.hopto.org:3000/users/username/" + username
+                let url = "http://mocnodeserv.hopto.org:80/users/username/" + username
                 Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
                     if response.response?.statusCode == 204 {
-                        let url = "http://mocnodeserv.hopto.org:3000/users/"
+                        let url = "http://mocnodeserv.hopto.org:80/users/"
                         let parameters = [
                             "userName" : username
                             
