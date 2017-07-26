@@ -50,6 +50,10 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
         }
     }
     
+    @IBAction func createButtonClicked(_ sender: Any) {
+        let url = "https://www.spotify.com/fr/home/"
+        UIApplication.shared.openURL(URL(string: url)!)
+    }
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }

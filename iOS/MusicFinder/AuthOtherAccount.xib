@@ -38,13 +38,25 @@
                         <action selector="loginSpotifyClicked:" destination="-1" eventType="touchUpInside" id="1GG-UK-zF4"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceG-oh-AT8">
+                    <rect key="frame" x="93" y="393.5" width="188" height="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="Pas de compte Spotify ?">
+                        <color key="titleColor" red="0.1176470588" green="0.84313725490000002" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="createButtonClicked:" destination="-1" eventType="touchUpInside" id="maC-wL-mZh"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Xe2-0c-ZvS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8gg-ZC-aG6"/>
                 <constraint firstItem="Xe2-0c-ZvS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ASy-UV-38A"/>
                 <constraint firstAttribute="trailing" secondItem="Xe2-0c-ZvS" secondAttribute="trailing" id="Eli-FU-QGW"/>
+                <constraint firstItem="ceG-oh-AT8" firstAttribute="top" secondItem="3Hu-5R-jeK" secondAttribute="bottom" constant="30" id="IgZ-pW-kZG"/>
                 <constraint firstItem="3Hu-5R-jeK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Jy8-p3-skJ"/>
+                <constraint firstItem="ceG-oh-AT8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WQz-Gv-BqC"/>
                 <constraint firstAttribute="bottom" secondItem="Xe2-0c-ZvS" secondAttribute="bottom" id="jM3-DI-nyC"/>
                 <constraint firstItem="3Hu-5R-jeK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="vvw-Jo-GIJ"/>
             </constraints>
