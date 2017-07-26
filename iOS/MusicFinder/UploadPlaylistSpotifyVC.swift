@@ -29,8 +29,6 @@ class UploadPlaylistSpotifyVC: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(UINib(nibName: SimpleCell.className(), bundle: nil), forCellReuseIdentifier: "cell")
-        // https://api.spotify.com/v1/users/alkrox/playlists
-        //Authorization: Bearer
 
         self.requestPlaylist()
         self.tableView.reloadData()

@@ -12,8 +12,6 @@
 		0F201CC81E86DFC400F0B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F201CC71E86DFC400F0B631 /* AppDelegate.swift */; };
 		0F201CCF1E86DFC400F0B631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CCE1E86DFC400F0B631 /* Assets.xcassets */; };
 		0F201CD21E86DFC400F0B631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CD01E86DFC400F0B631 /* LaunchScreen.storyboard */; };
-		0F201CDB1E86E02A00F0B631 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F201CD91E86E02A00F0B631 /* HomeVC.swift */; };
-		0F201CDC1E86E02A00F0B631 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F201CDA1E86E02A00F0B631 /* HomeVC.xib */; };
 		0F220B8B1E87D938000589EC /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F220B8A1E87D938000589EC /* NSObject.swift */; };
 		0F2E48941F18039100D9D23C /* ListQuizzVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E48921F18039100D9D23C /* ListQuizzVC.swift */; };
 		0F2E48951F18039100D9D23C /* ListQuizzVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E48931F18039100D9D23C /* ListQuizzVC.xib */; };
@@ -98,8 +96,6 @@
 		0F201CCE1E86DFC400F0B631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F201CD11E86DFC400F0B631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F201CD31E86DFC400F0B631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0F201CD91E86E02A00F0B631 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		0F201CDA1E86E02A00F0B631 /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		0F220B8A1E87D938000589EC /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		0F2E48921F18039100D9D23C /* ListQuizzVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListQuizzVC.swift; sourceTree = "<group>"; };
 		0F2E48931F18039100D9D23C /* ListQuizzVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListQuizzVC.xib; sourceTree = "<group>"; };
@@ -264,8 +260,6 @@
 		0F201CDD1E86E02E00F0B631 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0F201CD91E86E02A00F0B631 /* HomeVC.swift */,
-				0F201CDA1E86E02A00F0B631 /* HomeVC.xib */,
 				0FF5DB671F0EA5B600DA7E86 /* Home2VC.swift */,
 				0FF5DB681F0EA5B600DA7E86 /* Home2VC.xib */,
 			);
@@ -571,7 +565,6 @@
 				0F9C31971E87CA2100A84F2C /* DetailMusicVC.xib in Resources */,
 				0FC3C9421F113D8E00D386ED /* ListPlaylistVC.xib in Resources */,
 				0F8DDFEA1ED06E9600289AE8 /* AuthOtherAccount.xib in Resources */,
-				0F201CDC1E86E02A00F0B631 /* HomeVC.xib in Resources */,
 				0FD52B491EF2B7A60039543E /* ResultSearchCell.xib in Resources */,
 				0FD52B4E1EF32F580039543E /* TrackVC.xib in Resources */,
 				0FD52B2D1EF2899F0039543E /* ResultSearchVC.xib in Resources */,
@@ -694,7 +687,6 @@
 				0F220B8B1E87D938000589EC /* NSObject.swift in Sources */,
 				0FC1F8D01F0E8F4800C34908 /* LeftMenuCell.swift in Sources */,
 				0FC1F8CE1F0E7C0C00C34908 /* UIColor.swift in Sources */,
-				0F201CDB1E86E02A00F0B631 /* HomeVC.swift in Sources */,
 				0F1A5ECC1F0D386100473697 /* ProfileVC.swift in Sources */,
 				0FD52B271EF2882B0039543E /* SearchVC.swift in Sources */,
 				0F9C31931E87C8D100A84F2C /* UIViewController.swift in Sources */,

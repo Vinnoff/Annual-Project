@@ -28,17 +28,11 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
         self.addGestureMenu()
         loginButton.layer.cornerRadius = 5.0
         setup()
-        NotificationCenter.default.addObserver(self, selector: #selector(AuthOtherAccount.updateAfterFirstLogin), name: nil, object: nil)
-        callAlamofire(url: urlInfoAccount)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
     }
     
     func setup() {
@@ -50,43 +44,13 @@ class AuthOtherAccount: UIViewController, SPTAudioStreamingPlaybackDelegate, SPT
     
     @IBAction func loginSpotifyClicked(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
-            if auth.canHandle(auth.redirectURL) {
-                /*var revealVC: SWRevealViewController
-                revealVC = self.revealViewController()
-                let homeVC = Home2VC(nibName: Home2VC.className(), bundle: nil)
-                let newRootVC = UINavigationController(rootViewController: homeVC)
-                revealVC.pushFrontViewController(newRootVC, animated: true)*/
+            if !(auth.canHandle(auth.redirectURL)) {
+                print("Error login spotify")
             }
         }
     }
     
-    @IBAction func disconnectButton(_ sender: Any) {
-        userDefaults.removeObject(forKey: "SpotifySession")
-    }
-    
-    func updateAfterFirstLogin() {
-        if UserInfoSaver().isAuth()! {
-            
-        }
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    func callAlamofire(url: String) {
-        let token: String?
-        
-        if let session = UserInfoSaver().getSessionSpotify() {
-            token = session.accessToken
-            let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
-                                        "Accept": "application/json"]
-            print(headers)
-            Alamofire.request(url, headers: headers).responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value {
-                    print(JSON)
-                }
-            })
-        }
     }
 }

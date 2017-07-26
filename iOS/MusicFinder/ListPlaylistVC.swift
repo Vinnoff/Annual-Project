@@ -32,12 +32,12 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             self.setNavigationBarItem()
             self.addGestureMenu()
-            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ListPlaylistVC.longPress(longPressGestureRecognizer:)))
-            longPress.minimumPressDuration = 1.0
-            longPress.delegate = self
-            tableView.addGestureRecognizer(longPress)
             self.requestPlaylists()
         }
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ListPlaylistVC.longPress(longPressGestureRecognizer:)))
+        longPress.minimumPressDuration = 1.0
+        longPress.delegate = self
+        tableView.addGestureRecognizer(longPress)
         tableView.reloadData()
         
     }

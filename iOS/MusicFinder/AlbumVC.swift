@@ -16,7 +16,6 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     public var url: String?
     private var tracks = [Item]()
-    //private var imageUrlToSend: String?
     private var album: Album?
     
     override func viewDidLoad() {
@@ -36,9 +35,6 @@ class AlbumVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     if let album = response.result.value {
                         self.album = album
                         self.tracks = (album.tracks?.items!)!
-                        /*if !(album.images?.isEmpty)! {
-                         self.imageUrlToSend = album.images?[0].url
-                         }*/
                     }
                     self.tableView.reloadData()
                 })

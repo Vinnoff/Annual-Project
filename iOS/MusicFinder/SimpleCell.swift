@@ -14,7 +14,6 @@ class SimpleCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func bindData(title: String?) {
