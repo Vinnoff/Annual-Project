@@ -48,7 +48,6 @@ class ResultSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 token = session.accessToken
                 let headers: HTTPHeaders = ["Authorization": "Bearer " + token!,
                                             "Accept": "application/json"]
-                print(headers)
                 
                 if type == "track" {
                     //Track

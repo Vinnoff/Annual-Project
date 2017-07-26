@@ -38,7 +38,7 @@ class CreatePlaylistVC: UIViewController {
     @IBAction func submitClicked(_ sender: Any) {
         if UserInfoSaver().isAuth()! {
             let idUser = UserInfoSaver().getUserIdMusicFinder()
-            if textField.text != nil{
+            if textField.text != ""{
                 let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
                                               "Accept": "application/json"]
                 let parameters = [
@@ -60,13 +60,15 @@ class CreatePlaylistVC: UIViewController {
                         self.present(alert, animated: true, completion: nil)
                         
                     case .failure:
-                        let alert = UIAlertController(title: "Alert", message: "ERREUR creation \(response.response?.statusCode)", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Alerte", message: "ERREUR creation \(response.response?.statusCode)", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 })
             } else {
-                print("erreur textfield")
+                let alert = UIAlertController(title: "Alerte", message: "Écrivez un nom d'abord pour votre playlist", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
