@@ -240,6 +240,7 @@ module.exports = (api) => {
 						if (err) {
 							return res.status(500).send(err);
 						}
+
 						return res.send(data);
 					})
 				});
@@ -274,6 +275,17 @@ module.exports = (api) => {
 					if (err) {
 						return res.status(500).send();
 					}
+					Playlist.find({
+						Creator: req.params.id
+					}, (err, data) => {
+						data.forEach(function (playlist) {
+							playlist.remove((err, data) => {
+								if (err) {
+									return res.status(500).send();
+								}
+							});
+						});
+					})
 				})
 				return res.send(data);
 			});
