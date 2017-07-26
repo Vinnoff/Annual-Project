@@ -45,8 +45,6 @@ module.exports = (api) => {
 		}
 
 		item.storage[key] = data;
-		console.log("cache : %s\n", JSON.stringify(cache))
-		console.log("item : %s\n", JSON.stringify(item))
 		cache.push(item);
 	}
 
