@@ -69,7 +69,6 @@ module.exports = (api) => {
 			}).sort({
 				scoreToAccess: -1
 			}).exec((err, data) => {
-				console.log(data)
 				user.Rank = data[0].id
 				user.save((err, data) => {
 					if (err) {
