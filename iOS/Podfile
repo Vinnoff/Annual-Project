@@ -7,10 +7,8 @@ target 'MusicFinder' do
 
   # Pods for MusicFinder
 	pod ‘SWRevealViewController’, ‘~> 2.3’
-    pod 'iCarousel', '~> 1.8'
     pod 'Alamofire'
     pod 'AlamofireObjectMapper'
-    pod 'AlamofireImage'
     pod 'ObjectMapper'
 
 end
