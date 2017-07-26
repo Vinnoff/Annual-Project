@@ -31,7 +31,7 @@ class AddFriendVC: UIViewController {
     }
 
     func requestSearch(word: String) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/userNameResearch/" + word.lowercased()
+        let url = "http://mocnodeserv.hopto.org:80/users/userNameResearch/" + word.lowercased()
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[User]>) in
             if let users = response.result.value {
                 for user in users {
@@ -45,7 +45,7 @@ class AddFriendVC: UIViewController {
     }
     
     func requestAddUser(user: User) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
+        let url = "http://mocnodeserv.hopto.org:80/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
         let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
                                       "Accept": "application/json"]
         

@@ -12,7 +12,6 @@ import SWRevealViewController
 
 class UploadPlaylistSpotifyVC: UIViewController {
 
-    let url = "https://api.spotify.com/v1/users/alkrox/playlists"
     var playlists = [Playlist]()
     var tracks = [TrackMF]()
     var idPlaylistSpotify: String?
@@ -47,7 +46,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
     
     func requestPlaylist() {
         let id = UserInfoSaver().getUserIdMusicFinder()
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
+        let url = "http://mocnodeserv.hopto.org:80/playlist/user/" + id!
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
             if let playlists = response.result.value {
                 self.playlists = playlists
@@ -99,7 +98,7 @@ class UploadPlaylistSpotifyVC: UIViewController {
     
     func requestTracks(index: Int) {
         let idPlaylist = playlists[index].id
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + idPlaylist!
+        let url = "http://mocnodeserv.hopto.org:80/playlist/allsongs/" + idPlaylist!
         Alamofire.request(url, headers: headers).responseObject { (response: DataResponse<Playlist>) in
             if let playlist = response.result.value {
                 self.tracks = playlist.tracks!

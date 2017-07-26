@@ -43,7 +43,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func requestUser() {
-        let url = "http://mocnodeserv.hopto.org:3000/users/username/" + UserInfoSaver().getUsername()!
+        let url = "http://mocnodeserv.hopto.org:80/users/username/" + UserInfoSaver().getUsername()!
         Alamofire.request(url, headers: headers).responseObject(completionHandler: {
             (response: DataResponse<User>) in
             if let user = response.result.value {
@@ -57,7 +57,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     
     func requestReward() {
         for reward in (user?.rewards)! {
-            let url = "http://mocnodeserv.hopto.org:3000/reward/id/" + reward
+            let url = "http://mocnodeserv.hopto.org:80/reward/id/" + reward
             Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                 (response: DataResponse<Reward>) in
                 if let rewardReceived = response.result.value {
@@ -70,7 +70,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     
     func requestFriend() {
         for friendId in (user?.friends)! {
-            let url = "http://mocnodeserv.hopto.org:3000/users/id/" + friendId
+            let url = "http://mocnodeserv.hopto.org:80/users/id/" + friendId
             Alamofire.request(url, headers: headers).responseObject(completionHandler: {
                 (response: DataResponse<User>) in
                 if let user = response.result.value {
@@ -114,7 +114,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func requestRemoveFriend(user: User, index: Int) {
-        let url = "http://mocnodeserv.hopto.org:3000/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
+        let url = "http://mocnodeserv.hopto.org:80/users/friend/" + UserInfoSaver().getUserIdMusicFinder()! + "/" + user.id!
         
         let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
                                       "Accept": "application/json"]
@@ -142,7 +142,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func disconnectedClicked(_ sender: Any) {
         let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
                                       "Accept": "application/json"]
-        let url = "http://mocnodeserv.hopto.org:3000/auth/logout"
+        let url = "http://mocnodeserv.hopto.org:80/auth/logout"
         
         Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headersMF).validate(statusCode: 200..<300).responseData(completionHandler: { (response) in
             switch response.result {

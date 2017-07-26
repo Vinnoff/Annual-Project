@@ -37,7 +37,7 @@ class ListTracksVC: UIViewController {
     }
     
     func requestTracks() {
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + idPlaylist!
+        let url = "http://mocnodeserv.hopto.org:80/playlist/allsongs/" + idPlaylist!
         Alamofire.request(url, headers: headers).responseObject { (response: DataResponse<Playlist>) in
             if let playlist = response.result.value {
                 self.tracks = playlist.tracks!
@@ -47,7 +47,7 @@ class ListTracksVC: UIViewController {
     }
     
     func requestRemoveTrack(idTrack: String?) {
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/delsong/" + idPlaylist! + "/" + idTrack!
+        let url = "http://mocnodeserv.hopto.org:80/playlist/delsong/" + idPlaylist! + "/" + idTrack!
         let headersMF: HTTPHeaders = ["Authorization": UserInfoSaver().getTokenMF()!,
                                       "Accept": "application/json"]
         

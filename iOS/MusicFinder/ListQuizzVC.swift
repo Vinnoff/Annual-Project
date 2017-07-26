@@ -30,7 +30,7 @@ class ListQuizzVC: UIViewController {
     }
 
     func requestPlaylist() {
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/"
+        let url = "http://mocnodeserv.hopto.org:80/playlist/"
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
             if let playlists = response.result.value {
                 self.playlists = playlists
@@ -40,11 +40,11 @@ class ListQuizzVC: UIViewController {
     }
 
     func requestCreationGame(playlist: Playlist) {
-        let url = "http://mocnodeserv.hopto.org:3000/game/"
+        let url = "http://mocnodeserv.hopto.org:80/game/"
         var tabIdSong = [String]()
         
         
-        let urlGetSongs = "http://mocnodeserv.hopto.org:3000/playlist/allsongs/" + playlist.id!
+        let urlGetSongs = "http://mocnodeserv.hopto.org:80/playlist/allsongs/" + playlist.id!
         Alamofire.request(urlGetSongs, headers: headers).responseObject { (response: DataResponse<Playlist>) in
             if let playlist = response.result.value {
                 self.tracks = playlist.tracks!

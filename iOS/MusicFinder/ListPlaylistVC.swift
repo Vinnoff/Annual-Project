@@ -46,37 +46,13 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*func requestPlaylists(fromUser: Bool = false) {
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
-        if fromUser {
-            let id = UserInfoSaver().getUserIdMusicFinder()
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
-            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
-                if let playlists = response.result.value {
-                    self.playlists = playlists
-                    self.tableView.reloadData()
-                }
-            }
-        } else {
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/"
-            Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
-                if let playlists = response.result.value {
-                    self.playlists = playlists
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }*/
     
     func requestPlaylists() {
         let headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
         let id = UserInfoSaver().getUserIdMusicFinder()
-        let url = "http://mocnodeserv.hopto.org:3000/playlist/user/" + id!
+        let url = "http://mocnodeserv.hopto.org:80/playlist/user/" + id!
         Alamofire.request(url, headers: headers).responseArray { (response: DataResponse<[Playlist]>) in
             if let playlists = response.result.value {
                 self.playlists = playlists
@@ -107,7 +83,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if fromUser {
             if let idplaylist = playlists[indexPath.row]?.id {
-                let url = "http://mocnodeserv.hopto.org:3000/playlist/addsong/" + idplaylist
+                let url = "http://mocnodeserv.hopto.org:80/playlist/addsong/" + idplaylist
                 var parameters = [:] as [String : Any]
 
                 if trackItem != nil {
@@ -182,7 +158,7 @@ class ListPlaylistVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func askDeletePlaylist(index: Int?) {
         if let id = self.playlists[index!]?.id {
-            let url = "http://mocnodeserv.hopto.org:3000/playlist/" + id
+            let url = "http://mocnodeserv.hopto.org:80/playlist/" + id
             let alert = UIAlertController(title: "Attention", message: "Voulez-vous supprimer la playlist ?", preferredStyle: UIAlertControllerStyle.alert)
             let yesAction = UIAlertAction(title: "Oui", style: UIAlertActionStyle.default) {
                 UIAlertAction in
